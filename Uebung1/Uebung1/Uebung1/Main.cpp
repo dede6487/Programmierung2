@@ -20,6 +20,9 @@ static void Sleep(int ms)
 using namespace std;
 using namespace compsys;
 
+
+
+
 int main(int argc, const char* argv[])
 {
 	beginDrawing(W, H, "Atoms", 0xFFFFFF, false);
