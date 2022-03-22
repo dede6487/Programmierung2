@@ -64,7 +64,7 @@ double random(int ulimit, int llimit) {
 	random = (rand() / RAND_MAX) * (llimit-ulimit) + ulimit;
 
 	return random;
-}
+}	//doesn't work yet, just outputs ulimit
 
 //**********************************************************
 //	Function "number"
