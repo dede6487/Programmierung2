@@ -23,6 +23,8 @@ using namespace compsys;
 int W = 640;	//W,H are the width and the height of the created window
 int H = 480;
 
+int S = 40;		//time between the frame-updates - sleep
+
 //**********************************************************
 // struct "Atom"
 // 
@@ -46,6 +48,25 @@ typedef struct Atom
 };
 
 //**********************************************************
+//	Funtion "random"
+// 
+//	input: two numbers which define the lower and the upper
+//	limits of the outputted random number
+// 
+//	output: a random nunmber in between the given limits
+// 
+//**********************************************************
+
+double random(int ulimit, int llimit) {
+	double random;
+
+	srand(time(0));
+	random = (rand() / RAND_MAX) * (llimit-ulimit) + ulimit;
+
+	return random;
+}
+
+//**********************************************************
 //	Function "number"
 //	
 //	creates Atoms with their initial Values as stated above
@@ -54,17 +75,26 @@ typedef struct Atom
 //
 //**********************************************************
 
-double number() {
-	int N = 3;
+double number(int argc, const char* argv[]) {
+	int n = 3;
 
-	while (N >= 1) {
-		struct Atom AtomN;
-		AtomN.col = 1;
-		AtomN.rad = 2;
-		AtomN.vel = 3;
-		AtomN.pos_x = 4;
-		AtomN.pos_y = 5;
-		N--;
+	return n;
+}
+
+//**********************************************************
+//
+//**********************************************************
+
+void init(int n, struct Atom,int argc, const char* argv[]) {
+	struct Atom Atom[n];
+
+	while (int i = 0 < n) {
+		Atom[i].col = random(000, 255);
+		Atom[i].rad = random(50, 150);
+		Atom[i].vel = random(20, 50);
+		Atom[i].pos_x = random(0, H);
+		Atom[i].pos_y = random(0, W);
+		i++;
 	}
 }
 
@@ -72,23 +102,18 @@ double number() {
 //
 //**********************************************************
 
-double init(int N, struct Atom) {
+void draw(int n, struct Atom) {
+	fillRectangle(0, 0, W, H, 0000);
 
+	//Atoms need to be drawn here
+	flush();
 }
 
 //**********************************************************
 //
 //**********************************************************
 
-double draw() {
-
-}
-
-//**********************************************************
-//
-//**********************************************************
-
-double update(int N, struct Atom) {
+void update(int n, struct Atom) {
 
 }
 
