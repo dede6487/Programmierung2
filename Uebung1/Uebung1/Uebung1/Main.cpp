@@ -24,6 +24,7 @@ int W = 640;	//W,H are the width and the height of the created window
 int H = 480;
 
 int S = 40;		//time between the frame-updates - sleep
+int F = 200;	//number of updates that are performed by the program
 
 //**********************************************************
 // struct "Atom"
@@ -85,8 +86,7 @@ double number(int argc, const char* argv[]) {
 //
 //**********************************************************
 
-void init(int n, struct Atom,int argc, const char* argv[]) {
-	struct Atom Atom[n];
+void init(int n, Atom Atom[], int argc, const char* argv[]) {
 
 	while (int i = 0 < n) {
 		Atom[i].col = random(000, 255);
@@ -102,10 +102,15 @@ void init(int n, struct Atom,int argc, const char* argv[]) {
 //
 //**********************************************************
 
-void draw(int n, struct Atom) {
+void draw(int n, Atom Atom[]) {
 	fillRectangle(0, 0, W, H, 0000);
 
-	//Atoms need to be drawn here
+	while (int i = 0 < n) {
+		fillEllipse(Atom[i].pos_x, Atom[i].pos_y, Atom[i].rad, Atom[i].rad,
+			Atom[i].col);
+		i++;
+	}
+	
 	flush();
 }
 
