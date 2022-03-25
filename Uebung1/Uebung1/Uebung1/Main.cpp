@@ -86,7 +86,7 @@ double number(int argc, const char* argv[]) {
 //
 //**********************************************************
 
-void init(int n, Atom Atom[], int argc, const char* argv[]) {
+void init(int n, Atom* Atom, int argc, const char* argv[]) {
 
 	while (int i = 0 < n) {
 		Atom[i].col = random(000, 255);
@@ -102,7 +102,7 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 //
 //**********************************************************
 
-void draw(int n, Atom Atom[]) {
+void draw(int n, Atom* Atom) {
 	fillRectangle(0, 0, W, H, 0000);
 
 	while (int i = 0 < n) {
@@ -118,7 +118,7 @@ void draw(int n, Atom Atom[]) {
 //
 //**********************************************************
 
-void update(int n, struct Atom) {
+void update(int n, Atom* Atom) {
 
 }
 
