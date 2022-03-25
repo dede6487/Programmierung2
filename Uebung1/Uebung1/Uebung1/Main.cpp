@@ -20,6 +20,8 @@ static void Sleep(int ms)
 using namespace std;
 using namespace compsys;
 
+#include  <string>	//defines the getline() function
+
 int W = 640;	//W,H are the width and the height of the created window
 int H = 480;
 
@@ -62,7 +64,7 @@ double random(int ulimit, int llimit) {
 	double random;
 
 	srand(time(0));
-	random = (rand() / RAND_MAX) * (llimit-ulimit) + ulimit;
+	random = (rand() / static_cast<double>(RAND_MAX)) * (llimit-ulimit) + ulimit;
 
 	return random;
 }	//doesn't work yet, just outputs ulimit
