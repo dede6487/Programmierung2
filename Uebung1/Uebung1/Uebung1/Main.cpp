@@ -1,3 +1,8 @@
+//**********************************************************
+//
+//**********************************************************
+
+
 #include <iostream>
 #include <cstdlib>
 #include <cmath>
@@ -43,11 +48,12 @@ int F = 200;	//number of updates that are performed by the program
 
 typedef struct Atom
 {
-	int col;
-	float rad;
-	double vel;
-	double pos_x;
-	double pos_y;
+	float col;
+	int rad;
+	double vel_x;
+	double vel_y;
+	int pos_x;
+	int pos_y;
 };
 
 //**********************************************************
@@ -60,14 +66,16 @@ typedef struct Atom
 // 
 //**********************************************************
 
-double random(int ulimit, int llimit) {
+double random(int llimit, int ulimit) {
 	double random;
 
 	srand(time(0));
-	random = (rand() / static_cast<double>(RAND_MAX)) * (llimit-ulimit) + ulimit;
+	//random = (rand() / static_cast<double>(RAND_MAX)) * (ulimit-llimit) + ulimit;
+
+	random = (ulimit - llimit) / 2;
 
 	return random;
-}	//doesn't work yet, just outputs ulimit
+}	//doesn't work properly yet
 
 //**********************************************************
 //	Function "number"
@@ -90,13 +98,16 @@ double number(int argc, const char* argv[]) {
 
 void init(int n, Atom* Atom, int argc, const char* argv[]) {
 
-	while (int i = 0 < n) {
-		Atom[i].col = random(000, 255);
-		Atom[i].rad = random(50, 150);
-		Atom[i].vel = random(20, 50);
-		Atom[i].pos_x = random(0, H);
-		Atom[i].pos_y = random(0, W);
-		i++;
+	int j = 0;
+
+	while (j < n) {
+		Atom[j].col = random(000, 255);
+		Atom[j].rad = random(50, 150);
+		Atom[j].vel_x = random(20, 50);
+		Atom[j].vel_y = random(20, 50);
+		Atom[j].pos_x = random(0, H);
+		Atom[j].pos_y = random(0, W);
+		j++;
 	}
 }
 
@@ -105,12 +116,14 @@ void init(int n, Atom* Atom, int argc, const char* argv[]) {
 //**********************************************************
 
 void draw(int n, Atom* Atom) {
-	fillRectangle(0, 0, W, H, 0000);
+	fillRectangle(0, 0, W, H, 16777215);
 
-	while (int i = 0 < n) {
-		fillEllipse(Atom[i].pos_x, Atom[i].pos_y, Atom[i].rad, Atom[i].rad,
-			Atom[i].col);
-		i++;
+	int j = 0;
+
+	while (j < n) {
+		fillEllipse(Atom[j].pos_x, Atom[j].pos_y, Atom[j].rad, Atom[j].rad,
+			Atom[j].col);
+		j++;
 	}
 	
 	flush();
