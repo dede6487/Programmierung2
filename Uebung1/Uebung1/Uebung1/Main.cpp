@@ -57,25 +57,23 @@ typedef struct Atom
 };
 
 //**********************************************************
-//	Funtion "random"
+// Funtion "random"
 // 
-//	input: two numbers which define the lower and the upper
-//	limits of the outputted random number
+// input: two int numbers which define the lower and the upper
+// limits of the outputted random number
 // 
-//	output: a random nunmber in between the given limits
+// output: a random number in between the given limits
+// including the limits
 // 
 //**********************************************************
 
-double random(int llimit, int ulimit) {
-	double random;
+int random(int llimit, int ulimit) {
+	int random;
 
 	srand(time(0));
-	//random = (rand() / static_cast<double>(RAND_MAX)) * (ulimit-llimit) + ulimit;
 
-	random = (ulimit - llimit) / 2;
-
-	return random;
-}	//doesn't work properly yet
+	return (rand() % (ulimit - llimit + 1)) + llimit;
+}
 
 //**********************************************************
 //	Function "number"
@@ -101,7 +99,7 @@ void init(int n, Atom* Atom, int argc, const char* argv[]) {
 	int j = 0;
 
 	while (j < n) {
-		Atom[j].col = random(000, 255);
+		Atom[j].col = random(000, 0xFFFFFF);
 		Atom[j].rad = random(50, 150);
 		Atom[j].vel_x = random(20, 50);
 		Atom[j].vel_y = random(20, 50);
@@ -116,7 +114,7 @@ void init(int n, Atom* Atom, int argc, const char* argv[]) {
 //**********************************************************
 
 void draw(int n, Atom* Atom) {
-	fillRectangle(0, 0, W, H, 16777215);
+	fillRectangle(0, 0, W, H, 0xFFFFFF);
 
 	int j = 0;
 
