@@ -87,6 +87,15 @@ int random(int llimit, int ulimit) {
 double number(int argc, const char* argv[]) {
 	int n = 3;
 
+	ifstream Input{ "Input.txt" };
+	if (!Input) {
+		cout << "Dateifehler" << endl;
+		return -1;
+	}
+
+	Input >> n;
+	Input.close();
+
 	return n;
 }
 
@@ -108,21 +117,23 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 		Input >> n;
 		for (int j = 0; j < n; j++)
 		{
-			Atom[j].c 
-			Atom[j].rad
-			Atom[j].pos_x
-			Atom[j].pos_y
-			Atom[j].vel_x
-			Atom[j].vel_y
+			Input >> Atom[j].c;
+			Input >> Atom[j].rad;
+			Input >> Atom[j].pos_x;
+			Input >> Atom[j].pos_y;
+			Input >> Atom[j].vel_x;
+			Input >> Atom[j].vel_y;
 
 			cout << "Color of Atom " << j + 1 << " is      " << Atom[j].c << endl;
 			cout << "Radius of Atom " << j + 1 << " is     " << Atom[j].rad << endl;
-			cout << "vx of Atom " << j + 1 << " is         " << Atom[j].vel_x << endl;
-			cout << "vy of Atom " << j + 1 << " is         " << Atom[j].vel_y << endl;
 			cout << "x Position of Atom " << j + 1 << " is " << Atom[j].pos_x << endl;
 			cout << "y Position of Atom " << j + 1 << " is " << Atom[j].pos_y << endl;
+			cout << "vx of Atom " << j + 1 << " is         " << Atom[j].vel_x << endl;
+			cout << "vy of Atom " << j + 1 << " is         " << Atom[j].vel_y << endl;
 		}
 	}
+
+	Input.close();
 
 	//for (int j = 0; j < n; j++) {
 	//	Atom[j].c = random(000, 0xFFFFFF);
