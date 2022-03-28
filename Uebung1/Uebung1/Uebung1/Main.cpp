@@ -26,19 +26,20 @@ using namespace std;
 using namespace compsys;
 
 #include  <string>	//defines the getline() function
+#include <fstream>
 
 int W = 640;	//W,H are the width and the height of the created window
 int H = 480;
 
-int S = 40;		//time between the frame-updates - sleep
-int F = 200;	//number of updates that are performed by the program
+int S = 20;		//time between the frame-updates - sleep
+int F = 20;	//number of updates that are performed by the program
 
 //**********************************************************
 // struct "Atom"
 // 
 // defines the data structure for an Atom
 // Atoms hold the values:
-// col ... colour
+// c ... colour
 // rad ... radius
 // vel ... velocity
 // pos_x ... x-value for position
@@ -48,7 +49,7 @@ int F = 200;	//number of updates that are performed by the program
 
 typedef struct Atom
 {
-	int col;
+	int c;
 	int rad;
 	int vel_x;
 	int vel_y;
@@ -94,15 +95,50 @@ double number(int argc, const char* argv[]) {
 //**********************************************************
 
 void init(int n, Atom Atom[], int argc, const char* argv[]) {
-
-	for (int j = 0; j < n; j++) {
-		Atom[j].col = random(000, 0xFFFFFF);
-		Atom[j].rad = random(50, 150);
-		Atom[j].vel_x = random(20, 50);
-		Atom[j].vel_y = random(20, 50);
-		Atom[j].pos_x = random(0, H);
-		Atom[j].pos_y = random(0, W);
+	
+	ifstream Input{ "Input.txt" };
+	if (!Input) {
+		cout << "Dateifehler" << endl;
+		return;
 	}
+
+	while (Input)
+	{
+		int n;
+		Input >> n;
+		for (int j = 0; j < n; j++)
+		{
+			Atom[j].c 
+			Atom[j].rad
+			Atom[j].pos_x
+			Atom[j].pos_y
+			Atom[j].vel_x
+			Atom[j].vel_y
+
+			cout << "Color of Atom " << j + 1 << " is      " << Atom[j].c << endl;
+			cout << "Radius of Atom " << j + 1 << " is     " << Atom[j].rad << endl;
+			cout << "vx of Atom " << j + 1 << " is         " << Atom[j].vel_x << endl;
+			cout << "vy of Atom " << j + 1 << " is         " << Atom[j].vel_y << endl;
+			cout << "x Position of Atom " << j + 1 << " is " << Atom[j].pos_x << endl;
+			cout << "y Position of Atom " << j + 1 << " is " << Atom[j].pos_y << endl;
+		}
+	}
+
+	//for (int j = 0; j < n; j++) {
+	//	Atom[j].c = random(000, 0xFFFFFF);
+	//	Atom[j].rad = random(50, 150);
+	//	Atom[j].vel_x = random(20, 50);
+	//	Atom[j].vel_y = random(20, 50);
+	//	Atom[j].pos_x = random(0, H);
+	//	Atom[j].pos_y = random(0, W);
+
+	//	cout << "Color of Atom " << j+1 << " is      " << Atom[j].c << endl;
+	//	cout << "Radius of Atom " << j+1 << " is     " << Atom[j].rad<< endl;
+	//	cout << "vx of Atom " << j+1 << " is         " << Atom[j].vel_x << endl;
+	//	cout << "vy of Atom " << j+1 << " is         " << Atom[j].vel_y << endl;
+	//	cout << "x Position of Atom " << j+1 << " is " << Atom[j].pos_x << endl;
+	//	cout << "y Position of Atom " << j+1 << " is " << Atom[j].pos_y << endl;
+	//}
 }
 
 //**********************************************************
@@ -113,7 +149,7 @@ void draw(int n, Atom Atom[]) {
 	fillRectangle(0, 0, W, H, 0xFFFFFF);
 
 	for (int j = 0; j < n; j++) {
-		fillEllipse(Atom[j].pos_x, Atom[j].pos_y, Atom[j].rad, Atom[j].rad, Atom[j].col);
+		fillEllipse(Atom[j].pos_x, Atom[j].pos_y, Atom[j].rad, Atom[j].rad, Atom[j].c);
 	}
 	
 	flush();
@@ -123,8 +159,10 @@ void draw(int n, Atom Atom[]) {
 //
 //**********************************************************
 
-void update(int n, Atom* Atom) {
+void update(int n, Atom Atom[]) {
+	//for (int j = 0; j < n; j++) {
 
+	//}
 }
 
 
