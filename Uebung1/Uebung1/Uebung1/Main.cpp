@@ -48,10 +48,10 @@ int F = 200;	//number of updates that are performed by the program
 
 typedef struct Atom
 {
-	float col;
+	int col;
 	int rad;
-	double vel_x;
-	double vel_y;
+	int vel_x;
+	int vel_y;
 	int pos_x;
 	int pos_y;
 };
@@ -68,8 +68,7 @@ typedef struct Atom
 //**********************************************************
 
 int random(int llimit, int ulimit) {
-	int random;
-
+	
 	srand(time(0));
 
 	return (rand() % (ulimit - llimit + 1)) + llimit;
@@ -94,18 +93,15 @@ double number(int argc, const char* argv[]) {
 //
 //**********************************************************
 
-void init(int n, Atom* Atom, int argc, const char* argv[]) {
+void init(int n, Atom Atom[], int argc, const char* argv[]) {
 
-	int j = 0;
-
-	while (j < n) {
+	for (int j = 0; j < n; j++) {
 		Atom[j].col = random(000, 0xFFFFFF);
 		Atom[j].rad = random(50, 150);
 		Atom[j].vel_x = random(20, 50);
 		Atom[j].vel_y = random(20, 50);
 		Atom[j].pos_x = random(0, H);
 		Atom[j].pos_y = random(0, W);
-		j++;
 	}
 }
 
@@ -113,15 +109,11 @@ void init(int n, Atom* Atom, int argc, const char* argv[]) {
 //
 //**********************************************************
 
-void draw(int n, Atom* Atom) {
+void draw(int n, Atom Atom[]) {
 	fillRectangle(0, 0, W, H, 0xFFFFFF);
 
-	int j = 0;
-
-	while (j < n) {
-		fillEllipse(Atom[j].pos_x, Atom[j].pos_y, Atom[j].rad, Atom[j].rad,
-			Atom[j].col);
-		j++;
+	for (int j = 0; j < n; j++) {
+		fillEllipse(Atom[j].pos_x, Atom[j].pos_y, Atom[j].rad, Atom[j].rad, Atom[j].col);
 	}
 	
 	flush();
