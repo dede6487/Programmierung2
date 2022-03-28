@@ -31,8 +31,10 @@ using namespace compsys;
 int W = 640;	//W,H are the width and the height of the created window
 int H = 480;
 
-int S = 20;		//time between the frame-updates - sleep
-int F = 20;	//number of updates that are performed by the program
+int S = 30;		//time between the frame-updates - sleep
+int F = 200;	//number of updates that are performed by the program
+
+int argc = 2;
 
 //**********************************************************
 // struct "Atom"
@@ -86,15 +88,23 @@ int random(int llimit, int ulimit) {
 
 double number(int argc, const char* argv[]) {
 	int n = 3;
+	
+	argc = 2;
 
-	ifstream Input{ "Input.txt" };
-	if (!Input) {
-		cout << "Dateifehler" << endl;
-		return -1;
+	if (argc == 2)
+	{
+		ifstream Input{ "Input.txt" };
+		if (!Input) 
+		{
+			cout << "Error: check Input file (numbers)" << endl;
+			return -1;
+		}
+
+		Input >> n;
+		Input.close();
 	}
 
-	Input >> n;
-	Input.close();
+	cout << "the number of Atoms is: " << n << endl;
 
 	return n;
 }
@@ -104,52 +114,60 @@ double number(int argc, const char* argv[]) {
 //**********************************************************
 
 void init(int n, Atom Atom[], int argc, const char* argv[]) {
-	
-	ifstream Input{ "Input.txt" };
-	if (!Input) {
-		cout << "Dateifehler" << endl;
-		return;
-	}
 
-	while (Input)
+	argc = 2;
+
+	if (argc == 2)
 	{
-		int n;
-		Input >> n;
-		for (int j = 0; j < n; j++)
-		{
-			Input >> Atom[j].c;
-			Input >> Atom[j].rad;
-			Input >> Atom[j].pos_x;
-			Input >> Atom[j].pos_y;
-			Input >> Atom[j].vel_x;
-			Input >> Atom[j].vel_y;
+		ifstream Input{ "Input.txt" };
+		if (!Input) {
+			cout << "Error: check Input file (init)" << endl;
+			return;
+		}
 
-			cout << "Color of Atom " << j + 1 << " is      " << Atom[j].c << endl;
-			cout << "Radius of Atom " << j + 1 << " is     " << Atom[j].rad << endl;
-			cout << "x Position of Atom " << j + 1 << " is " << Atom[j].pos_x << endl;
-			cout << "y Position of Atom " << j + 1 << " is " << Atom[j].pos_y << endl;
-			cout << "vx of Atom " << j + 1 << " is         " << Atom[j].vel_x << endl;
-			cout << "vy of Atom " << j + 1 << " is         " << Atom[j].vel_y << endl;
+		while (Input)
+		{
+			int n;
+			Input >> n;
+			for (int j = 0; j < n; j++)
+			{
+				Input >> Atom[j].c;
+				Input >> Atom[j].rad;
+				Input >> Atom[j].pos_x;
+				Input >> Atom[j].pos_y;
+				Input >> Atom[j].vel_x;
+				Input >> Atom[j].vel_y;
+
+				cout << "Atom " << j + 1 << " has the following values assigned:" << endl;
+				cout << "Color" << j + 1 << " is      " << Atom[j].c << endl;
+				cout << "Radius" << j + 1 << " is     " << Atom[j].rad << endl;
+				cout << "x Pos." << j + 1 << " is     " << Atom[j].pos_x << endl;
+				cout << "y Pos." << j + 1 << " is     " << Atom[j].pos_y << endl;
+				cout << "vx" << j + 1 << " is         " << Atom[j].vel_x << endl;
+				cout << "vy" << j + 1 << " is         " << Atom[j].vel_y << endl;
+			}
+		}
+
+		Input.close();
+	}
+	else if(argc == 1) {
+		for (int j = 0; j < n; j++) {
+			Atom[j].c = random(000, 0xFFFFFF);
+			Atom[j].rad = random(50, 150);
+			Atom[j].vel_x = random(5, 25);
+			Atom[j].vel_y = random(5, 25);
+			Atom[j].pos_x = random(0, H);
+			Atom[j].pos_y = random(0, W);
+
+			cout << "Atom " << j + 1 << " has the following values assigned:" << endl;
+			cout << "Color" << j + 1 << " is      " << Atom[j].c << endl;
+			cout << "Radius" << j + 1 << " is     " << Atom[j].rad << endl;
+			cout << "x Pos." << j + 1 << " is     " << Atom[j].pos_x << endl;
+			cout << "y Pos." << j + 1 << " is     " << Atom[j].pos_y << endl;
+			cout << "vx" << j + 1 << " is         " << Atom[j].vel_x << endl;
+			cout << "vy" << j + 1 << " is         " << Atom[j].vel_y << endl;
 		}
 	}
-
-	Input.close();
-
-	//for (int j = 0; j < n; j++) {
-	//	Atom[j].c = random(000, 0xFFFFFF);
-	//	Atom[j].rad = random(50, 150);
-	//	Atom[j].vel_x = random(20, 50);
-	//	Atom[j].vel_y = random(20, 50);
-	//	Atom[j].pos_x = random(0, H);
-	//	Atom[j].pos_y = random(0, W);
-
-	//	cout << "Color of Atom " << j+1 << " is      " << Atom[j].c << endl;
-	//	cout << "Radius of Atom " << j+1 << " is     " << Atom[j].rad<< endl;
-	//	cout << "vx of Atom " << j+1 << " is         " << Atom[j].vel_x << endl;
-	//	cout << "vy of Atom " << j+1 << " is         " << Atom[j].vel_y << endl;
-	//	cout << "x Position of Atom " << j+1 << " is " << Atom[j].pos_x << endl;
-	//	cout << "y Position of Atom " << j+1 << " is " << Atom[j].pos_y << endl;
-	//}
 }
 
 //**********************************************************
@@ -171,9 +189,32 @@ void draw(int n, Atom Atom[]) {
 //**********************************************************
 
 void update(int n, Atom Atom[]) {
-	//for (int j = 0; j < n; j++) {
+	for (int j = 0; j < n; j++) {
 
-	//}
+		Atom[j].pos_x += Atom[j].vel_x;
+		Atom[j].pos_y += Atom[j].vel_y;
+
+		if (Atom[j].pos_x >= W - (Atom[j].rad / 2))
+		{
+			Atom[j].vel_x = -Atom[j].vel_x;
+			Atom[j].pos_x = W - (Atom[j].rad / 2);
+		}
+		if (Atom[j].pos_x <= 0)
+		{
+			Atom[j].vel_x = -Atom[j].vel_x;
+			Atom[j].pos_x = (Atom[j].rad / 2);
+		}
+		if (Atom[j].pos_y >= H - (Atom[j].rad / 2))
+		{
+			Atom[j].vel_y = -Atom[j].vel_y;
+			Atom[j].pos_y = H - (Atom[j].rad / 2);
+		}
+		if (Atom[j].pos_y <= 0)
+		{
+			Atom[j].vel_y = -Atom[j].vel_y;
+			Atom[j].pos_y = (Atom[j].rad / 2);
+		}
+	}
 }
 
 
