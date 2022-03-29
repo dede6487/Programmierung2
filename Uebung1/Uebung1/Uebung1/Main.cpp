@@ -34,9 +34,6 @@ int H = 480;
 int S = 30;		//time between the frame-updates - sleep
 int F = 200;	//number of updates that are performed by the program
 
-int argc = 2;
-char* argv[];
-
 //**********************************************************
 // struct "Atom"
 // 
@@ -89,13 +86,9 @@ int random(int llimit, int ulimit) {
 double number(int argc, const char* argv[]) {
 	int n = 3;
 
-	cout << "please give the dir to the Input file:" << endl;
-	//cin >> argv[1];
-	argc = sizeof argv;
-
 	if (argc == 2)
 	{
-		ifstream Input{ "Input.txt" };
+		ifstream Input{ argv[1] };
 		if (!Input) 
 		{
 			cout << "Error: check Input file (numbers)" << endl;
@@ -119,7 +112,7 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 
 	if (argc == 2)
 	{
-		ifstream Input{ "Input.txt" };
+		ifstream Input{ argv[1] };
 		if (!Input) {
 			cout << "Error: check Input file (init)" << endl;
 			return;
@@ -154,20 +147,20 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 		srand(time(0));
 		for (int j = 0; j < n; j++) {
 			Atom[j].c = random(000, 0xFFFFFF);
-			Atom[j].r = random(20, 80);
+			Atom[j].r = random(20, 40);
 			Atom[j].vx = random(5, 25);
 			Atom[j].vy = random(5, 25);
-			Atom[j].x = random(0, W);
-			Atom[j].y = random(0, H);
+			Atom[j].x = random(Atom[j].r, W - Atom[j].r);
+			Atom[j].y = random(Atom[j].r, H - Atom[j].r);
 			
 			//the following function should check, if Atoms were to overlap
-			for (int l = 0, m=1; l <= j && m<=3; l++, m++) {
+			for (int l = 0; l <= j; l++) {
 				if ((abs(Atom[j].x - Atom[l].x) < Atom[j].r + Atom[l].r) 
 					&& (abs(Atom[j].y - Atom[l].y) < Atom[j].r + Atom[l].r)) 
 				{
-					Atom[j].x = random(0, W);
-					Atom[j].y = random(0, H);
-				}//else delete Atom[j]?
+					Atom[j].x = random(Atom[j].r, W - Atom[j].r);
+					Atom[j].y = random(Atom[j].r, H - Atom[j].r);
+				}//else delete Atom[j] or just abort?
 			}
 
 			cout << "Atom " << j + 1 << " has the following values assigned:" << endl;
@@ -198,8 +191,8 @@ void draw(int n, Atom Atom[]) {
 	fillRectangle(0, 0, W, H, 0xFFFFFF);
 
 	for (int j = 0; j < n; j++) {
-		fillEllipse(Atom[j].x, Atom[j].y, Atom[j].r, Atom[j].r, Atom[j].c);
-	}//x and y aren't at the center of the ellipse, needs to be corrected
+		fillEllipse(Atom[j].x - Atom[j].r, Atom[j].y - Atom[j].r, 2 * Atom[j].r, 2 * Atom[j].r, Atom[j].c);
+	}
 	
 	flush();
 }
@@ -227,7 +220,7 @@ void update(int n, Atom Atom[]) {
 			Atom[j].vx = -Atom[j].vx;
 			Atom[j].x = W - Atom[j].r;
 		}
-		if (Atom[j].x <= 0)
+		if (Atom[j].x <= Atom[j].r)
 		{
 			Atom[j].vx = -Atom[j].vx;
 			Atom[j].x = Atom[j].r;
@@ -237,7 +230,7 @@ void update(int n, Atom Atom[]) {
 			Atom[j].vy = -Atom[j].vy;
 			Atom[j].y = H - Atom[j].r;
 		}
-		if (Atom[j].y <= 0)
+		if (Atom[j].y <= Atom[j].r)
 		{
 			Atom[j].vy = -Atom[j].vy;
 			Atom[j].y = Atom[j].r;
