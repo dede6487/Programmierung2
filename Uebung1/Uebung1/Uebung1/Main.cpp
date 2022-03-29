@@ -35,6 +35,7 @@ int S = 30;		//time between the frame-updates - sleep
 int F = 200;	//number of updates that are performed by the program
 
 int argc = 2;
+char* argv[];
 
 //**********************************************************
 // struct "Atom"
@@ -87,8 +88,10 @@ int random(int llimit, int ulimit) {
 
 double number(int argc, const char* argv[]) {
 	int n = 3;
-	
-	argc = 1;
+
+	cout << "please give the dir to the Input file:" << endl;
+	//cin >> argv[1];
+	argc = sizeof argv;
 
 	if (argc == 2)
 	{
@@ -113,8 +116,6 @@ double number(int argc, const char* argv[]) {
 //**********************************************************
 
 void init(int n, Atom Atom[], int argc, const char* argv[]) {
-
-	argc = 1;
 
 	if (argc == 2)
 	{
@@ -198,7 +199,7 @@ void draw(int n, Atom Atom[]) {
 
 	for (int j = 0; j < n; j++) {
 		fillEllipse(Atom[j].x, Atom[j].y, Atom[j].r, Atom[j].r, Atom[j].c);
-	}
+	}//x and y aren't at the center of the ellipse, needs to be corrected
 	
 	flush();
 }
