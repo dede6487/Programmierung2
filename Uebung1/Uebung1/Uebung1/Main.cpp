@@ -42,21 +42,22 @@ int argc = 2;
 // defines the data structure for an Atom
 // Atoms hold the values:
 // c ... colour
-// rad ... radius
-// vel ... velocity
-// pos_x ... x-value for position
-// pos_y ... y-value for position
+// r ... radius
+// vx ... velocity in x
+// vy ... velocity in y
+// x ... x-value for position
+// y ... y-value for position
 // 
 //**********************************************************
 
 typedef struct Atom
 {
 	int c;
-	int rad;
-	int vel_x;
-	int vel_y;
-	int pos_x;
-	int pos_y;
+	int r;
+	int vx;
+	int vy;
+	int x;
+	int y;
 };
 
 //**********************************************************
@@ -132,19 +133,19 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 			for (int j = 0; j < n; j++)
 			{
 				Input >> Atom[j].c;
-				Input >> Atom[j].rad;
-				Input >> Atom[j].pos_x;
-				Input >> Atom[j].pos_y;
-				Input >> Atom[j].vel_x;
-				Input >> Atom[j].vel_y;
+				Input >> Atom[j].r;
+				Input >> Atom[j].x;
+				Input >> Atom[j].y;
+				Input >> Atom[j].vx;
+				Input >> Atom[j].vy;
 
 				cout << "Atom " << j + 1 << " has the following values assigned:" << endl;
 				cout << "Color" << j + 1 << " is      " << Atom[j].c << endl;
-				cout << "Radius" << j + 1 << " is     " << Atom[j].rad << endl;
-				cout << "x Pos." << j + 1 << " is     " << Atom[j].pos_x << endl;
-				cout << "y Pos." << j + 1 << " is     " << Atom[j].pos_y << endl;
-				cout << "vx" << j + 1 << " is         " << Atom[j].vel_x << endl;
-				cout << "vy" << j + 1 << " is         " << Atom[j].vel_y << endl;
+				cout << "Radius" << j + 1 << " is     " << Atom[j].r << endl;
+				cout << "x Pos." << j + 1 << " is     " << Atom[j].x << endl;
+				cout << "y Pos." << j + 1 << " is     " << Atom[j].y << endl;
+				cout << "vx" << j + 1 << " is         " << Atom[j].vx << endl;
+				cout << "vy" << j + 1 << " is         " << Atom[j].vy << endl;
 			}
 		}
 
@@ -153,19 +154,19 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 	else if(argc == 1) {
 		for (int j = 0; j < n; j++) {
 			Atom[j].c = random(000, 0xFFFFFF);
-			Atom[j].rad = random(50, 150);
-			Atom[j].vel_x = random(5, 25);
-			Atom[j].vel_y = random(5, 25);
-			Atom[j].pos_x = random(0, H);
-			Atom[j].pos_y = random(0, W);
+			Atom[j].r = random(50, 150);
+			Atom[j].vx = random(5, 25);
+			Atom[j].vy = random(5, 25);
+			Atom[j].x = random(0, H);
+			Atom[j].y = random(0, W);
 
 			cout << "Atom " << j + 1 << " has the following values assigned:" << endl;
 			cout << "Color" << j + 1 << " is      " << Atom[j].c << endl;
-			cout << "Radius" << j + 1 << " is     " << Atom[j].rad << endl;
-			cout << "x Pos." << j + 1 << " is     " << Atom[j].pos_x << endl;
-			cout << "y Pos." << j + 1 << " is     " << Atom[j].pos_y << endl;
-			cout << "vx" << j + 1 << " is         " << Atom[j].vel_x << endl;
-			cout << "vy" << j + 1 << " is         " << Atom[j].vel_y << endl;
+			cout << "Radius" << j + 1 << " is     " << Atom[j].r << endl;
+			cout << "x Pos." << j + 1 << " is     " << Atom[j].x << endl;
+			cout << "y Pos." << j + 1 << " is     " << Atom[j].y << endl;
+			cout << "vx" << j + 1 << " is         " << Atom[j].vx << endl;
+			cout << "vy" << j + 1 << " is         " << Atom[j].vy << endl;
 		}
 	}
 }
@@ -178,7 +179,7 @@ void draw(int n, Atom Atom[]) {
 	fillRectangle(0, 0, W, H, 0xFFFFFF);
 
 	for (int j = 0; j < n; j++) {
-		fillEllipse(Atom[j].pos_x, Atom[j].pos_y, Atom[j].rad, Atom[j].rad, Atom[j].c);
+		fillEllipse(Atom[j].x, Atom[j].y, Atom[j].r, Atom[j].r, Atom[j].c);
 	}
 	
 	flush();
@@ -191,28 +192,28 @@ void draw(int n, Atom Atom[]) {
 void update(int n, Atom Atom[]) {
 	for (int j = 0; j < n; j++) {
 
-		Atom[j].pos_x += Atom[j].vel_x;
-		Atom[j].pos_y += Atom[j].vel_y;
+		Atom[j].x += Atom[j].vx;
+		Atom[j].y += Atom[j].vy;
 
-		if (Atom[j].pos_x >= W - (Atom[j].rad / 2))
+		if (Atom[j].x >= W - Atom[j].r)
 		{
-			Atom[j].vel_x = -Atom[j].vel_x;
-			Atom[j].pos_x = W - (Atom[j].rad / 2);
+			Atom[j].vx = -Atom[j].vx;
+			Atom[j].x = W - Atom[j].r;
 		}
-		if (Atom[j].pos_x <= 0)
+		if (Atom[j].x <= 0)
 		{
-			Atom[j].vel_x = -Atom[j].vel_x;
-			Atom[j].pos_x = (Atom[j].rad / 2);
+			Atom[j].vx = -Atom[j].vx;
+			Atom[j].x = Atom[j].r;
 		}
-		if (Atom[j].pos_y >= H - (Atom[j].rad / 2))
+		if (Atom[j].y >= H - Atom[j].r)
 		{
-			Atom[j].vel_y = -Atom[j].vel_y;
-			Atom[j].pos_y = H - (Atom[j].rad / 2);
+			Atom[j].vy = -Atom[j].vy;
+			Atom[j].y = H - Atom[j].r;
 		}
-		if (Atom[j].pos_y <= 0)
+		if (Atom[j].y <= 0)
 		{
-			Atom[j].vel_y = -Atom[j].vel_y;
-			Atom[j].pos_y = (Atom[j].rad / 2);
+			Atom[j].vy = -Atom[j].vy;
+			Atom[j].y = Atom[j].r;
 		}
 	}
 }
