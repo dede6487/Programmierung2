@@ -72,8 +72,6 @@ typedef struct Atom
 //**********************************************************
 
 int random(int llimit, int ulimit) {
-	
-	srand(time(0));
 
 	return (rand() % (ulimit - llimit + 1)) + llimit;
 }
@@ -90,7 +88,7 @@ int random(int llimit, int ulimit) {
 double number(int argc, const char* argv[]) {
 	int n = 3;
 	
-	argc = 2;
+	argc = 1;
 
 	if (argc == 2)
 	{
@@ -116,7 +114,7 @@ double number(int argc, const char* argv[]) {
 
 void init(int n, Atom Atom[], int argc, const char* argv[]) {
 
-	argc = 2;
+	argc = 1;
 
 	if (argc == 2)
 	{
@@ -152,13 +150,24 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 		Input.close();
 	}
 	else if(argc == 1) {
+		srand(time(0));
 		for (int j = 0; j < n; j++) {
 			Atom[j].c = random(000, 0xFFFFFF);
-			Atom[j].r = random(50, 150);
+			Atom[j].r = random(20, 80);
 			Atom[j].vx = random(5, 25);
 			Atom[j].vy = random(5, 25);
-			Atom[j].x = random(0, H);
-			Atom[j].y = random(0, W);
+			Atom[j].x = random(0, W);
+			Atom[j].y = random(0, H);
+			
+			//the following function should check, if Atoms were to overlap
+			for (int l = 0, m=1; l <= j && m<=3; l++, m++) {
+				if ((abs(Atom[j].x - Atom[l].x) < Atom[j].r + Atom[l].r) 
+					&& (abs(Atom[j].y - Atom[l].y) < Atom[j].r + Atom[l].r)) 
+				{
+					Atom[j].x = random(0, W);
+					Atom[j].y = random(0, H);
+				}//else delete Atom[j]?
+			}
 
 			cout << "Atom " << j + 1 << " has the following values assigned:" << endl;
 			cout << "Color" << j + 1 << " is      " << Atom[j].c << endl;
@@ -169,10 +178,19 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 			cout << "vy" << j + 1 << " is         " << Atom[j].vy << endl;
 		}
 	}
+	else { cout << "Error: Please give a valid Argument!"; }
 }
 
 //**********************************************************
-//
+// Function "Draw"
+// 
+// Input: number of Atoms and values of these Atoms
+// 
+// Output: none
+// 
+// The draw function draws each individual "Frame" of the animation
+// by first drawing a blank background and then drawing each individual Atom
+// at its respective position. All of this is updated as one "Frame". 
 //**********************************************************
 
 void draw(int n, Atom Atom[]) {
@@ -186,7 +204,15 @@ void draw(int n, Atom Atom[]) {
 }
 
 //**********************************************************
-//
+// Funtion "Update"
+// 
+// Input:number of Atoms and Values of Atoms
+// 
+// Output: none
+// 
+// The "Update" Function determines the position of every Atom
+// by calculation their position through their velocities in x and y.
+// It also handles Atom bouncing from Walls and later also themselves.
 //**********************************************************
 
 void update(int n, Atom Atom[]) {
