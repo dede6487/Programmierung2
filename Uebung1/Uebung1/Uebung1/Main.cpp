@@ -235,6 +235,31 @@ void update(int n, Atom Atom[]) {
 			Atom[j].vy = -Atom[j].vy;
 			Atom[j].y = Atom[j].r;
 		}
+
+
+		for (int l = 0; l <= j; l++) {
+			if (
+				(abs(Atom[j].x - Atom[l].x) < Atom[j].r + Atom[l].r) && (abs(Atom[j].y - Atom[l].y) < Atom[j].r + Atom[l].r && j!= l)
+				//sqrt(((Atom[j].x - Atom[l].x)^2)+ ((Atom[j].y - Atom[l].y) ^ 2)) < Atom[j].r + Atom[l].r && j!= l
+				)
+			{
+				//if (Atom[j].x > Atom[l].x)
+				//{
+				//	Atom[l].x = Atom[j].x + Atom[j].r + Atom[l].r;
+				//}
+				//else {
+				//	Atom[j].x = Atom[l].x + Atom[j].r + Atom[l].r;
+				//}
+				//if (Atom[j].y > Atom[l].y)
+				//{
+				//	Atom[l].y = Atom[j].y + Atom[j].r + Atom[l].r;
+				//}
+				//else {
+				//	Atom[j].y = Atom[l].y + Atom[j].r + Atom[l].r;
+				//}
+				cout << "Kollision" << endl;
+			}
+		}
 	}
 }
 
