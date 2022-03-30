@@ -31,7 +31,7 @@ using namespace compsys;
 int W = 640;	//W,H are the width and the height of the created window
 int H = 480;
 
-int S = 30;		//time between the frame-updates - sleep
+int S = 40;		//time between the frame-updates - sleep
 int F = 200;	//number of updates that are performed by the program
 
 //**********************************************************
@@ -155,12 +155,15 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 			
 			//the following function should check, if Atoms were to overlap
 			for (int l = 0; l <= j; l++) {
-				if ((abs(Atom[j].x - Atom[l].x) < Atom[j].r + Atom[l].r) 
-					&& (abs(Atom[j].y - Atom[l].y) < Atom[j].r + Atom[l].r)) 
+				if (sqrt(pow(Atom[j].x - Atom[l].x, 2) + pow(Atom[j].y - Atom[l].y, 2)) < Atom[j].r + Atom[l].r && j != l)
 				{
 					Atom[j].x = random(Atom[j].r, W - Atom[j].r);
 					Atom[j].y = random(Atom[j].r, H - Atom[j].r);
-				}//else delete Atom[j] or just abort?
+				}
+				else {
+					cout << "Error: Atom overlap, please try again!" << endl;
+					exit;
+				}
 			}
 
 			cout << "Atom " << j + 1 << " has the following values assigned:" << endl;
@@ -215,6 +218,8 @@ void update(int n, Atom Atom[]) {
 		Atom[j].x += Atom[j].vx;
 		Atom[j].y += Atom[j].vy;
 
+		//checks for collisions between atoms and walls
+
 		if (Atom[j].x >= W - Atom[j].r)
 		{
 			Atom[j].vx = -Atom[j].vx;
@@ -236,27 +241,26 @@ void update(int n, Atom Atom[]) {
 			Atom[j].y = Atom[j].r;
 		}
 
-
+		//checks for collisions between different atoms
 		for (int l = 0; l <= j; l++) {
 			if (
-				(abs(Atom[j].x - Atom[l].x) < Atom[j].r + Atom[l].r) && (abs(Atom[j].y - Atom[l].y) < Atom[j].r + Atom[l].r && j!= l)
-				//sqrt(((Atom[j].x - Atom[l].x)^2)+ ((Atom[j].y - Atom[l].y) ^ 2)) < Atom[j].r + Atom[l].r && j!= l
+				sqrt(pow(Atom[j].x - Atom[l].x,2)+ pow(Atom[j].y - Atom[l].y,2)) < Atom[j].r + Atom[l].r && j != l
 				)
 			{
-				//if (Atom[j].x > Atom[l].x)
-				//{
-				//	Atom[l].x = Atom[j].x + Atom[j].r + Atom[l].r;
-				//}
-				//else {
-				//	Atom[j].x = Atom[l].x + Atom[j].r + Atom[l].r;
-				//}
-				//if (Atom[j].y > Atom[l].y)
-				//{
-				//	Atom[l].y = Atom[j].y + Atom[j].r + Atom[l].r;
-				//}
-				//else {
-				//	Atom[j].y = Atom[l].y + Atom[j].r + Atom[l].r;
-				//}
+				if (Atom[j].x > Atom[l].x)
+				{
+					Atom[l].x = Atom[j].x - Atom[j].r - Atom[l].r;
+				}
+				else {
+					Atom[j].x = Atom[l].x - Atom[j].r - Atom[l].r;
+				}
+				if (Atom[j].y > Atom[l].y)
+				{
+					Atom[l].y = Atom[j].y - Atom[j].r - Atom[l].r;
+				}
+				else {
+					Atom[j].y = Atom[l].y - Atom[j].r - Atom[l].r;
+				}
 				cout << "Kollision" << endl;
 			}
 		}
