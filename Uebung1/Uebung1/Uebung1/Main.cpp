@@ -163,7 +163,7 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 				else {
 					cout << "Error: Atom overlap, please try again!" << endl;
 					exit;
-				}
+				}//not yet fully functional
 			}
 
 			cout << "Atom " << j + 1 << " has the following values assigned:" << endl;
@@ -213,6 +213,10 @@ void draw(int n, Atom Atom[]) {
 //**********************************************************
 
 void update(int n, Atom Atom[]) {
+
+	double Vx = 0;
+	double Vy = 0;
+
 	for (int j = 0; j < n; j++) {
 
 		Atom[j].x += Atom[j].vx;
@@ -247,19 +251,38 @@ void update(int n, Atom Atom[]) {
 				sqrt(pow(Atom[j].x - Atom[l].x,2)+ pow(Atom[j].y - Atom[l].y,2)) < Atom[j].r + Atom[l].r && j != l
 				)
 			{
+				Vx = (pow(Atom[l].r,2) * Atom[l].vx + pow(Atom[j].r,2) * Atom[j].vx) / (pow(Atom[j].r,2) + pow(Atom[l].r,2));
+				Vy = (pow(Atom[l].r, 2) * Atom[l].vy + pow(Atom[j].r, 2) * Atom[j].vy) / (pow(Atom[j].r, 2) + pow(Atom[l].r, 2));
+
 				if (Atom[j].x > Atom[l].x)
 				{
 					Atom[l].x = Atom[j].x - Atom[j].r - Atom[l].r;
+					//Atom[l].vx = 2 * Vx - Atom[l].vx;
+					//Atom[l].vy= 2 * Vy - Atom[l].vy;
+					//Atom[j].vx = 2 * Vx - Atom[j].vx;
+					//Atom[j].vy = 2 * Vy - Atom[j].vy;
 				}
 				else {
 					Atom[j].x = Atom[l].x - Atom[j].r - Atom[l].r;
+					//Atom[l].vx = 2 * Vx - Atom[l].vx;
+					//Atom[l].vy = 2 * Vy - Atom[l].vy;
+					//Atom[j].vx = 2 * Vx - Atom[j].vx;
+					//Atom[j].vy = 2 * Vy - Atom[j].vy;
 				}
 				if (Atom[j].y > Atom[l].y)
 				{
 					Atom[l].y = Atom[j].y - Atom[j].r - Atom[l].r;
+					//Atom[l].vx = 2 * Vx - Atom[l].vx;
+					//Atom[l].vy = 2 * Vy - Atom[l].vy;
+					//Atom[j].vx = 2 * Vx - Atom[j].vx;
+					//Atom[j].vy = 2 * Vy - Atom[j].vy;
 				}
 				else {
 					Atom[j].y = Atom[l].y - Atom[j].r - Atom[l].r;
+					//Atom[l].vx = 2 * Vx - Atom[l].vx;
+					//Atom[l].vy = 2 * Vy - Atom[l].vy;
+					//Atom[j].vx = 2 * Vx - Atom[j].vx;
+					//Atom[j].vy = 2 * Vy - Atom[j].vy;
 				}
 				cout << "Kollision" << endl;
 			}
