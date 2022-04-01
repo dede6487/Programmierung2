@@ -154,14 +154,23 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 			Atom[j].y = random(Atom[j].r, H - Atom[j].r);
 			
 			//the following function should check, if Atoms were to overlap
+
+			bool valid=true;
+
 			for (int l = 0; l <= j; l++) {
-				if (sqrt(pow(Atom[j].x - Atom[l].x, 2) + pow(Atom[j].y - Atom[l].y, 2)) < Atom[j].r + Atom[l].r && j != l)
+				if (sqrt(pow(Atom[j].x - Atom[l].x, 2) + pow(Atom[j].y - Atom[l].y, 2)) < Atom[j].r + Atom[l].r && j != l && valid)
 				{
 					Atom[j].x = random(Atom[j].r, W - Atom[j].r);
 					Atom[j].y = random(Atom[j].r, H - Atom[j].r);
-				}//not yet fully functional, check if it was repeated 3 times
-				//bool valid, if three times not work, valid = faslse
-				//exit(1); // + Error message
+
+					if (m >= 2) {
+						valid = false;
+					}
+				}
+				else {
+					cout << "Error: Atoms would overlap, please try again!" << endl;
+					exit(1);
+				}
 			}
 
 			cout << "Atom " << j + 1 << " has the following values assigned:" << endl;
