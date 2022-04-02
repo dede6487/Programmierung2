@@ -21,12 +21,18 @@
     <ClCompile Include="Drawing.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Auxiliary.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CImg.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Drawing.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Auxiliary.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

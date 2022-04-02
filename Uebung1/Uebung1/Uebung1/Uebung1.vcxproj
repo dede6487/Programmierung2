@@ -141,10 +141,12 @@
   <ItemGroup>
     <ClCompile Include="Drawing.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Auxiliary.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CImg.h" />
     <ClInclude Include="Drawing.h" />
+    <ClInclude Include="Auxiliary.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

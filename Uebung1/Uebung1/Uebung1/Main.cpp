@@ -27,6 +27,7 @@ using namespace compsys;
 
 #include  <string>	//defines the getline() function
 #include <fstream>
+#include "Auxiliary.h"
 
 int W = 640;	//W,H are the width and the height of the created window
 int H = 480;
@@ -264,8 +265,6 @@ void update(int n, Atom Atom[]) {
 
 			if (sqrt(pow(dx,2)+ pow(dy,2)) <= rsum && j != l)
 			{
-				Vx = (pow(Atom[l].r,2) * Atom[l].vx + pow(Atom[j].r,2) * Atom[j].vx) / (pow(Atom[j].r,2) + pow(Atom[l].r,2));
-				Vy = (pow(Atom[l].r, 2) * Atom[l].vy + pow(Atom[j].r, 2) * Atom[j].vy) / (pow(Atom[j].r, 2) + pow(Atom[l].r, 2));
 
 				double alpha = atan2(dy,dx);
 				int dx1 = cos(alpha) * rsum;
@@ -273,6 +272,36 @@ void update(int n, Atom Atom[]) {
 
 				Atom[j].x += dx1 - dx;
 				Atom[j].y += dy1 - dy;
+
+				double beta = 3.1415926 - alpha;
+
+				double a;
+				double r;
+				double vx1;
+				double vy1;
+
+				toPolar(Atom[j].vx, Atom[j].vy, r, a);
+				a - beta;
+				toCartesian(r, a, vx1, vy1);
+
+				Atom[j].vx = vx1;
+				Atom[j].vy = vy1;
+
+				toPolar(Atom[l].vx, Atom[l].vy, r, a);
+				a - beta;
+				toCartesian(r, a, vx1, vy1);
+
+				Atom[l].vx = vx1;
+				Atom[l].vy = vy1;
+
+				Vx = (pow(Atom[l].r, 2) * Atom[l].vx + pow(Atom[j].r, 2) * Atom[j].vx) / (pow(Atom[j].r, 2) + pow(Atom[l].r, 2));
+				Vy = (pow(Atom[l].r, 2) * Atom[l].vy + pow(Atom[j].r, 2) * Atom[j].vy) / (pow(Atom[j].r, 2) + pow(Atom[l].r, 2));
+
+				Atom[j].vx = 2 * Vx - Atom[j].vx;
+				Atom[j].vy = 2 * Vy - Atom[j].vy;
+
+				Atom[l].vx = 2 * Vx - Atom[l].vx;
+				Atom[l].vy = 2 * Vy - Atom[l].vy;
 
 				cout << "Kollision" << endl;//for debugging
 			}
