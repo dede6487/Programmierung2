@@ -158,16 +158,19 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 			bool valid=true;
 
 			for (int l = 0; l <= j; l++) {
+				int m = 0;
 				if (sqrt(pow(Atom[j].x - Atom[l].x, 2) + pow(Atom[j].y - Atom[l].y, 2)) < Atom[j].r + Atom[l].r && j != l && valid)
 				{
 					Atom[j].x = random(Atom[j].r, W - Atom[j].r);
 					Atom[j].y = random(Atom[j].r, H - Atom[j].r);
 
+					m++;
+
 					if (m >= 2) {
 						valid = false;
 					}
 				}
-				else {
+				else if(!valid){
 					cout << "Error: Atoms would overlap, please try again!" << endl;
 					exit(1);
 				}
@@ -254,49 +257,24 @@ void update(int n, Atom Atom[]) {
 
 		//checks for collisions between different atoms
 		for (int l = 0; l <= j; l++) {
-			if (
-				sqrt(pow(Atom[j].x - Atom[l].x,2)+ pow(Atom[j].y - Atom[l].y,2)) < Atom[j].r + Atom[l].r && j != l
-				)
+
+			int dx = Atom[j].x - Atom[l].x;
+			int dy = Atom[j].y - Atom[l].y;
+			int rsum = Atom[j].r + Atom[l].r;
+
+			if (sqrt(pow(dx,2)+ pow(dy,2)) <= rsum && j != l)
 			{
 				Vx = (pow(Atom[l].r,2) * Atom[l].vx + pow(Atom[j].r,2) * Atom[j].vx) / (pow(Atom[j].r,2) + pow(Atom[l].r,2));
 				Vy = (pow(Atom[l].r, 2) * Atom[l].vy + pow(Atom[j].r, 2) * Atom[j].vy) / (pow(Atom[j].r, 2) + pow(Atom[l].r, 2));
 
-				//differencce
-				//delta x, delty y
-				//Atom[j].x += fehler * rsum
-				//fehler = (rsum-dist)/dist
+				double alpha = atan2(dy,dx);
+				int dx1 = cos(alpha) * rsum;
+				int dy1 = sin(alpha) * rsum;
 
-				//if (Atom[j].x > Atom[l].x)
-				//{
-				//	Atom[l].x = Atom[j].x - Atom[j].r - Atom[l].r;
-				//	//Atom[l].vx = 2 * Vx - Atom[l].vx;
-				//	//Atom[l].vy= 2 * Vy - Atom[l].vy;
-				//	//Atom[j].vx = 2 * Vx - Atom[j].vx;
-				//	//Atom[j].vy = 2 * Vy - Atom[j].vy;
-				//}
-				//else {
-				//	Atom[j].x = Atom[l].x - Atom[j].r - Atom[l].r;
-				//	//Atom[l].vx = 2 * Vx - Atom[l].vx;
-				//	//Atom[l].vy = 2 * Vy - Atom[l].vy;
-				//	//Atom[j].vx = 2 * Vx - Atom[j].vx;
-				//	//Atom[j].vy = 2 * Vy - Atom[j].vy;
-				//}
-				//if (Atom[j].y > Atom[l].y)
-				//{
-				//	Atom[l].y = Atom[j].y - Atom[j].r - Atom[l].r;
-				//	//Atom[l].vx = 2 * Vx - Atom[l].vx;
-				//	//Atom[l].vy = 2 * Vy - Atom[l].vy;
-				//	//Atom[j].vx = 2 * Vx - Atom[j].vx;
-				//	//Atom[j].vy = 2 * Vy - Atom[j].vy;
-				//}
-				//else {
-				//	Atom[j].y = Atom[l].y - Atom[j].r - Atom[l].r;
-				//	//Atom[l].vx = 2 * Vx - Atom[l].vx;
-				//	//Atom[l].vy = 2 * Vy - Atom[l].vy;
-				//	//Atom[j].vx = 2 * Vx - Atom[j].vx;
-				//	//Atom[j].vy = 2 * Vy - Atom[j].vy;
-				//}
-				cout << "Kollision" << endl;
+				Atom[j].x += dx1 - dx;
+				Atom[j].y += dy1 - dy;
+
+				cout << "Kollision" << endl;//for debugging
 			}
 		}
 	}
