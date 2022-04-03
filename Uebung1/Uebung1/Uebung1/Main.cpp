@@ -225,7 +225,7 @@ void draw(int n, Atom Atom[]) {
 
 void update(int n, Atom Atom[]) {
 
-	double Vx = 0;
+	double Vx = 0;//maybe in for deklarieren?
 	double Vy = 0;
 
 	for (int j = 0; j < n; j++) {
