@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[11pt,titlepage]{article}
 
 %Laenderspezifische Einstellungen bzgl. Rechtschreibung, Sonderzeichen und Kodierung
 \usepackage[utf8]{inputenc}
@@ -6,15 +6,18 @@
 \usepackage[T1]{fontenc}
 \usepackage{titlesec}
 \usepackage{graphicx}
+\usepackage{courier}
 
 \usepackage{listings}
 \usepackage{color}
 \definecolor{light-gray}{gray}{0.85}
 \lstset{
+language=C++,
 numbers=left,
 breaklines=true,
 backgroundcolor=\color{light-gray},
 tabsize=2,
+basicstyle=\footnotesize\ttfamily,
 }
 
 \usepackage[
@@ -31,6 +34,18 @@ tabsize=2,
 \usepackage{amsmath}
 \usepackage[english]{varioref}
 \usepackage{hyperref}
+
+\fancypagestyle{firstPage}{
+	\fancyhead[LE,RO]{\textsc{Page} \thepage}
+	\fancyhead[LO,RE]{}
+	\fancyheadoffset[LE,RO]{2.5cm}
+	\renewcommand{\headrulewidth}{0.5pt}
+	
+	\fancyfoot[LE,RO]{\tiny{Assignment 1, Felix Dreßler (k12105003), created: \today}}
+	\cfoot{}
+	\fancyfootoffset[Le,RO]{2.5cm}
+	\renewcommand{\footrulewidth}{0.5pt}
+}
 
 \fancypagestyle{fancy}{
 	\fancyhead[R]{Seite \thepage}
@@ -52,11 +67,15 @@ tabsize=2,
 
 \pagestyle{fancy}
 
-\begin{document}
+\title{Programming 2 - Assignment 1}
+\author{Felix Dreßler (k12105003)}
+\date{\today} %Erstellungsdatum
 
+\begin{document}
+\maketitle
 	\section{Programming 1 - First Assignment}	
 	
-		\begin{lstlisting}
+		\begin{lstlisting}[name=Main.cpp]
 //**********************************************************
 //
 //**********************************************************
@@ -389,95 +408,4 @@ int main(int argc, const char* argv[])
 	endDrawing();
 }
 		\end{lstlisting}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		\subsection{Aufgabe 47}
-			Wir betrachten die Intervalle $(a,b)$ und $(c,d)$ mit $a<b$ und $c<d$
-			z.z.: $(a,b)$ Gleichmächtig $(c,d)$, also $(a,b)~(c,d)$ 
-			
-			Um zu zeigen, dass zwei Mengen gleichmächtig sind gilt es, eine Bijektion zwischen diesen zu finden.
-			Wir wählen:
-			\begin{displaymath}
-				f(x)=(x-a) \cdot \frac{d-c}{b-a}+c
-			\end{displaymath}
-			\begin{figure}[h]
-				\centering
-				\includegraphics[width=5cm]{Graph1.png}
-				\caption{Skizze zu $f(x)$}
-				\label{fig:Bild}
-			\end{figure}
-			Da diese Funktionj bijektiv und Abgeschlossen ist, gilt $(a,b)~(c,d)$
-		
-		\subsection{Aufgabe 48}
-			$X:={f: \mathbb{N} \rightarrow {0,1}}$
-			Ist $X$ abzählbar?
-			
-			Behauptung: $X$	ist überabzählbar.
-			
-			Begründung:
-				
-			Man ziehe die Potenzmenge $P(\mathbb{N})$ heran. Diese Potenzmenge ist überabzählbar. Wir bilden nehmen nun je ein Element von $P(\mathbb{N})$ (also eine Menge), diese bel. Menge nennen wir $N$,es gilt $N\subseteq \mathbb{N}$.
-			Wir können $N$ nun auf X bijektiv abbilden, weil es genau $\vert P(\mathbb{N})\vert$ viele Möglichkeiten für f gibt.
-			Damit ist X überabzählbar.
-			
-		\subsection{Aufgabe 49}
-			Grenzwert bestimmen
-			\begin{displaymath}
-				\lim \limits_{n \to \infty}	\frac{\frac{7n^k}{n^3}+\frac{n}{n^3}}{2\cdot \frac{n^3}{n^3}+9\cdot\frac{n^2}{n^3}+\frac{1}{n^3}}	
-				=\lim \limits_{n \to \infty}	\frac{\frac{7n^k}{n^3}+\frac{1}{n^2}}{2+9\cdot\frac{1}{n}+\frac{1}{n^3}}
-				=\lim \limits_{n \to \infty}\frac{\frac{7n^k}{n^3}+0}{2+0+0}
-				=\lim \limits_{n \to \infty}\frac{2}{7}\cdot\frac{n^k}{n^3}
-			\end{displaymath}	
-			Obige Umformung gilt für alle $k \leq 3$.
-			
-			Für $k<3$ konvergiert die Folge gegen $0$.
-			
-			Für $k=3$ konvergiert die Folge gegen $\frac{2}{7}$
-			
-			Für $k>3$ ist die Folge divergent.
-			
-		\subsection{Aufgabe 50}
-			sei $a_n$ eine nichtnegative Folge mit $a_n \rightarrow a$
-		
-			z.z.: $\sqrt{a_n} \rightarrow \sqrt{a}$
-			
-			Fall 1: $a=0$
-			\begin{displaymath}
-				\exists n_0 \in \mathbb{N} \forall n \geq n_0 :\vert a_n\vert < \varepsilon^2 \Rightarrow \vert\sqrt{a_n}<\sqrt{\varepsilon^2}=\varepsilon
-			\end{displaymath}
-			Fall 2: $a>0$
-			\begin{displaymath}
-				\vert a_n-a\vert<\varepsilon
-			\end{displaymath}
-			\begin{displaymath}
-				\vert\sqrt{a_n}-\sqrt{a}\vert=\left\vert \sqrt{a_n}-\sqrt{a}\cdot\frac{\sqrt{a_n}+\sqrt{a}}{\sqrt{a_n}+\sqrt{a}} \right\vert=\frac{\vert a_n-a\vert}{\vert\sqrt{a_n}+\sqrt{a}\vert}
-			\end{displaymath}
-			Aufgrund der Nichtnegativität von $a_n$ und der Eigenschaften der Wurzel bleibt der Nenner positiv.
-			\begin{displaymath}
-				\frac{\vert a_n-a\vert}{\vert\sqrt{a_n}+\sqrt{a}\vert}<\frac{\sqrt{a}\cdot\varepsilon}{\sqrt{a}}=\varepsilon
-			\end{displaymath}
-		
-		\subsection{Aufgabe 51}
-			sei $a_n \rightarrow a$
-			$(a_n)$ konvergent $\Rightarrow (a_n)$ beschränkt, d.h. $\exists M\geq0 \forall n\in\mathbb{N}:\vert a_n\vert\leq M$ und daher auch $a\leq M$und $\vert a_n-a\vert\leq \vert a_n\vert+\vert a \vert \leq 2\cdot M$
-			
-			sei $\varepsilon>0$. Es gibt (weil $a_n \rightarrow a$) ein $n_0 \in\mathbb{N}$ so dass $\vert a_n-a\vert<\varepsilon$ für alle $n\geq n_0$
-			
-			\begin{displaymath}
-				\begin{split}
-				\Rightarrow &\left\vert \frac{a_1+...+a_n}{n}-a \right\vert = \left\vert \frac{a_1+...+a_n}{n}-\frac{n\cdot a}{n} \right\vert\leq \sum\limits_{j=1 \to n}\frac{\vert a_j-a\vert}{n}=\sum\limits_{j=1 \to n_0}\frac{\vert a_j-a\vert}{n}+\sum\limits_{j=n_0+1 \to n}\frac{\vert a_j-a\vert}{n}\\
-				&\\
-				&\leq\frac{2\cdot M\cdot n_n}{n}+\frac{\varepsilon}{n}\cdot (n-n_0)\leq \frac{2\cdot M\cdot n_n}{n}+\varepsilon \leq 2\varepsilon  n\geq max \left\{ n_0,\frac{2\cdot M\cdot n_n}{n} \right\}
-				\end{split}
-			\end{displaymath}
 \end{document}

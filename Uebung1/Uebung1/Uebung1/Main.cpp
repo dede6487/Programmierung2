@@ -1,8 +1,10 @@
 //**********************************************************
+//Header "Main.cpp"
 //
+// is the Main cpp file of the "Atoms" project
+// 
+// created by Felix Dreﬂler, 04.04.2022
 //**********************************************************
-
-
 #include <iostream>
 #include <cstdlib>
 #include <cmath>
@@ -62,12 +64,13 @@ typedef struct Atom
 //**********************************************************
 // Funtion "random"
 // 
+// This function gives a random number inbetween given limits
+// 
 // input: two int numbers which define the lower and the upper
 // limits of the outputted random number
 // 
 // output: a random number in between the given limits
 // including the limits
-// 
 //**********************************************************
 
 int random(int llimit, int ulimit) {
@@ -81,7 +84,11 @@ int random(int llimit, int ulimit) {
 //	creates Atoms with their initial Values as stated above
 //	N Atoms will be created with random colour, random size and
 //	random velocity at a random position.
+// 
+// input:
 //
+// 
+// output:
 //**********************************************************
 
 double number(int argc, const char* argv[]) {
@@ -106,7 +113,13 @@ double number(int argc, const char* argv[]) {
 }
 
 //**********************************************************
-//
+//Function "init"
+// 
+// text
+// 
+// input:
+// 
+// output:
 //**********************************************************
 
 void init(int n, Atom Atom[], int argc, const char* argv[]) {
@@ -192,13 +205,13 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 //**********************************************************
 // Function "Draw"
 // 
-// Input: number of Atoms and values of these Atoms
-// 
-// Output: none
-// 
 // The draw function draws each individual "Frame" of the animation
 // by first drawing a blank background and then drawing each individual Atom
 // at its respective position. All of this is updated as one "Frame". 
+// 
+// Input: number of Atoms and values of these Atoms
+// 
+// Output: none
 //**********************************************************
 
 void draw(int n, Atom Atom[]) {
@@ -214,18 +227,18 @@ void draw(int n, Atom Atom[]) {
 //**********************************************************
 // Funtion "Update"
 // 
-// Input:number of Atoms and Values of Atoms
-// 
-// Output: none
-// 
 // The "Update" Function determines the position of every Atom
 // by calculation their position through their velocities in x and y.
 // It also handles Atom bouncing from Walls and later also themselves.
+// 
+// Input:number of Atoms and Values of Atoms
+// 
+// Output: none
 //**********************************************************
 
 void update(int n, Atom Atom[]) {
 
-	double Vx = 0;//maybe in for deklarieren?
+	double Vx = 0;//maybe in for() deklarieren?
 	double Vy = 0;
 
 	for (int j = 0; j < n; j++) {
@@ -302,13 +315,13 @@ void update(int n, Atom Atom[]) {
 
 				Atom[l].vx = 2 * Vx - Atom[l].vx;
 				Atom[l].vy = 2 * Vy - Atom[l].vy;
-
-				cout << "Kollision" << endl;//for debugging
 			}
 		}
 	}
 }
 
+//Main as described in the Assignment
+//further elaboration needed?
 
 int main(int argc, const char* argv[])
 {
