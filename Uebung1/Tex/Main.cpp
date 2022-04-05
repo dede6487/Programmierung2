@@ -3,7 +3,7 @@
 //
 // is the Main cpp file of the "Atoms" project
 // 
-// created by Felix Dressler, 04.04.2022
+// created by Felix Dreßler, 04.04.2022
 //**********************************************************
 #include <iostream>
 #include <cstdlib>
