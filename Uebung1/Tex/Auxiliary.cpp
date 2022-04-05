@@ -4,7 +4,7 @@
 // defines auxiliary functions for use in the "Atoms" project
 // that are declared in "Auxiliary.h"
 // 
-// created by Felix Dreﬂler, 04.04.2022
+// created by Felix Dressler, 04.04.2022
 //**********************************************************
 #include <iostream>
 #include <cstdlib>

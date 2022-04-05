@@ -4,7 +4,7 @@
 // declares auxiliary functions for use in the "Atoms" project
 // for further elaboration of functions, see "Auxiliary.cpp"
 // 
-// created by Felix Dreﬂler, 04.04.2022
+// created by Felix Dressler, 04.04.2022
 //**********************************************************
 #pragma once
 

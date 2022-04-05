@@ -6,10 +6,10 @@
 \usepackage[T1]{fontenc}
 \usepackage{titlesec}
 \usepackage{graphicx}
-\usepackage{courier}
 
 \usepackage{listings}
 \usepackage{color}
+\usepackage{courier}
 \definecolor{light-gray}{gray}{0.85}
 \lstset{
 language=C++,
@@ -21,7 +21,7 @@ basicstyle=\footnotesize\ttfamily,
 frame=single,
 inputencoding=utf8,
 extendedchars=true,
-%showstringspaces=false,
+showstringspaces=false,
 literate =
 	{ä}{{\"a}}1
 	{ö}{{\"o}}1
@@ -34,12 +34,6 @@ literate =
 }
 
 \def\ContinueLineNumber{\lstset{firstnumber=last}}
-
-%\lstset{
-%	breakatwhitespace,
-%	breaklines,
-%	backgroundcolor=\color{LightYellow},
-%}
 
 \usepackage[
 	a4paper,
@@ -94,32 +88,43 @@ literate =
 
 \begin{document}
 \maketitle
-	\section{Programming 1 - First Assignment}	
-	The following paragraph shows the beginning of the File "Main.cpp" of the "Atoms" Project. 
-	We see, that in comparison to the given Header in the assignment, there is an "Auxiliary.h" included in row 32. This Header-File will be discussed in the next section.
-	
-	There are also four global variables defined in rows 34 to 38. W and H are width and height of the created window, in which the atoms will be simulated.
-	S describes the time that will pass between each frame. It will be passed to the Sleep function that is describes in rows 14 to 25.
-	\lstinputlisting[firstline=0,lastline=39]{Main.cpp}
-	
-	\ContinueLineNumber
-	\lstinputlisting[firstline=40,lastline=62]{Main.cpp}
-	
-	\ContinueLineNumber
-	\lstinputlisting[firstline=64,lastline=79]{Main.cpp}
-	
-	\ContinueLineNumber
-	\lstinputlisting[firstline=81,lastline=113]{Main.cpp}
-	
-	\ContinueLineNumber
-	\lstinputlisting[firstline=115,lastline=203]{Main.cpp}
-	
-	\ContinueLineNumber
-	\lstinputlisting[firstline=205,lastline=225]{Main.cpp}
-	
-	\ContinueLineNumber
-	\lstinputlisting[firstline=227,lastline=321]{Main.cpp}
-	
-	\ContinueLineNumber
-	\lstinputlisting[firstline=323,lastline=344]{Main.cpp}
+	\section{Main.cpp}	
+		\subsection{Header of Main.cpp}
+			The following paragraph shows the beginning of the File "Main.cpp" of the "Atoms" Project. 
+			We see, that in comparison to the given Header in the assignment, there is an "Auxiliary.h" included in row 32. This Header-File will be discussed in the next section.
+			
+			There are also four global variables defined in rows 34 to 38. W and H are width and height of the created window, in which the atoms will be simulated.
+			S describes the time that will pass between each frame. It will be passed to the Sleep function that is describes in rows 14 to 25.
+			\lstinputlisting[firstline=0,lastline=38]{Main.cpp}
+			
+			
+		\subsection{structure "Atom"}	
+			\ContinueLineNumber
+			\lstinputlisting[firstline=40,lastline=61]{Main.cpp}
+			
+		\subsection{Function "number"}
+			\ContinueLineNumber
+			\lstinputlisting[firstline=63,lastline=101]{Main.cpp}
+			
+		\subsection{Function "init"}
+			\ContinueLineNumber
+			\lstinputlisting[firstline=103,lastline=209]{Main.cpp}
+			
+		\subsection{Function "Draw"}
+			\ContinueLineNumber
+			\lstinputlisting[firstline=211,lastline=231]{Main.cpp}
+			
+		\subsection{Function "Update"}
+			\ContinueLineNumber
+			\lstinputlisting[firstline=233,lastline=332]{Main.cpp}
+			
+		\subsection{Main}
+			\ContinueLineNumber
+			\lstinputlisting[firstline=334,lastline=354]{Main.cpp}
+			
+		\section{Auxiliary}
+			\subsection{Auciliary.h}
+				\lstinputlisting{Auxiliary.h}
+			\subsection{Auxiliary.cpp}
+				\lstinputlisting{Auxiliary.cpp}
 \end{document}

@@ -1,5 +1,5 @@
 //**********************************************************
-//Header "Main.cpp"
+//"Main.cpp"
 //
 // is the Main cpp file of the "Atoms" project
 // 
@@ -29,7 +29,7 @@ using namespace compsys;
 
 #include  <string>	//defines the getline() function
 #include <fstream>
-#include "Auxiliary.h"
+#include "Auxiliary.h" //includes auxiliary functions such as "toPolar", "random", ...
 
 int W = 640;	//W,H are the width and the height of the created window
 int H = 480;
@@ -48,7 +48,6 @@ int F = 200;	//number of updates that are performed by the program
 // vy ... velocity in y
 // x ... x-value for position
 // y ... y-value for position
-// 
 //**********************************************************
 
 typedef struct Atom
@@ -62,33 +61,22 @@ typedef struct Atom
 };
 
 //**********************************************************
-// Funtion "random"
-// 
-// This function gives a random number inbetween given limits
-// 
-// input: two int numbers which define the lower and the upper
-// limits of the outputted random number
-// 
-// output: a random number in between the given limits
-// including the limits
-//**********************************************************
-
-int random(int llimit, int ulimit) {
-
-	return (rand() % (ulimit - llimit + 1)) + llimit;
-}
-
-//**********************************************************
 //	Function "number"
 //	
-//	creates Atoms with their initial Values as stated above
-//	N Atoms will be created with random colour, random size and
-//	random velocity at a random position.
+//	This function determines the number of atoms that should be 
+// created. It checks if there was an input file given. If yes, it
+// takes the number of atoms from this file. If not it gives the back
+// the number 3.
 // 
 // input:
+// argc ... number of arguments given when programm is called
+// argv[] ... argument that was given when programm is called
+// (should be the directory to a .txt file that holds start values
+// for the simulation.
 //
 // 
 // output:
+// n ... number of atoms that shoudl be created
 //**********************************************************
 
 double number(int argc, const char* argv[]) {
@@ -115,11 +103,20 @@ double number(int argc, const char* argv[]) {
 //**********************************************************
 //Function "init"
 // 
-// text
+// This function initializes n Atoms with their respective values.
+// If an input file was given, it uses the values that are stated there.
+// If no input file was given, it defines the values of the atoms at random
+// within a given Interval.
 // 
 // input:
+// n ... number of atoms that should be created
+// Atom[] ... gives an array of Atoms (struct defined above)
+// argc ... number of arguments given when programm is called
+// argv[] ... argument that was given when programm is called
+// (should be the directory to a .txt file that holds start values
+// for the simulation.
 // 
-// output:
+// output: none
 //**********************************************************
 
 void init(int n, Atom Atom[], int argc, const char* argv[]) {
@@ -134,10 +131,13 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 
 		while (Input)
 		{
-			int n;
+			int n;	//saves the first number in the input document to be able to 
+					//access the other numbers, this variable will not be used
 			Input >> n;
 			for (int j = 0; j < n; j++)
 			{
+				//we assume that the user only gives us valid placements 
+				//i.e. the atoms do not overlap
 				Input >> Atom[j].c;
 				Input >> Atom[j].r;
 				Input >> Atom[j].x;
@@ -145,6 +145,7 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 				Input >> Atom[j].vx;
 				Input >> Atom[j].vy;
 
+				//gives ut the values of each atom
 				cout << "Atom " << j + 1 << " has the following values assigned:" << endl;
 				cout << "Color" << j + 1 << " is      " << Atom[j].c << endl;
 				cout << "Radius" << j + 1 << " is     " << Atom[j].r << endl;
@@ -167,20 +168,25 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 			Atom[j].x = random(Atom[j].r, W - Atom[j].r);
 			Atom[j].y = random(Atom[j].r, H - Atom[j].r);
 			
-			//the following function should check, if Atoms were to overlap
-
+			//the following function should check, if Atoms were to overlap if they overlap, 
+			//it tries three times to create a new one, if it fails on the third time, it exits
 			bool valid=true;
 
 			for (int l = 0; l <= j; l++) {
 				int m = 0;
-				if (sqrt(pow(Atom[j].x - Atom[l].x, 2) + pow(Atom[j].y - Atom[l].y, 2)) < Atom[j].r + Atom[l].r && j != l && valid)
+
+				int dx = Atom[j].x - Atom[l].x; //difference between the x-coordinates of the two compared atoms
+				int dy = Atom[j].y - Atom[l].y; //difference between the y-coordinates of the two compared atoms
+				int rsum = Atom[j].r + Atom[l].r; //sum of the radi of the two atoms compared
+
+				if (dx*dx + dy*dy < rsum && j != l && valid)
 				{
 					Atom[j].x = random(Atom[j].r, W - Atom[j].r);
 					Atom[j].y = random(Atom[j].r, H - Atom[j].r);
 
 					m++;
 
-					if (m >= 2) {
+					if (m > 2) {
 						valid = false;
 					}
 				}
@@ -209,9 +215,9 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 // by first drawing a blank background and then drawing each individual Atom
 // at its respective position. All of this is updated as one "Frame". 
 // 
-// Input: number of Atoms and values of these Atoms
+// input: number of Atoms and values of these Atoms
 // 
-// Output: none
+// output: none
 //**********************************************************
 
 void draw(int n, Atom Atom[]) {
@@ -229,7 +235,13 @@ void draw(int n, Atom Atom[]) {
 // 
 // The "Update" Function determines the position of every Atom
 // by calculation their position through their velocities in x and y.
-// It also handles Atom bouncing from Walls and later also themselves.
+// It also handles collisions between different atoms and between 
+// atoms and walls.
+// 
+// It first checks if an atom was to collide with a wall, if yes it 
+// changes its velocity accordingly.
+// Next it checks if this atom was to collide with any of the other
+// atoms, if yes it changes their velocities accordingly.
 // 
 // Input:number of Atoms and Values of Atoms
 // 
@@ -237,10 +249,6 @@ void draw(int n, Atom Atom[]) {
 //**********************************************************
 
 void update(int n, Atom Atom[]) {
-
-	double Vx = 0;//maybe in for() deklarieren?
-	double Vy = 0;
-
 	for (int j = 0; j < n; j++) {
 
 		Atom[j].x += Atom[j].vx;
@@ -272,13 +280,12 @@ void update(int n, Atom Atom[]) {
 		//checks for collisions between different atoms
 		for (int l = 0; l <= j; l++) {
 
-			int dx = Atom[j].x - Atom[l].x;
-			int dy = Atom[j].y - Atom[l].y;
-			int rsum = Atom[j].r + Atom[l].r;
+			int dx = Atom[j].x - Atom[l].x; //difference between the x-coordinates of the two compared atoms
+			int dy = Atom[j].y - Atom[l].y; //difference between the y-coordinates of the two compared atoms
+			int rsum = Atom[j].r + Atom[l].r; //sum of the radi of the two atoms compared
 
-			if (sqrt(pow(dx,2)+ pow(dy,2)) <= rsum && j != l)
+			if (dx*dx + dy*dy <= rsum && j != l)
 			{
-
 				double alpha = atan2(dy,dx);
 				int dx1 = cos(alpha) * rsum;
 				int dy1 = sin(alpha) * rsum;
@@ -288,10 +295,13 @@ void update(int n, Atom Atom[]) {
 
 				double beta = 3.1415926 - alpha;
 
-				double a;
-				double r;
-				double vx1;
-				double vy1;
+				double Vx = 0;
+				double Vy = 0;
+
+				double a; //angle of a vector as outputted from "toPolar"
+				double r; //radius of a vector as outputted from "toPolar"
+				double vx1; //new velocity in x after rotation and transformation by "toCartesian"
+				double vy1; //new velocity in x after rotation and transformation by "toCartesian"
 
 				toPolar(Atom[j].vx, Atom[j].vy, r, a);
 				a - beta;
@@ -307,6 +317,7 @@ void update(int n, Atom Atom[]) {
 				Atom[l].vx = vx1;
 				Atom[l].vy = vy1;
 
+				//Vx and Vy as describes in the theory of elastic impact
 				Vx = (pow(Atom[l].r, 2) * Atom[l].vx + pow(Atom[j].r, 2) * Atom[j].vx) / (pow(Atom[j].r, 2) + pow(Atom[l].r, 2));
 				Vy = (pow(Atom[l].r, 2) * Atom[l].vy + pow(Atom[j].r, 2) * Atom[j].vy) / (pow(Atom[j].r, 2) + pow(Atom[l].r, 2));
 
@@ -321,7 +332,6 @@ void update(int n, Atom Atom[]) {
 }
 
 //Main as described in the Assignment
-//further elaboration needed?
 
 int main(int argc, const char* argv[])
 {
