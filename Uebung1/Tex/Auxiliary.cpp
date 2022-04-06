@@ -50,5 +50,5 @@ void toCartesian(double r, double a, double& x, double& y)
 
 int random(int llimit, int ulimit) {
 
-	return (rand() % (ulimit - llimit + 1)) + llimit;
+	return ((rand()+rand()*(RAND_MAX+1)) % (ulimit - llimit + 1)) + llimit;
 }

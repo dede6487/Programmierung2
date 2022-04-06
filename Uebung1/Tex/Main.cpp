@@ -53,11 +53,11 @@ int F = 200;	//number of updates that are performed by the program
 typedef struct Atom
 {
 	int c;
-	int r;
-	int vx;
-	int vy;
-	int x;
-	int y;
+	double r;
+	double vx;
+	double vy;
+	double x;
+	double y;
 };
 
 //**********************************************************
@@ -80,7 +80,7 @@ typedef struct Atom
 //**********************************************************
 
 double number(int argc, const char* argv[]) {
-	int n = 3;
+	int N = 3;
 
 	if (argc == 2)
 	{
@@ -91,13 +91,13 @@ double number(int argc, const char* argv[]) {
 			return -1;
 		}
 
-		Input >> n;
+		Input >> N;
 		Input.close();
 	}
 
-	cout << "the number of Atoms is: " << n << endl;
+	cout << "the number of Atoms is: " << N << endl;
 
-	return n;
+	return N;
 }
 
 //**********************************************************
@@ -120,7 +120,6 @@ double number(int argc, const char* argv[]) {
 //**********************************************************
 
 void init(int n, Atom Atom[], int argc, const char* argv[]) {
-
 	if (argc == 2)
 	{
 		ifstream Input{ argv[1] };
@@ -172,14 +171,14 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 			//it tries three times to create a new one, if it fails on the third time, it exits
 			bool valid=true;
 
-			for (int l = 0; l <= j; l++) {
+			for (int l = 0; l < j; l++) {
 				int m = 0;
 
-				int dx = Atom[j].x - Atom[l].x; //difference between the x-coordinates of the two compared atoms
-				int dy = Atom[j].y - Atom[l].y; //difference between the y-coordinates of the two compared atoms
-				int rsum = Atom[j].r + Atom[l].r; //sum of the radi of the two atoms compared
+				double dx = Atom[j].x - Atom[l].x; //difference between the x-coordinates of the two compared atoms
+				double dy = Atom[j].y - Atom[l].y; //difference between the y-coordinates of the two compared atoms
+				double rsum = Atom[j].r + Atom[l].r; //sum of the radi of the two atoms compared
 
-				if (dx*dx + dy*dy < rsum && j != l && valid)
+				for (int k=0; dx * dx + dy * dy < rsum*rsum && valid && k<=m; k++)
 				{
 					Atom[j].x = random(Atom[j].r, W - Atom[j].r);
 					Atom[j].y = random(Atom[j].r, H - Atom[j].r);
@@ -190,7 +189,7 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 						valid = false;
 					}
 				}
-				else if(!valid){
+				if(!valid){
 					cout << "Error: Atoms would overlap, please try again!" << endl;
 					exit(1);
 				}
@@ -284,11 +283,11 @@ void update(int n, Atom Atom[]) {
 			int dy = Atom[j].y - Atom[l].y; //difference between the y-coordinates of the two compared atoms
 			int rsum = Atom[j].r + Atom[l].r; //sum of the radi of the two atoms compared
 
-			if (dx*dx + dy*dy <= rsum && j != l)
+			if (dx*dx + dy*dy <= rsum*rsum && j != l)
 			{
 				double alpha = atan2(dy,dx);
-				int dx1 = cos(alpha) * rsum;
-				int dy1 = sin(alpha) * rsum;
+				double dx1 = cos(alpha) * rsum;
+				double dy1 = sin(alpha) * rsum;
 
 				Atom[j].x += dx1 - dx;
 				Atom[j].y += dy1 - dy;

@@ -94,9 +94,77 @@ literate =
 		
 		For each test, the text output of the program was recorded, stating the initial values of the atoms. Furthermore, screenshots of the initial-state and the end-state are included.
 		\subsection{Tests without atom-collison}
-		
+			\subsubsection{Input.txt}
+			
+			\includegraphics[scale=0.5]{pictures/input_nocollision.png}
+			\includegraphics[scale=0.5]{pictures/input_nocollision_final.png}
+			
+			\subsubsection{randomly created atoms}
+			\begin{lstlisting}[numbers=none]
+			the number of Atoms is: 3
+			Atom 1 has the following values assigned:
+			Color1 is      11200266
+			Radius1 is     28
+			x Pos.1 is     283
+			y Pos.1 is     275
+			vx1 is         6
+			vy1 is         16
+			Atom 2 has the following values assigned:
+			Color2 is      3412068
+			Radius2 is     28
+			x Pos.2 is     169
+			y Pos.2 is     142
+			vx2 is         17
+			vy2 is         7
+			Atom 3 has the following values assigned:
+			Color3 is      16597665
+			Radius3 is     24
+			x Pos.3 is     70
+			y Pos.3 is     317
+			vx3 is         20
+			vy3 is         18
+			\end{lstlisting}
+
+			\includegraphics[scale=0.5]{pictures/random_nocollision.png}
+			\includegraphics[scale=0.5]{pictures/random_nocollision_final.png}
+\newpage
 		\subsection{Tests with atom-collsion}
+			\subsubsection{Input.txt}
+			
+			\includegraphics[scale=0.5]{pictures/input_collision.png}
+			\includegraphics[scale=0.5]{pictures/input_collision_final.png}
+			
+			\subsubsection{randomly created atoms}
+			Input Data:
+			\begin{lstlisting}[numbers=none]
+			the number of Atoms is: 3
+			Atom 1 has the following values assigned:
+			Color1 is      12312020
+			Radius1 is     23
+			x Pos.1 is     577
+			y Pos.1 is     200
+			vx1 is         5
+			vy1 is         8
+			Atom 2 has the following values assigned:
+			Color2 is      5024215
+			Radius2 is     37
+			x Pos.2 is     565
+			y Pos.2 is     411
+			vx2 is         22
+			vy2 is         18
+			Atom 3 has the following values assigned:
+			Color3 is      6381998
+			Radius3 is     26
+			x Pos.3 is     328
+			y Pos.3 is     327
+			vx3 is         7
+			vy3 is         17
+			\end{lstlisting}
 		
+			\includegraphics[scale=0.5]{pictures/random_collision.png}
+			\includegraphics[scale=0.5]{pictures/random_collision_final.png}
+			
+\newpage			
 	\section{The Program - Main.cpp}	
 		\subsection{Header of Main.cpp}
 			The following paragraph shows the beginning of the File "Main.cpp" of the "Atoms" Project. 
@@ -117,31 +185,31 @@ literate =
 			
 		\subsection{Function "init"}
 			\ContinueLineNumber
-			\lstinputlisting[firstline=103,lastline=209]{Main.cpp}
+			\lstinputlisting[firstline=103,lastline=208]{Main.cpp}
 			
 		\subsection{Function "Draw"}
 			\ContinueLineNumber
-			\lstinputlisting[firstline=211,lastline=231]{Main.cpp}
+			\lstinputlisting[firstline=210,lastline=230]{Main.cpp}
 			
 		\subsection{Function "Update"}
 			\ContinueLineNumber
-			\lstinputlisting[firstline=233,lastline=332]{Main.cpp}
+			\lstinputlisting[firstline=232,lastline=331]{Main.cpp}
 			
 		\subsection{Main}
 			\ContinueLineNumber
-			\lstinputlisting[firstline=334,lastline=354]{Main.cpp}
+			\lstinputlisting[firstline=333,lastline=353]{Main.cpp}
 			
+\newpage			
 		\section{The Program - Auxiliary}
 		For better clarity, auxiliary functions were outsourced to the files 
 		"Auxiliary.h" and "Auxiliary.cpp".
 			\subsection{Auciliary.h}
 			In the file "Auxiliary.h", the auxiliary functions are declared.
+				\lstset{firstnumber=1}
 				\lstinputlisting{Auxiliary.h}
 			\subsection{Auxiliary.cpp}
 			In the file "Auxiliary.cpp" the auxiliary functions are defined.
 			
-			%now it works, lol
-			If the random Function (staring in line 407) receives a wide range in which a random number should be generated, it struggles to give out all possible values.
-			For example when creating a random color in the int range 0 to 0xFFFFFF we will never see "red" as output of "random". This could be resolved by creating three independent random numbers (RGB) and later combining them.
+			"random" creates a random value in between two limits. It may seem unintuitive to implement this function this way, but in order to be able to reach more possible values with bigger given limtits (for example the limits 0 and 0xFFFFFF which are used to represent colours) we would not be able to get any red. This is because the RAND\textunderscore MAX is too low on some common C++ compilers.
 				\lstinputlisting{Auxiliary.cpp}
 \end{document}
