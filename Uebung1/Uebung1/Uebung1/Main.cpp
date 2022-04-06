@@ -179,7 +179,7 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 				int dy = Atom[j].y - Atom[l].y; //difference between the y-coordinates of the two compared atoms
 				int rsum = Atom[j].r + Atom[l].r; //sum of the radi of the two atoms compared
 
-				if (dx*dx + dy*dy < rsum && j != l && valid)
+				for (int k; dx*dx + dy*dy < rsum && j != l && valid && k=<m; k++;)
 				{
 					Atom[j].x = random(Atom[j].r, W - Atom[j].r);
 					Atom[j].y = random(Atom[j].r, H - Atom[j].r);
@@ -190,7 +190,7 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 						valid = false;
 					}
 				}
-				else if(!valid){
+				if(!valid){
 					cout << "Error: Atoms would overlap, please try again!" << endl;
 					exit(1);
 				}
@@ -278,56 +278,56 @@ void update(int n, Atom Atom[]) {
 		}
 
 		//checks for collisions between different atoms
-		for (int l = 0; l <= j; l++) {
+		//for (int l = 0; l <= j; l++) {
 
-			int dx = Atom[j].x - Atom[l].x; //difference between the x-coordinates of the two compared atoms
-			int dy = Atom[j].y - Atom[l].y; //difference between the y-coordinates of the two compared atoms
-			int rsum = Atom[j].r + Atom[l].r; //sum of the radi of the two atoms compared
+		//	int dx = Atom[j].x - Atom[l].x; //difference between the x-coordinates of the two compared atoms
+		//	int dy = Atom[j].y - Atom[l].y; //difference between the y-coordinates of the two compared atoms
+		//	int rsum = Atom[j].r + Atom[l].r; //sum of the radi of the two atoms compared
 
-			if (dx*dx + dy*dy <= rsum && j != l)
-			{
-				double alpha = atan2(dy,dx);
-				int dx1 = cos(alpha) * rsum;
-				int dy1 = sin(alpha) * rsum;
+		//	if (dx*dx + dy*dy <= rsum && j != l)
+		//	{
+		//		double alpha = atan2(dy,dx);
+		//		int dx1 = cos(alpha) * rsum;
+		//		int dy1 = sin(alpha) * rsum;
 
-				Atom[j].x += dx1 - dx;
-				Atom[j].y += dy1 - dy;
+		//		Atom[j].x += dx1 - dx;
+		//		Atom[j].y += dy1 - dy;
 
-				double beta = 3.1415926 - alpha;
+		//		double beta = 3.1415926 - alpha;
 
-				double Vx = 0;
-				double Vy = 0;
+		//		double Vx = 0;
+		//		double Vy = 0;
 
-				double a; //angle of a vector as outputted from "toPolar"
-				double r; //radius of a vector as outputted from "toPolar"
-				double vx1; //new velocity in x after rotation and transformation by "toCartesian"
-				double vy1; //new velocity in x after rotation and transformation by "toCartesian"
+		//		double a; //angle of a vector as outputted from "toPolar"
+		//		double r; //radius of a vector as outputted from "toPolar"
+		//		double vx1; //new velocity in x after rotation and transformation by "toCartesian"
+		//		double vy1; //new velocity in x after rotation and transformation by "toCartesian"
 
-				toPolar(Atom[j].vx, Atom[j].vy, r, a);
-				a - beta;
-				toCartesian(r, a, vx1, vy1);
+		//		toPolar(Atom[j].vx, Atom[j].vy, r, a);
+		//		a - beta;
+		//		toCartesian(r, a, vx1, vy1);
 
-				Atom[j].vx = vx1;
-				Atom[j].vy = vy1;
+		//		Atom[j].vx = vx1;
+		//		Atom[j].vy = vy1;
 
-				toPolar(Atom[l].vx, Atom[l].vy, r, a);
-				a - beta;
-				toCartesian(r, a, vx1, vy1);
+		//		toPolar(Atom[l].vx, Atom[l].vy, r, a);
+		//		a - beta;
+		//		toCartesian(r, a, vx1, vy1);
 
-				Atom[l].vx = vx1;
-				Atom[l].vy = vy1;
+		//		Atom[l].vx = vx1;
+		//		Atom[l].vy = vy1;
 
-				//Vx and Vy as describes in the theory of elastic impact
-				Vx = (pow(Atom[l].r, 2) * Atom[l].vx + pow(Atom[j].r, 2) * Atom[j].vx) / (pow(Atom[j].r, 2) + pow(Atom[l].r, 2));
-				Vy = (pow(Atom[l].r, 2) * Atom[l].vy + pow(Atom[j].r, 2) * Atom[j].vy) / (pow(Atom[j].r, 2) + pow(Atom[l].r, 2));
+		//		//Vx and Vy as describes in the theory of elastic impact
+		//		Vx = (pow(Atom[l].r, 2) * Atom[l].vx + pow(Atom[j].r, 2) * Atom[j].vx) / (pow(Atom[j].r, 2) + pow(Atom[l].r, 2));
+		//		Vy = (pow(Atom[l].r, 2) * Atom[l].vy + pow(Atom[j].r, 2) * Atom[j].vy) / (pow(Atom[j].r, 2) + pow(Atom[l].r, 2));
 
-				Atom[j].vx = 2 * Vx - Atom[j].vx;
-				Atom[j].vy = 2 * Vy - Atom[j].vy;
+		//		Atom[j].vx = 2 * Vx - Atom[j].vx;
+		//		Atom[j].vy = 2 * Vy - Atom[j].vy;
 
-				Atom[l].vx = 2 * Vx - Atom[l].vx;
-				Atom[l].vy = 2 * Vy - Atom[l].vy;
-			}
-		}
+		//		Atom[l].vx = 2 * Vx - Atom[l].vx;
+		//		Atom[l].vy = 2 * Vy - Atom[l].vy;
+		//	}
+		//}
 	}
 }
 

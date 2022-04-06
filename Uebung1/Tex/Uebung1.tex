@@ -88,13 +88,22 @@ literate =
 
 \begin{document}
 \maketitle
-	\section{Main.cpp}	
+	\section{Testing the Program}
+		For testing purposes a series of tests was performed. The program was tested first without the implementation of collisions between different atoms for an fixed input saved in "Input.txt" and random generated atoms.
+		Next the program was tested including the implementation of collision between different atoms. This was executed once using the same fixed "Input.txt" and with random generated atoms.
+		
+		For each test, the text output of the program was recorded, stating the initial values of the atoms. Furthermore, screenshots of the initial-state and the end-state are included.
+		\subsection{Tests without atom-collison}
+		
+		\subsection{Tests with atom-collsion}
+		
+	\section{The Program - Main.cpp}	
 		\subsection{Header of Main.cpp}
 			The following paragraph shows the beginning of the File "Main.cpp" of the "Atoms" Project. 
-			We see, that in comparison to the given Header in the assignment, there is an "Auxiliary.h" included in row 32. This Header-File will be discussed in the next section.
+			We see, that in comparison to the given Header in the assignment, there is an "Auxiliary.h" included in line 32. This Header-File will be discussed in the next section.
 			
-			There are also four global variables defined in rows 34 to 38. W and H are width and height of the created window, in which the atoms will be simulated.
-			S describes the time that will pass between each frame. It will be passed to the Sleep function that is describes in rows 14 to 25.
+			There are also four global variables defined in lines 34 to 38. W and H are width and height of the created window, in which the atoms will be simulated.
+			S describes the time that will pass between each frame. It will be passed to the Sleep function that is describes in lines 14 to 25.
 			\lstinputlisting[firstline=0,lastline=38]{Main.cpp}
 			
 			
@@ -122,9 +131,16 @@ literate =
 			\ContinueLineNumber
 			\lstinputlisting[firstline=334,lastline=354]{Main.cpp}
 			
-		\section{Auxiliary}
+		\section{The Program - Auxiliary}
+		For better clarity, auxiliary functions were outsourced to the files 
+		"Auxiliary.h" and "Auxiliary.cpp".
 			\subsection{Auciliary.h}
+			In the file "Auxiliary.h", the auxiliary functions are declared.
 				\lstinputlisting{Auxiliary.h}
 			\subsection{Auxiliary.cpp}
+			In the file "Auxiliary.cpp" the auxiliary functions are defined.
+			
+			If the random Function (staring in line 407) receives a wide range in which a random number should be generated, it struggles to give out all possible values.
+			For example when creating a random color in the int range 0 to 0xFFFFFF we will never see "red" as output of "random". This could be resolved by creating three independent random numbers (RGB) and later combining them.
 				\lstinputlisting{Auxiliary.cpp}
 \end{document}
