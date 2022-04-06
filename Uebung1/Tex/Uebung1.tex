@@ -140,6 +140,7 @@ literate =
 			\subsection{Auxiliary.cpp}
 			In the file "Auxiliary.cpp" the auxiliary functions are defined.
 			
+			%now it works, lol
 			If the random Function (staring in line 407) receives a wide range in which a random number should be generated, it struggles to give out all possible values.
 			For example when creating a random color in the int range 0 to 0xFFFFFF we will never see "red" as output of "random". This could be resolved by creating three independent random numbers (RGB) and later combining them.
 				\lstinputlisting{Auxiliary.cpp}

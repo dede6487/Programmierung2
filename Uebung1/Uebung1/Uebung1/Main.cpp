@@ -80,7 +80,7 @@ typedef struct Atom
 //**********************************************************
 
 double number(int argc, const char* argv[]) {
-	int n = 3;
+	int n = 8;
 
 	if (argc == 2)
 	{
@@ -120,7 +120,6 @@ double number(int argc, const char* argv[]) {
 //**********************************************************
 
 void init(int n, Atom Atom[], int argc, const char* argv[]) {
-
 	if (argc == 2)
 	{
 		ifstream Input{ argv[1] };
@@ -179,7 +178,7 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 				int dy = Atom[j].y - Atom[l].y; //difference between the y-coordinates of the two compared atoms
 				int rsum = Atom[j].r + Atom[l].r; //sum of the radi of the two atoms compared
 
-				for (int k; dx*dx + dy*dy < rsum && j != l && valid && k=<m; k++;)
+				for (int k=0; dx * dx + dy * dy < rsum && valid && k<=m; k++)
 				{
 					Atom[j].x = random(Atom[j].r, W - Atom[j].r);
 					Atom[j].y = random(Atom[j].r, H - Atom[j].r);
