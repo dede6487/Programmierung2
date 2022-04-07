@@ -6,6 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{titlesec}
 \usepackage{graphicx}
+\usepackage{subcaption}
 
 \usepackage{listings}
 \usepackage{color}
@@ -95,10 +96,21 @@ literate =
 		For each test, the text output of the program was recorded, stating the initial values of the atoms. Furthermore, screenshots of the initial-state and the end-state are included.
 		\subsection{Tests without atom-collison}
 			\subsubsection{Input.txt}
-			
-			\includegraphics[scale=0.5]{pictures/input_nocollision.png}
-			\includegraphics[scale=0.5]{pictures/input_nocollision_final.png}
-			
+				\begin{figure}[h!]
+					\centering
+					\begin{subfigure}{.5\textwidth}
+						\centering
+						\includegraphics[scale=0.5]{pictures/input_nocollision.png}
+						\caption{start state}
+						\label{fig:sub1}
+					\end{subfigure}%
+					\begin{subfigure}{.5\textwidth}
+						\centering
+						\includegraphics[scale=0.5]{pictures/input_nocollision_final.png}
+						\caption{end state}
+						\label{fig:sub2}
+					\end{subfigure}
+				\end{figure}
 			\subsubsection{randomly created atoms}
 			\begin{lstlisting}[numbers=none]
 			the number of Atoms is: 3
@@ -124,15 +136,36 @@ literate =
 			vx3 is         20
 			vy3 is         18
 			\end{lstlisting}
-
-			\includegraphics[scale=0.5]{pictures/random_nocollision.png}
-			\includegraphics[scale=0.5]{pictures/random_nocollision_final.png}
+				\begin{figure}[h!]
+					\centering
+					\begin{subfigure}{.5\textwidth}
+						\centering
+						\includegraphics[scale=0.5]{pictures/random_nocollision.png}
+						\caption{start state}
+					\end{subfigure}%
+					\begin{subfigure}{.5\textwidth}
+						\centering
+						\includegraphics[scale=0.5]{pictures/random_nocollision_final.png}
+						\caption{end state}
+					\end{subfigure}
+				\end{figure}
+	
 \newpage
 		\subsection{Tests with atom-collsion}
 			\subsubsection{Input.txt}
-			
-			\includegraphics[scale=0.5]{pictures/input_collision.png}
-			\includegraphics[scale=0.5]{pictures/input_collision_final.png}
+				\begin{figure}[h!]
+					\centering
+					\begin{subfigure}{.5\textwidth}
+						\centering
+						\includegraphics[scale=0.5]{pictures/input_collision.png}
+						\caption{start state}
+					\end{subfigure}%
+					\begin{subfigure}{.5\textwidth}
+						\centering
+						\includegraphics[scale=0.5]{pictures/input_collision_final.png}
+						\caption{end state}
+					\end{subfigure}
+				\end{figure}			
 			
 			\subsubsection{randomly created atoms}
 			Input Data:
@@ -160,10 +193,20 @@ literate =
 			vx3 is         7
 			vy3 is         17
 			\end{lstlisting}
-		
-			\includegraphics[scale=0.5]{pictures/random_collision.png}
-			\includegraphics[scale=0.5]{pictures/random_collision_final.png}
-			
+			\begin{figure}[h!]
+				\centering
+				\begin{subfigure}{.5\textwidth}
+					\centering
+					\includegraphics[scale=0.5]{pictures/random_collision.png}
+					\caption{start state}
+				\end{subfigure}%
+				\begin{subfigure}{.5\textwidth}
+					\centering
+					\includegraphics[scale=0.5]{pictures/random_collision_final.png}
+					\caption{end state}
+				\end{subfigure}
+			\end{figure}
+						
 \newpage			
 	\section{The Program - Main.cpp}	
 		\subsection{Header of Main.cpp}
@@ -185,19 +228,19 @@ literate =
 			
 		\subsection{Function "init"}
 			\ContinueLineNumber
-			\lstinputlisting[firstline=103,lastline=208]{Main.cpp}
+			\lstinputlisting[firstline=103,lastline=210]{Main.cpp}
 			
 		\subsection{Function "Draw"}
 			\ContinueLineNumber
-			\lstinputlisting[firstline=210,lastline=230]{Main.cpp}
+			\lstinputlisting[firstline=212,lastline=233]{Main.cpp}
 			
 		\subsection{Function "Update"}
 			\ContinueLineNumber
-			\lstinputlisting[firstline=232,lastline=331]{Main.cpp}
+			\lstinputlisting[firstline=235,lastline=338]{Main.cpp}
 			
 		\subsection{Main}
 			\ContinueLineNumber
-			\lstinputlisting[firstline=333,lastline=353]{Main.cpp}
+			\lstinputlisting[firstline=340,lastline=360]{Main.cpp}
 			
 \newpage			
 		\section{The Program - Auxiliary}

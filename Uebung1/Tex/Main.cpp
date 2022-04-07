@@ -174,8 +174,10 @@ void init(int n, Atom Atom[], int argc, const char* argv[]) {
 			for (int l = 0; l < j; l++) {
 				int m = 0;
 
-				double dx = Atom[j].x - Atom[l].x; //difference between the x-coordinates of the two compared atoms
-				double dy = Atom[j].y - Atom[l].y; //difference between the y-coordinates of the two compared atoms
+				double dx = Atom[j].x - Atom[l].x; 
+				//difference between the x-coordinates of the two compared atoms
+				double dy = Atom[j].y - Atom[l].y; 
+				//difference between the y-coordinates of the two compared atoms
 				double rsum = Atom[j].r + Atom[l].r; //sum of the radi of the two atoms compared
 
 				for (int k=0; dx * dx + dy * dy < rsum*rsum && valid && k<=m; k++)
@@ -223,7 +225,8 @@ void draw(int n, Atom Atom[]) {
 	fillRectangle(0, 0, W, H, 0xFFFFFF);
 
 	for (int j = 0; j < n; j++) {
-		fillEllipse(Atom[j].x - Atom[j].r, Atom[j].y - Atom[j].r, 2 * Atom[j].r, 2 * Atom[j].r, Atom[j].c);
+		fillEllipse(Atom[j].x - Atom[j].r, Atom[j].y - Atom[j].r,
+			2 * Atom[j].r, 2 * Atom[j].r, Atom[j].c);
 	}
 	
 	flush();
@@ -279,9 +282,11 @@ void update(int n, Atom Atom[]) {
 		//checks for collisions between different atoms
 		for (int l = 0; l <= j; l++) {
 
-			int dx = Atom[j].x - Atom[l].x; //difference between the x-coordinates of the two compared atoms
-			int dy = Atom[j].y - Atom[l].y; //difference between the y-coordinates of the two compared atoms
-			int rsum = Atom[j].r + Atom[l].r; //sum of the radi of the two atoms compared
+			double dx = Atom[j].x - Atom[l].x; 
+			//difference between the x-coordinates of the two compared atoms
+			double dy = Atom[j].y - Atom[l].y; 
+			//difference between the y-coordinates of the two compared atoms
+			double rsum = Atom[j].r + Atom[l].r; //sum of the radi of the two atoms compared
 
 			if (dx*dx + dy*dy <= rsum*rsum && j != l)
 			{
@@ -297,10 +302,10 @@ void update(int n, Atom Atom[]) {
 				double Vx = 0;
 				double Vy = 0;
 
-				double a; //angle of a vector as outputted from "toPolar"
-				double r; //radius of a vector as outputted from "toPolar"
-				double vx1; //new velocity in x after rotation and transformation by "toCartesian"
-				double vy1; //new velocity in x after rotation and transformation by "toCartesian"
+				double a;//angle of a vector as outputted from "toPolar"
+				double r;//radius of a vector as outputted from "toPolar"
+				double vx1;//new velocity in x after rotation and transformation by "toCartesian"
+				double vy1;//new velocity in x after rotation and transformation by "toCartesian"
 
 				toPolar(Atom[j].vx, Atom[j].vy, r, a);
 				a - beta;
@@ -317,8 +322,10 @@ void update(int n, Atom Atom[]) {
 				Atom[l].vy = vy1;
 
 				//Vx and Vy as describes in the theory of elastic impact
-				Vx = (pow(Atom[l].r, 2) * Atom[l].vx + pow(Atom[j].r, 2) * Atom[j].vx) / (pow(Atom[j].r, 2) + pow(Atom[l].r, 2));
-				Vy = (pow(Atom[l].r, 2) * Atom[l].vy + pow(Atom[j].r, 2) * Atom[j].vy) / (pow(Atom[j].r, 2) + pow(Atom[l].r, 2));
+				Vx = (pow(Atom[l].r, 2) * Atom[l].vx + pow(Atom[j].r, 2) * Atom[j].vx) 
+					/ (pow(Atom[j].r, 2) + pow(Atom[l].r, 2));
+				Vy = (pow(Atom[l].r, 2) * Atom[l].vy + pow(Atom[j].r, 2) * Atom[j].vy) 
+					/ (pow(Atom[j].r, 2) + pow(Atom[l].r, 2));
 
 				Atom[j].vx = 2 * Vx - Atom[j].vx;
 				Atom[j].vy = 2 * Vy - Atom[j].vy;
