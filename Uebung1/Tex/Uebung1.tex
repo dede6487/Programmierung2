@@ -51,18 +51,6 @@ literate =
 \usepackage[english]{varioref}
 \usepackage{hyperref}
 
-\fancypagestyle{firstPage}{
-	\fancyhead[LE,RO]{\textsc{Page} \thepage}
-	\fancyhead[LO,RE]{}
-	\fancyheadoffset[LE,RO]{2.5cm}
-	\renewcommand{\headrulewidth}{0.5pt}
-	
-	\fancyfoot[LE,RO]{\tiny{Assignment 1, Felix Dreßler (k12105003), created: \today}}
-	\cfoot{}
-	\fancyfootoffset[Le,RO]{2.5cm}
-	\renewcommand{\footrulewidth}{0.5pt}
-}
-
 \fancypagestyle{fancy}{
 	\fancyhead[R]{Page \thepage}
 	\fancyhead[L]{\leftmark}
@@ -84,14 +72,16 @@ literate =
 \pagestyle{fancy}
 
 \title{Programming 2 - Assignment 1}
-\author{Felix Dreßler (k12105003)}
+\author{Felix Dreßler (k12105003)\\ email \href{mailto:FelixDressler01@gmail.com}{FelixDressler01@gmail.com}}
 \date{\today} %Erstellungsdatum
 
 \begin{document}
 \maketitle
 	\section{Testing the Program}
-		For testing purposes a series of tests was performed. The program was tested first without the implementation of collisions between different atoms for an fixed input saved in "Input.txt" and random generated atoms.
+		For evaluation purposes a series of tests were performed. The program was executed first without the implementation of collisions between different atoms for an fixed input saved in "Input.txt" and random generated atoms.
 		Next the program was tested including the implementation of collision between different atoms. This was executed once using the same fixed "Input.txt" and with random generated atoms.
+		
+		For the file "Input.txt" the exact values will not be stated in this documentation, because this file was part of the assignment. However the .txt file should be included in the submissions .zip file.
 		
 		For each test, the text output of the program was recorded, stating the initial values of the atoms. Furthermore, screenshots of the initial-state and the end-state are included.
 		\subsection{Tests without atom-collison}
@@ -233,7 +223,7 @@ literate =
 		\subsection{Function "Draw"}
 			\ContinueLineNumber
 			\lstinputlisting[firstline=212,lastline=233]{Main.cpp}
-			
+\newpage
 		\subsection{Function "Update"}
 			\ContinueLineNumber
 			\lstinputlisting[firstline=235,lastline=338]{Main.cpp}
