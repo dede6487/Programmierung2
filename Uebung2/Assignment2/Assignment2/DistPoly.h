@@ -4,6 +4,8 @@
 
 #include<string>
 
+using namespace std;
+
 class DistPoly
 {
 private:
@@ -25,3 +27,4 @@ public:
 	DistPoly& add(DistPoly& p);
 	void println();
 };
+
