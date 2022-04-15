@@ -1,7 +1,5 @@
 #pragma once
 
-#include"DistPoly.cpp"
-
 #include<string>
 
 using namespace std;
@@ -12,7 +10,9 @@ private:
 	int n;
 	string* vars;
 	int coeff;
-	int exps;
+	int* exps;
+
+	int var_length;
 public:
 
 	//constructor
