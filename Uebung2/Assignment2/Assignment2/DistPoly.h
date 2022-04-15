@@ -11,8 +11,6 @@ private:
 	string* vars;
 	int coeff;
 	int* exps;
-
-	int var_length;
 public:
 
 	//constructor
