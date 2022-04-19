@@ -4,13 +4,17 @@
 
 using namespace std;
 
+struct Monom {
+	int coeff;
+	int* exps;
+};
+
 class DistPoly
 {
 private:
 	int n;
 	string* vars;
-	int coeff;
-	int* exps;
+	Monom Monom;
 public:
 
 	//constructor
