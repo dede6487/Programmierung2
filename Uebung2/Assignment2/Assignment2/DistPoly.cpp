@@ -3,9 +3,14 @@
 
 using namespace std;
 
+int sort(DistPoly& p, int* exps) {
+
+    return 0;
+}
+
 //requires rework
 DistPoly& DistPoly::add(int coeff, int* exps) {
-    if (this->n != 0) {
+    if (coeff !=0) {
         bool added = false;
         for (int j = 0; j <= this->m; j++) { //steps through every single monomial that is already existing in this polynomial
             int same = 0;
@@ -21,17 +26,25 @@ DistPoly& DistPoly::add(int coeff, int* exps) {
             }
         }
         if (added == false) { //if no exponents were matching, we will create a new monomial and add it to the polynomial
-            Monom* NewMonoms = new Monom[2*(this->m)];
-            //Monom NewMonoms[this->m + 1]; why doesn't this also work?????
-            for (int i = 0; i <= this->m; i++) {
-                NewMonoms[i].coeff = this->monoms[i].coeff;
-                NewMonoms[i].exps = this->monoms[i].exps;
-            }
-            NewMonoms[(this->m)].coeff = coeff; //why "Pufferüberlauf" if i want to write in NewMonoms[(this->m)+1]????
-            NewMonoms[(this->m)].exps = exps;
-
-            this->m++;
-            this->monoms = NewMonoms;
+            //if (this->m == this->am) {
+            //    Monom* NewMonoms = new Monom[2 * (this->m)];
+            //    for (int i = 0, j = 0; i <= m && j<=n; i++) {
+            //        if (this->monoms[i].exps[j] > exps[j]) {
+            //            NewMonoms[i] = this->monoms[i];
+            //        }
+            //        else if(this->monoms[i].exps[j] == exps[j]) {
+            //            j++;  
+            //        }
+            //        else if (this->monoms[i].exps[j] < exps[j]) {
+            //            NewMonoms[i].coeff = coeff;
+            //            NewMonoms[i].exps = exps;
+            //            for (int k = i+1; k <= m + 1; k++) {//copys every other monom after the inserted monom, then breaks
+            //                NewMonoms[k] = this->monoms[k];
+            //            }
+            //            break;
+            //        }
+            //    }
+            //}
         }
     }
 
@@ -68,8 +81,9 @@ void DistPoly::println() {
 
 DistPoly::DistPoly(int n, string* vars) {
     this->n = n;
-    this->m = 1;
     this->vars = vars;
+    this->m = 1;
+    this->am = 0;
     this->monoms = new Monom[m+1];
     for (int j = 0; j <= m; j++) {
         this->monoms[j].coeff = 0;
@@ -82,8 +96,9 @@ DistPoly::DistPoly(int n, string* vars) {
 
 DistPoly::DistPoly(DistPoly& p) {
     this->n = p.n;
-    this->m = p.m;
     this->vars = p.vars;
+    this->m = p.m;
+    this->am = p.am;
     this->monoms = new Monom[(p.m)+1];
     for (int i = 0; i <= m; i++) {
         this->monoms[i].coeff = p.monoms[i].coeff;
