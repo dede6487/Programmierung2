@@ -3,6 +3,7 @@
 
 using namespace std;
 
+//requires rework
 DistPoly& DistPoly::add(int coeff, int* exps) {
     if (this->n != 0) {
         bool added = false;
