@@ -11,7 +11,9 @@ int main() {
 	int coeff = 4;
 
 	p.println();
-	//DistPoly q = p.add(coeff, e1);
+	DistPoly p = p.add(coeff, e1);
+	p.println();
+	//DistPoly q(p);
 	//q.println();
 
 	return 0;
