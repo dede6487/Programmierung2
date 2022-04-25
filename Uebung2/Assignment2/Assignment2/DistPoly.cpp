@@ -12,9 +12,9 @@ int sort(DistPoly& p, int* exps) {
 DistPoly& DistPoly::add(int coeff, int* exps) {
     if (coeff !=0) {
         bool added = false;
-        for (int j = 0; j <= this->m; j++) { //steps through every single monomial that is already existing in this polynomial
+        for (int j = 0; j < this->m; j++) { //steps through every single monomial that is already existing in this polynomial
             int same = 0;
-            for (int i = 0; i <= this->n; i++) { //checks every exponent of a polynomial if it is equivalent to the given one, if not same will increase by one
+            for (int i = 0; i < this->n; i++) { //checks every exponent of a polynomial if it is equivalent to the given one, if not same will increase by one
                 if (this->monoms[j].exps[i] != exps[i]) {
                     same++;
                 }
@@ -34,17 +34,17 @@ DistPoly& DistPoly::add(int coeff, int* exps) {
 
             Monom* NewMonoms = new Monom[y];
 
-            for (int i = 0, j = 0; i <= m; i++) {
+            for (int i = 0, j = 0; i < m; i++) {
                 if (this->monoms[i].exps[j] > exps[j]) {
                     NewMonoms[i] = this->monoms[i];
                 }
                 else if (this->monoms[i].exps[j] == exps[j]) {
-                    if (j == n) {
-                        for (int k = i; k <= m; k++) {//copys every other monom until the inserted monom,ten inserts the new monom, then breaks
+                    if (j == n-1) {
+                        for (int k = i; k < m; k++) {//copys every other monom until the inserted monom,ten inserts the new monom, then breaks
                             NewMonoms[k] = this->monoms[k];
                         }
-                        NewMonoms[m + 1].coeff = coeff;
-                        NewMonoms[m + 1].exps = exps;
+                        NewMonoms[m+1].coeff = coeff;
+                        NewMonoms[m+1].exps = exps;
                         break;
                     }
                     j++;
@@ -53,7 +53,7 @@ DistPoly& DistPoly::add(int coeff, int* exps) {
                 else if (this->monoms[i].exps[j] < exps[j]) {
                     NewMonoms[i].coeff = coeff;
                     NewMonoms[i].exps = exps;
-                    for (int k = i + 1; k <= m + 1; k++) {//copys every other monom after the inserted monom, then breaks
+                    for (int k = i + 1; k < m; k++) {//copys every other monom after the inserted monom, then breaks
                         NewMonoms[k] = this->monoms[k];
                     }
                     break;
@@ -81,10 +81,10 @@ void DistPoly::println() {
         }
         cout << "\n";
         cout << "Polynomial = [";
-        for (int i = 0; i <= m; i++) {
+        for (int i = 0; i < m; i++) {
             cout << "{";//different symbol?
             cout << this->monoms[i].coeff << ", ";
-            for (int j = 0; j <= n; j++) {
+            for (int j = 0; j < n; j++) {
                 cout << this->monoms[i].exps[j];
             }
             cout << "}, ";//different symbol?
@@ -96,13 +96,13 @@ void DistPoly::println() {
 DistPoly::DistPoly(int n, string* vars) {
     this->n = n;
     this->vars = vars;
-    this->m = 1;
+    this->m = 2;
     this->am = 0;
     this->monoms = new Monom[m+1];
-    for (int j = 0; j <= m; j++) {
+    for (int j = 0; j < m; j++) {
         this->monoms[j].coeff = 0;
         this->monoms[j].exps = new int[n];
-        for (int i = 0; i <= n; i++) {
+        for (int i = 0; i < n; i++) {
             this->monoms[j].exps[i] = 0;
         }
     }
@@ -114,7 +114,7 @@ DistPoly::DistPoly(DistPoly& p) {
     this->m = p.m;
     this->am = p.am;
     this->monoms = new Monom[(p.m)+1];
-    for (int i = 0; i <= m; i++) {
+    for (int i = 0; i < m; i++) {
         this->monoms[i].coeff = p.monoms[i].coeff;
         this->monoms[i].exps = p.monoms[i].exps;
     }
