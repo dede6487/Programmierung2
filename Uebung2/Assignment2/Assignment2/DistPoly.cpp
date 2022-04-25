@@ -26,25 +26,39 @@ DistPoly& DistPoly::add(int coeff, int* exps) {
             }
         }
         if (added == false) { //if no exponents were matching, we will create a new monomial and add it to the polynomial
-            //if (this->m == this->am) {
-            //    Monom* NewMonoms = new Monom[2 * (this->m)];
-            //    for (int i = 0, j = 0; i <= m && j<=n; i++) {
-            //        if (this->monoms[i].exps[j] > exps[j]) {
-            //            NewMonoms[i] = this->monoms[i];
-            //        }
-            //        else if(this->monoms[i].exps[j] == exps[j]) {
-            //            j++;  
-            //        }
-            //        else if (this->monoms[i].exps[j] < exps[j]) {
-            //            NewMonoms[i].coeff = coeff;
-            //            NewMonoms[i].exps = exps;
-            //            for (int k = i+1; k <= m + 1; k++) {//copys every other monom after the inserted monom, then breaks
-            //                NewMonoms[k] = this->monoms[k];
-            //            }
-            //            break;
-            //        }
-            //    }
-            //}
+            int y = this->m;
+
+            if (this->m == this->am) {
+                int y = 2 * this->m;
+            }
+
+            Monom* NewMonoms = new Monom[y];
+
+            for (int i = 0, j = 0; i <= m; i++) {
+                if (this->monoms[i].exps[j] > exps[j]) {
+                    NewMonoms[i] = this->monoms[i];
+                }
+                else if (this->monoms[i].exps[j] == exps[j]) {
+                    if (j == n) {
+                        for (int k = i; k <= m; k++) {//copys every other monom until the inserted monom,ten inserts the new monom, then breaks
+                            NewMonoms[k] = this->monoms[k];
+                        }
+                        NewMonoms[m + 1].coeff = coeff;
+                        NewMonoms[m + 1].exps = exps;
+                        break;
+                    }
+                    j++;
+                    i--;
+                }
+                else if (this->monoms[i].exps[j] < exps[j]) {
+                    NewMonoms[i].coeff = coeff;
+                    NewMonoms[i].exps = exps;
+                    for (int k = i + 1; k <= m + 1; k++) {//copys every other monom after the inserted monom, then breaks
+                        NewMonoms[k] = this->monoms[k];
+                    }
+                    break;
+                }
+            }
         }
     }
 
@@ -88,7 +102,7 @@ DistPoly::DistPoly(int n, string* vars) {
     for (int j = 0; j <= m; j++) {
         this->monoms[j].coeff = 0;
         this->monoms[j].exps = new int[n];
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i <= n; i++) {
             this->monoms[j].exps[i] = 0;
         }
     }
