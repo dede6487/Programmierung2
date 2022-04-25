@@ -13,8 +13,8 @@ int main() {
 	p.println();
 	p.add(coeff, e1);
 	p.println();
-	DistPoly q(p);
-	q.println();
+	//DistPoly q(p);
+	//q.println();
 
 	return 0;
 }
