@@ -61,7 +61,7 @@ DistPoly& DistPoly::add(int coeff, int* exps) {
     //        }
     //    }
     //}
-    
+    //the NewMonoms should assigned to the old Monoms before returning *this!!!!
     this->monoms[0].coeff = coeff;
     this->monoms[0].exps = exps;
 
