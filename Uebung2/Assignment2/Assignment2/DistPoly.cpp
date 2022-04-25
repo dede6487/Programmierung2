@@ -98,7 +98,7 @@ DistPoly::DistPoly(int n, string* vars) {
     this->vars = vars;
     this->m = 2;
     this->am = 0;
-    this->monoms = new Monom[m+1];
+    this->monoms = new Monom[m];
     for (int j = 0; j < m; j++) {
         this->monoms[j].coeff = 0;
         this->monoms[j].exps = new int[n];

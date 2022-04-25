@@ -12,10 +12,10 @@ struct Monom {
 class DistPoly
 {
 private:
-	int n; //number of variables -1
+	int n; //number of variables
 	string* vars;
 	Monom* monoms;
-	int m; //number of potential monoms in this polynomial -1 (allocated memory)
+	int m; //number of potential monoms in this polynomial (allocated memory)
 	int am; //actual number of monoms in this polynomial
 public:
 
