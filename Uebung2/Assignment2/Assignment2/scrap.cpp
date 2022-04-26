@@ -84,3 +84,29 @@
 //    this->monoms[y].exps = exps;
 //
 //}
+
+//void DistPoly::println_brkts() {
+	//    if (n == 0) {
+	//        cout << "0" << endl;
+	//    }
+	//    else {
+	//        cout << "vars = ";
+	//        for (int i = 0; i < n; i++) {
+	//            cout << this->vars[i];
+	//        }
+	//        cout << "\n";
+	//        cout << "Polynomial = [";
+	//        for (int i = 0; i < m; i++) {
+	//            cout << "{";
+	//            cout << this->monoms[i].coeff << ", ";
+	//            cout << "(";
+	//            for (int j = 0; j < n; j++) {
+	//                cout << this->monoms[i].exps[j];
+	//                cout << " ,";
+	//            }
+	//            cout << ")";
+	//            cout << "}, ";
+	//        }
+	//        cout << "]" << endl;
+	//    }
+	//}

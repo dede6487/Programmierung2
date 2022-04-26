@@ -40,7 +40,7 @@ public:
 
 	DistPoly& add(int coeff, int* exps);
 	DistPoly& add(DistPoly& p);
-	void println_brkts(); //prints the polynomial in brackets-style
+	//void println_brkts(); //prints the polynomial in brackets-style
 	void println();
 
 	void resize(int factor);//enlarges the polynomial, 
