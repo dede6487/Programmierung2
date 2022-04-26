@@ -45,6 +45,6 @@ public:
 
 	void resize(int factor);//enlarges the polynomial, 
 
-	int sort(int* exps);//gives back the position in which the monom with the exponents exps should be inserted
+	int sort(int* exps, int n, int j);//gives back the position in which the monom with the exponents exps should be inserted
 };
 

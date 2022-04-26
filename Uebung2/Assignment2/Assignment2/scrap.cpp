@@ -50,3 +50,37 @@
 //        break;
 //    }
 //}
+
+//bool added = false;
+//for (int j = 0; j < this->m; j++) { //steps through every single monomial that is already existing in this polynomial
+//    int same = 0;
+//    for (int i = 0; i < this->n; i++) { //checks every exponent of a polynomial if it is equivalent to the given one, if not same will increase by one
+//        if (this->monoms[j].exps[i] != exps[i]) {
+//            same++;
+//        }
+//    }
+//    if (same == 0) { //if same wasn't increased, the monomial has the same exponents, the coefficients can thus be added together and the for will break
+//        this->monoms[j].coeff += coeff;
+//        added = true;
+//        break;
+//    }
+//}
+////adding above works
+////adding below requires rework
+//if (added == false) { //if no exponents were matching, we will create a new monomial and add it to the polynomial
+//
+//    if (this->m == this->am) {
+//        this->resize(2);
+//    }
+//
+//    int y = this->sort(exps, this->n);
+//
+//    for (int i = y; i <= this->am; i++) {
+//        this->monoms[i + 1].coeff = this->monoms[i].coeff;
+//        this->monoms[i + 1].exps = this->monoms[i].exps;
+//    }
+//
+//    this->monoms[y].coeff = coeff;
+//    this->monoms[y].exps = exps;
+//
+//}

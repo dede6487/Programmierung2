@@ -17,21 +17,19 @@ int main() {
 	p.add(3, e1).add(5, e2).add(7, e3).add(11, e4).add(13, e5);
 
 	// construct zero polynomial in two variables, then add monomials
-	//DistPoly q(2, vars);
-	//q.add(11, e4).add(-3, e2).add(2, e6).add(-2, e2);
+	DistPoly q(2, vars);
+	q.add(11, e4).add(-3, e2).add(2, e6).add(-2, e2);
 
 	// print p and q
-	p.println_brkts();
-	//p.println();
-	//q.println_brkts();
-	//q.println();
+	p.println();
+	q.println();
 
 	// set p to p+2*q and print it
 
-	//DistPoly r = p;
-	//r.add(3,e1).add(-1, e2);
-	//p = r;
-	//p.println_brkts();
+	DistPoly r = p;
+	r.add(3,e1).add(-1, e2);
+	p = r;
+	p.println();
 
 
 
