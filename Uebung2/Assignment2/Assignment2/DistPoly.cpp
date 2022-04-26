@@ -152,6 +152,9 @@ void DistPoly::resize(int factor) {
     this->monoms = NewMonoms;
     this->m = factor * (this->m);
 }
+//idea: create new array of monoms with emty constructor, then initialize them by assigning a newly constructed monom (with different constructor) to every element of the array
+
+
 //constructor
 //Monom::Monom(int coeff, int* exps, int n) {
 //    this->coeff = coeff;
@@ -161,9 +164,9 @@ void DistPoly::resize(int factor) {
 //
 //
 ////constructor
-//Monom::Monom(int n) {
+//Monom::Monom() {
 //    this->coeff = 0;
-//    this->exps = new int[n];
+//    this->exps = 0;
 //}
 //
 //

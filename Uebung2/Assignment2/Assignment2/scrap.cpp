@@ -123,44 +123,44 @@
 ////constructor for Monom, problem is because it tries to delete a pointer, that has already been deleted
 //
 //
-////constructor
-////Monom::Monom(int coeff, int* exps, int n) {
-////    this->coeff = coeff;
-////    this->exps = new int[n]; //creates a new array of exponents, this is in order to have seperate pointers and deallocate their respectivve memory later (for DistPoly)
-////    this->exps = exps;
-////}
-//
-////constructor
-////Monom::Monom() {
-////    this->coeff = 0;
-////    this->n = 1;
-////    this->exps = 0;//new int[n];
-////    //for (int i = 0; i < n; i++) {
-////    //    this->exps[i] = 0;
-////    //}
-////
-////}
-//
-////destructor
-//Monom::~Monom() {
-//    //delete[] exps;
+//constructor
+//Monom::Monom(int coeff, int* exps, int n) {
+//    this->coeff = coeff;
+//    this->exps = new int[n]; //creates a new array of exponents, this is in order to have seperate pointers and deallocate their respectivve memory later (for DistPoly)
+//    this->exps = exps;
 //}
+
+//constructor
+//Monom::Monom() {
+//    this->coeff = 0;
+//    this->n = 1;
+//    this->exps = 0;//new int[n];
+//    //for (int i = 0; i < n; i++) {
+//    //    this->exps[i] = 0;
+//    //}
 //
-////Monom::Monom(int coeff, int* exps) {
-////    this->coeff = coeff;
-////    this->exps = new int[this->n];
-////    for (int i = 0; i < n; i++) {
-////        this->exps[i] = exps[i];
-////    }
-////}
+//}
+
+//destructor
+//Monom::~Monom() {
+//    delete[] exps;
+//}
+
+//Monom::Monom(int coeff, int* exps) {
+//    this->coeff = coeff;
+//    this->exps = new int[this->n];
+//    for (int i = 0; i < n; i++) {
+//        this->exps[i] = exps[i];
+//    }
+//}
+
+//copy assignment operator
+//Monom& Monom::operator=(Monom& m) {
+//    this->coeff = m.coeff;
+//    this->exps = new int[m.n];
+//    for (int i = 0; i < m.n; i++) {
+//        this->exps[i] = m.exps[i];
+//    }
 //
-////copy assignment operator
-////Monom& Monom::operator=(Monom& m) {
-////    this->coeff = m.coeff;
-////    this->exps = new int[m.n];
-////    for (int i = 0; i < m.n; i++) {
-////        this->exps[i] = m.exps[i];
-////    }
-////
-////    return *this;
-////}
+//    return *this;
+//}
