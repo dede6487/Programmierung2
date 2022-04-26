@@ -25,34 +25,23 @@ DistPoly& DistPoly::add(int coeff, int* exps) {
                 break;
             }
         }
+        //adding above works
+        //adding below requires rework
         if (added == false) { //if no exponents were matching, we will create a new monomial and add it to the polynomial
 
             if (this->m == this->am) {
-                this->resize(2, this->m);
+                this->resize(2);
             }
 
-            for (int i = 0; i < m; i++) {
-                //if (this->monoms[i].exps[j] == exps[j]) {
-                //        for (int k = i; k < m; k++) {//copys every other monom until the inserted monom,then inserts the new monom, then breaks
-                //            this->monoms[k] = this->monoms[k];
-                //        }
-                //        this->monoms[m + 1].coeff = coeff; //potential puffer overflow, this is handeled by the if directly under the added == flase check, seems as ifthe VS code checker doesn't compute this right
-                //        this->monoms[m + 1].exps = exps;
-                //        this->am++;
-                //        j--;
-                //        break;
-                //    i--;
-                //}//wtf!!!!!!!!!!!
-                else if (this->monoms[i].exps[j] < exps[j]) {
-                    this->monoms[i].coeff = coeff;
-                    this->monoms[i].exps = exps;
-                    this->am++;
-                    for (int k = i + 1; k <= m; k++) {//copys every other monom after the inserted monom, then breaks
-                        this->monoms[k] = this->monoms[k];
-                    }
-                    break;
-                }
+            int y = this->sort(exps);
+
+            for (int i = y; i <= this->am; i++) {
+                this->monoms[i+1].coeff = this->monoms[i].coeff;
+                this->monoms[i+1].exps = this->monoms[i].exps;
             }
+
+            this->monoms[y].coeff = coeff;
+            this->monoms[y].exps = exps;
 
         }
     }
@@ -64,6 +53,20 @@ DistPoly& DistPoly::add(int coeff, int* exps) {
 DistPoly& DistPoly::add(DistPoly& p) {
 
     return *this;
+}
+
+int DistPoly::sort(int* exps) {
+    int j = 0, k=0;
+    for (int i = 0;true ; i++) {
+        if (exps[j] == this->monoms[i].exps[j]) {
+            //now we must compare the next exponent and see if it is greater or not
+            break;
+        }
+        else if (exps[j] > this->monoms[i].exps[j]) {
+            return i;
+            break;
+        }
+    }
 }
 
 void DistPoly::println_brkts() {
@@ -122,7 +125,7 @@ void DistPoly::println() {
 DistPoly::DistPoly(int n, string* vars) {
     this->n = n;
     this->vars = vars;
-    this->m = 2;
+    this->m = 1;
     this->am = 0;
     this->monoms = new Monom[m];
     for (int j = 0; j < m; j++) {
@@ -139,7 +142,7 @@ DistPoly::DistPoly(DistPoly& p) {
     this->vars = p.vars;
     this->m = p.m;
     this->am = p.am;
-    this->monoms = new Monom[(p.m)+1];
+    this->monoms = new Monom[(p.m) + 1];
     for (int i = 0; i < m; i++) {
         this->monoms[i].coeff = p.monoms[i].coeff;
         this->monoms[i].exps = p.monoms[i].exps;
@@ -161,21 +164,49 @@ DistPoly& DistPoly::operator=(DistPoly& p) {
     return *this;
 }
 
-//constructor for struct, change struct to class, problem is because it tries to delete a pointer, that has already been deleted
+//constructor for Monom, problem is because it tries to delete a pointer, that has already been deleted
 DistPoly::~DistPoly() {
     //for (int i = 0; i < this->m; i++) {
     //    delete[] this->monoms[i].exps;
     //}
-    //delete[] this->monoms;
+    delete[] this->monoms;
 }
 
-//*****************************************************************************
-
-void DistPoly::resize(int factor, int m) {
+void DistPoly::resize(int factor) {
     Monom* NewMonoms = new Monom[factor * m];
-    for (int i = 0; i < m; i++) {
+    for (int i = 0; i < this->m; i++) {
         NewMonoms[i] = this->monoms[i];
+    }
+    for (int i = this->m; i < (this->m) * factor; i++) {//initializes the remaining elements of the array with the standard value 0
+        NewMonoms[i].coeff = 0;
+        NewMonoms[i].exps = new int[this->n];
+        for (int j = 0; j < this->n; j++) {
+            NewMonoms[i].exps[j] = 0;
+        }
     }
     delete[] this->monoms;
     this->monoms = NewMonoms;
+    this->m = factor * (this->m);
 }
+//constructor
+//Monom::Monom(int coeff, int* exps, int n) {
+//    this->coeff = coeff;
+//    this->exps = new int[n]; //creates a new array of exponents, this is in order to have seperate pointers and deallocate their respectivve memory later (for DistPoly)
+//    this->exps = exps;
+//}
+//
+//
+////constructor
+//Monom::Monom(int n) {
+//    this->coeff = 0;
+//    this->exps = new int[n];
+//}
+//
+//
+////copy assignment operator
+//Monom& Monom::operator=(Monom& m) {
+//    this->coeff = m.coeff;
+//    this->exps = m.exps;
+//
+//    return *this;
+//}

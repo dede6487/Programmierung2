@@ -10,7 +10,13 @@ public:
 	int coeff;
 	int* exps;
 
-	//Monom(int coeff, int* exps);
+	//constructor
+	//Monom(int coeff, int* exps, int n);
+	//Monom(int n);
+
+	//copy constructor, copy assignment operator, destructor
+	//Monom& operator=(Monom& m);
+
 
 };
 
@@ -37,8 +43,8 @@ public:
 	void println_brkts(); //prints the polynomial in brackets-style
 	void println();
 
-	void resize(int factor, int m);//enlarges the polynomial, 
+	void resize(int factor);//enlarges the polynomial, 
 
-	int sort(DistPoly& p, int* exps);//gives back the position in which the monom with the exponents exps should be inserted
+	int sort(int* exps);//gives back the position in which the monom with the exponents exps should be inserted
 };
 
