@@ -12,7 +12,15 @@ DistPoly& DistPoly::add(int coeff, int* exps) {
                 k = sort(exps, this->n, j);
             }
             if (k == 0) {
-                this->monoms[j].coeff += coeff;
+                if (this->monoms[j].coeff + coeff == 0) {
+                    for (int l = j; l < this->am+1; l++) { //shifts the monoms into the empty element
+                        this->monoms[l] = this->monoms[l + 1];
+                    }
+                    this->am--;
+                }
+                else {
+                    this->monoms[j].coeff += coeff;
+                }
                 break;
             }
             else if (k == -1) {
@@ -73,7 +81,7 @@ void DistPoly::println() {
                         cout << "^" << this->monoms[i].exps[j];
                     }
                 }
-                if (i < am) {
+                if (i < am && this->monoms[i+1].coeff > 0) {
                     cout << "+";
                 }
             }
