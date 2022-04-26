@@ -27,7 +27,7 @@ private:
 	string* vars;
 	Monom* monoms;
 	int m; //number of potential monoms in this polynomial (allocated memory)
-	int am; //actual number of monoms in this polynomial
+	int am; //actual number of monoms in this polynomial -1
 public:
 
 	//constructor

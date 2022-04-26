@@ -17,10 +17,12 @@ DistPoly& DistPoly::add(int coeff, int* exps) {
             }
             else if (k == -1) {
 
-                this->resize(2);
+                if (this->m == this->am+1) {
+                    this->resize(2);
+                }
 
-                for (int l = j; l < this->am+1; l++) {
-                    this->monoms[l + 1] = this->monoms[l];
+                for (int l = this->am + 1; l > j; l--) {
+                    this->monoms[l] = this->monoms[l-1];
                 }
                 this->monoms[j].coeff = coeff;
                 this->monoms[j].exps = exps;
@@ -53,7 +55,7 @@ int DistPoly::sort(int* exps, int n, int j) {
 //
 
 void DistPoly::println() {
-    int empty = 0;
+    //int empty = 0;
     if (n == 0 || m==0 || am==0) {
         cout << "0" << endl;
     }
@@ -61,19 +63,20 @@ void DistPoly::println() {
         for (int i = 0; i < m; i++) {
             if (this->monoms[i].coeff != 0) {
                 cout << this->monoms[i].coeff;
-                cout << "*";
+
                 for (int j = 0; j < n; j++) {
-                    cout << this->vars[j];
-                    cout << "^" << this->monoms[i].exps[j];
-                    if (j == this->n && i < am) cout << "+";
+                    if (this->monoms[i].exps[j] == 1) {
+                        cout << this->vars[j];
+                    }
+                    else if (this->monoms[i].exps[j] != 0) {
+                        cout << this->vars[j];
+                        cout << "^" << this->monoms[i].exps[j];
+                    }
+                }
+                if (i < am) {
+                    cout << "+";
                 }
             }
-            else {
-                empty++;
-            }
-        }
-        if (empty == m) {
-            cout << "0";
         }
         cout << "\n";
     }
