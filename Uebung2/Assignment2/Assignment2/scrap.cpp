@@ -85,28 +85,82 @@
 //
 //}
 
+//using namespace std;
+//
+//DistPoly& DistPoly::add(DistPoly& p) {
+//
+//    return *this;
+//}
+//
+//
+//
 //void DistPoly::println_brkts() {
-	//    if (n == 0) {
-	//        cout << "0" << endl;
-	//    }
-	//    else {
-	//        cout << "vars = ";
-	//        for (int i = 0; i < n; i++) {
-	//            cout << this->vars[i];
-	//        }
-	//        cout << "\n";
-	//        cout << "Polynomial = [";
-	//        for (int i = 0; i < m; i++) {
-	//            cout << "{";
-	//            cout << this->monoms[i].coeff << ", ";
-	//            cout << "(";
-	//            for (int j = 0; j < n; j++) {
-	//                cout << this->monoms[i].exps[j];
-	//                cout << " ,";
-	//            }
-	//            cout << ")";
-	//            cout << "}, ";
-	//        }
-	//        cout << "]" << endl;
-	//    }
-	//}
+//    if (n == 0) {
+//        cout << "0" << endl;
+//    }
+//    else {
+//        cout << "vars = ";
+//        for (int i = 0; i < n; i++) {
+//            cout << this->vars[i];
+//        }
+//        cout << "\n";
+//        cout << "Polynomial = [";
+//        for (int i = 0; i < m; i++) {
+//            cout << "{";
+//            cout << this->monoms[i].coeff << ", ";
+//            cout << "(";
+//            for (int j = 0; j < n; j++) {
+//                cout << this->monoms[i].exps[j];
+//                cout << " ,";
+//            }
+//            cout << ")";
+//            cout << "}, ";
+//        }
+//        cout << "]" << endl;
+//    }
+//}
+//
+////constructor for Monom, problem is because it tries to delete a pointer, that has already been deleted
+//
+//
+////constructor
+////Monom::Monom(int coeff, int* exps, int n) {
+////    this->coeff = coeff;
+////    this->exps = new int[n]; //creates a new array of exponents, this is in order to have seperate pointers and deallocate their respectivve memory later (for DistPoly)
+////    this->exps = exps;
+////}
+//
+////constructor
+////Monom::Monom() {
+////    this->coeff = 0;
+////    this->n = 1;
+////    this->exps = 0;//new int[n];
+////    //for (int i = 0; i < n; i++) {
+////    //    this->exps[i] = 0;
+////    //}
+////
+////}
+//
+////destructor
+//Monom::~Monom() {
+//    //delete[] exps;
+//}
+//
+////Monom::Monom(int coeff, int* exps) {
+////    this->coeff = coeff;
+////    this->exps = new int[this->n];
+////    for (int i = 0; i < n; i++) {
+////        this->exps[i] = exps[i];
+////    }
+////}
+//
+////copy assignment operator
+////Monom& Monom::operator=(Monom& m) {
+////    this->coeff = m.coeff;
+////    this->exps = new int[m.n];
+////    for (int i = 0; i < m.n; i++) {
+////        this->exps[i] = m.exps[i];
+////    }
+////
+////    return *this;
+////}

@@ -60,10 +60,7 @@ int DistPoly::sort(int* exps, int n, int j) {
     return 0;
 }
 
-//
-
 void DistPoly::println() {
-    //int empty = 0;
     if (n == 0 || m==0 || am==0) {
         cout << "0" << endl;
     }
@@ -118,7 +115,6 @@ DistPoly::DistPoly(DistPoly& p) {
 
 }
 
-//does this even work?
 DistPoly& DistPoly::operator=(DistPoly& p) {
     this->n = p.n;
     this->vars = p.vars;
@@ -132,7 +128,7 @@ DistPoly& DistPoly::operator=(DistPoly& p) {
     return *this;
 }
 
-//constructor for Monom, problem is because it tries to delete a pointer, that has already been deleted
+//problem is because it tries to delete a pointer, that has already been deleted -> better: create constructor and destructor for class Monom
 DistPoly::~DistPoly() {
     //for (int i = 0; i < this->m; i++) {
     //    delete[] this->monoms[i].exps;
