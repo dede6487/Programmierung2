@@ -47,7 +47,7 @@ public:
 	//void println_brkts(); //prints the polynomial in brackets-style
 	void println();
 
-	void resize(int factor);//enlarges the polynomial, 
+	void resize(int factor);//enlarges the polynomial by a given factor 
 
 	int sort(int* exps, int n, int j);//gives back the position in which the monom with the exponents exps should be inserted
 };
