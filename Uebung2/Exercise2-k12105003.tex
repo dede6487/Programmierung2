@@ -89,20 +89,67 @@ literate =
 	This is the output, that was created by the code above.
 		\lstinputlisting[numbers=none]{Documentation/Main/test-output.txt}
 		
+\newpage	
+	\subsection{testing in three and one variable}
+	In this section, tests of the class in one and three variables will be presented. In order to produce results that are comparable we modified the test case from the previous section to work with uni- and three-variate polynomials.
+	By modifying it further, adding zero-polynomials was also tested.
+	
+		\subsubsection{testing in one variable}
+		The following code was used to perform the tests.
+			\lstinputlisting[]{Documentation/specific_tests/Main3.cpp}
+	
+		This is the output, that was created by the code above.
+			\lstinputlisting[numbers=none]{Documentation/specific_tests/test-output3.txt}
+\newpage		
+		\subsubsection{testing in three variables}
+		The following code was used to perform the tests.
+			\lstinputlisting[]{Documentation/specific_tests/Main1.cpp}
+			
+		This is the output, that was created by the code above.
+			\lstinputlisting[numbers=none]{Documentation/specific_tests/test-output1.txt}
+\newpage			
+		\subsubsection{adding the zero-polynomial}
+		The following code was used to perform the tests.
+			\lstinputlisting[]{Documentation/specific_tests/Main2.cpp}
+		
+		This is the output, that was created by the code above.
+			\lstinputlisting[numbers=none]{Documentation/specific_tests/test-output2.txt}
+			
+\newpage		
 	\subsection{testing error messages}
 	In this section, we will test different kinds of errors that can occur during programming with this class.
 	We will try to produce error messages.
 	
-	\subsubsection{}
-	
-\newpage		
+		\subsubsection{adding polynomials with different numbers of variables}
+		The following code was used to perform the tests.
+			\lstinputlisting[]{Documentation/Errors/Main1.cpp}
+		
+		This is the output, that was created by the code above. The desired error message has been printed successfully.
+			\lstinputlisting[numbers=none]{Documentation/Errors/Error1.txt}
+			
+		\subsubsection{adding polynomials with different orders of variables}
+		The following code was used to perform the tests.
+			\lstinputlisting[]{Documentation/Errors/Main2.cpp}
+		
+		This is the output, that was created by the code above. The desired error message has been printed successfully.
+			\lstinputlisting[numbers=none]{Documentation/Errors/Error2.txt}
+\newpage
+
+		
+	\section{Problems}
+	This section will briefly discuss the Problems that have occurred during programming.
+\newpage
+		
 	\section{The Class - DistPoly.h}
+	This section shows the Header file in which the \emph{DistPoly} class is defined.
 	
 		\lstinputlisting[]{Assignment2/Assignment2/DistPoly.h}
 	
 \newpage
 	\section{The Class - DistPoly.cpp}
-			
+		This section shows the .cpp file in which the \emph{DistPoly} class is implemented.	
+		
+		
 		Note: The copy constructor could also be implemented by using the add function.	
 		
 		\lstinputlisting[]{Assignment2/Assignment2/DistPoly.cpp}	

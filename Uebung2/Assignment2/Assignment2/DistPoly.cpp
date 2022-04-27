@@ -54,7 +54,7 @@ DistPoly& DistPoly::add(DistPoly& p) {
         }
     }
     if (p.am != 0) {
-        for (int i = 0; i < p.am; i++){
+        for (int i = 0; i <= p.am; i++){
             this->add(p.monoms[i].coeff, p.monoms[i].exps);
         }
     }
