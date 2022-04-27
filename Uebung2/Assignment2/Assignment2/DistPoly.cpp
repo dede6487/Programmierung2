@@ -51,7 +51,9 @@ DistPoly& DistPoly::add(DistPoly& p) {
         }
     }
     if (p.am != 0) {
-        //here the polynomials should be added using the previuously defined add function
+        for (int i = 0; i < p.am; i++){
+            this->add(p.monoms[i].coeff, p.monoms[i].exps);
+        }
     }
 
     return *this;
@@ -105,6 +107,7 @@ DistPoly::DistPoly(int n, string* vars) {
     for (int j = 0; j < m; j++) {
         this->monoms[j].coeff = 0;
         this->monoms[j].exps = new int[n];
+        this->monoms[j].n = n;
         for (int i = 0; i < n; i++) {
             this->monoms[j].exps[i] = 0;
         }
@@ -120,6 +123,7 @@ DistPoly::DistPoly(DistPoly& p) {
     //check if monomial is null, e.g. is actually a monomial, this check should be included everywhere, where such copying actions are performed
     for (int i = 0; i < m; i++) {
         this->monoms[i].coeff = p.monoms[i].coeff;
+        this->monoms[i].n = p.n;
         for (int j = 0; j < p.n; j++) {
             this->monoms[i].exps[j] = p.monoms[i].exps[j];
         }
@@ -135,6 +139,7 @@ DistPoly& DistPoly::operator=(DistPoly& p) {
     this->monoms = new Monom[this->m];
     for (int i = 0; i < m; i++) {
         this->monoms[i].coeff = p.monoms[i].coeff;
+        this->monoms[i].n = p.n;
         for (int j = 0; j < p.n; j++) {
             this->monoms[i].exps[j] = p.monoms[i].exps[j];
         }
@@ -154,17 +159,19 @@ DistPoly::~DistPoly() {
 void DistPoly::resize(int factor) {
     if (factor > 0) {
         Monom* NewMonoms = new Monom[factor * this->m];
-        for (int i = 0; i < this->m; i++) {
+        for (int i = 0; i < (this->m); i++) {
+            //Monom temporary(this->monoms[i].coeff, this->monoms[i].exps, this->n);
+            //NewMonoms[i] = temporary;
             NewMonoms[i] = this->monoms[i];
         }
-        for (int i = this->m; i < (this->m) * factor; i++) {//initializes the remaining elements of the array with the standard value 0
-            NewMonoms[i].coeff = 0;
-            NewMonoms[i].exps = new int[this->n];
-            for (int j = 0; j < this->n; j++) {
-                NewMonoms[i].exps[j] = 0;
-            }
-        }
-        delete[] this->monoms;
+        //for (int i = this->m; i < (this->m) * factor; i++) {//initializes the remaining elements of the array with the standard value 0
+        //    NewMonoms[i].coeff = 0;
+        //    NewMonoms[i].exps = new int[this->n];
+        //    for (int j = 0; j < this->n; j++) {
+        //        NewMonoms[i].exps[j] = 0;
+        //    }
+        //}
+        //delete[] this->monoms;
         this->monoms = NewMonoms;
         this->m = factor * (this->m);
     }
@@ -176,29 +183,41 @@ void DistPoly::resize(int factor) {
 
 
 //constructor
-//Monom::Monom(int coeff, int* exps, int n) {
-//    this->coeff = coeff;
-//    this->exps = new int[n]; //creates a new array of exponents, this is in order to have seperate pointers and deallocate their respectivve memory later (for DistPoly)
-//    this->exps = exps;
-//}
+Monom::Monom(int coeff, int* exps, int n) {
+    this->n = n;
+    this->coeff = coeff;
+    this->exps = new int[n]; //creates a new array of exponents, this is in order to have seperate pointers and deallocate their respectivve memory later (for DistPoly)
+    for (int i = 0; i < n; i++) {
+        this->exps[i] = exps[i];
+    }
+
+}
 //
 //
 ////constructor
-//Monom::Monom() {
-//    this->coeff = 0;
-//    this->exps = 0;
-//}
+Monom::Monom() {
+    this->n = 1;
+    this->coeff = 0;
+    this->exps = new int[n];
+    for (int i = 0; i < this->n; i++) {
+        this->exps[i] = 0;
+    }
+}
 //
 //
 ////copy assignment operator
-//Monom& Monom::operator=(Monom& m) {
-//    this->coeff = m.coeff;
-//    this->exps = m.exps;
-//
-//    return *this;
-//}
+Monom& Monom::operator=(Monom& m) {
+    this->n = m.n;
+    this->coeff = m.coeff;
+    this->exps = new int[n]; //creates a new array of exponents, this is in order to have seperate pointers and deallocate their respectivve memory later (for DistPoly)
+    for (int i = 0; i < n; i++) {
+        this->exps[i] = m.exps[i];
+    }
+
+    return *this;
+}
 
 //destructor
-//Monom::~Monom() {
-//    delete[] exps;
-//}
+Monom::~Monom() {
+    delete[] exps;
+}

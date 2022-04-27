@@ -25,7 +25,7 @@ int main() {
 	// set p to p+2*q and print it
 
 	DistPoly r = p;
-	r.add(3,e1).add(-1, e2);
+	r.add(q).add(q);
 	p = r;
 	p.println();
 

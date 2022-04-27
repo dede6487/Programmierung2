@@ -9,16 +9,17 @@ class Monom
 public:
 	int coeff;
 	int* exps;
+	int n;
 
 	//constructor
-	//Monom(int coeff, int* exps, int n);
-	//Monom();
+	Monom(int coeff, int* exps, int n);
+	Monom();
 
 	//copy constructor, copy assignment operator, destructor
-	//Monom& operator=(Monom& m);
+	Monom& operator=(Monom& m);
 
 	//destructor
-	//~Monom();
+	~Monom();
 
 
 };
