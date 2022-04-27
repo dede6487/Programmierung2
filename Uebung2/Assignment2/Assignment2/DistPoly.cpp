@@ -13,7 +13,7 @@ DistPoly& DistPoly::add(int coeff, int* exps) {
             }
             if (k == 0) {
                 if (this->monoms[j].coeff + coeff == 0) {
-                    for (int l = j; l < this->am+1; l++) { //shifts the monoms into the empty element
+                    for (int l = j; l < this->am+1; l++) { //shifts the monoms into the gap to fill it
                         this->monoms[l] = this->monoms[l + 1];
                     }
                     this->am--;
@@ -142,12 +142,14 @@ DistPoly::DistPoly(DistPoly& p) {
 
 DistPoly& DistPoly::operator=(DistPoly& p) {
     this->n = p.n;
+    delete[] vars;
     this->vars = new string[n];
     for (int i = 0; i < n; i++) {
         this->vars[i] = p.vars[i];
     }
     this->m = p.m;
     this->am = p.am;
+    delete[] monoms;
     this->monoms = new Monom[this->m];
     for (int i = 0; i < m; i++) {
         this->monoms[i].coeff = p.monoms[i].coeff;
@@ -171,7 +173,7 @@ DistPoly::~DistPoly() {
 
 void DistPoly::resize(int factor) {
     if (factor > 0) {
-        Monom* NewMonoms = new Monom[(factor * this->m)+1];
+        Monom* NewMonoms = new Monom[(factor * this->m) + 1];
         for (int i = 0; i < this->m; i++) {
             //Monom temporary(this->monoms[i].coeff, this->monoms[i].exps, this->n);
             //NewMonoms[i] = temporary;
@@ -184,7 +186,12 @@ void DistPoly::resize(int factor) {
         //        NewMonoms[i].exps[j] = 0;
         //    }
         //}
-        //delete[] this->monoms;
+        delete[] this->monoms;
+        //for (int i = 0; i < n; i++) {//this handles what the missing destructor for the Monoms would otherwise do
+        //    if (monoms[i].exps != 0) {
+        //        delete[] monoms[i].exps;
+        //    }
+        //}
         this->monoms = NewMonoms;
         this->m = factor * (this->m) + 1;
     }
@@ -232,5 +239,5 @@ Monom& Monom::operator=(Monom& m) {
 
 //destructor
 //Monom::~Monom() {
-//    delete [] exps;
+//    delete[] exps;
 //}

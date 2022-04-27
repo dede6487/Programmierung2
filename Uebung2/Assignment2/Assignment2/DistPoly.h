@@ -28,8 +28,8 @@ class DistPoly
 {
 private:
 	int n; //number of variables
-	string* vars;
-	Monom* monoms;
+	string* vars; //names of the variables
+	Monom* monoms; //pointer to an array of monomials
 	int m; //number of potential monoms in this polynomial (allocated memory)
 	int am; //actual number of monoms in this polynomial -1
 public:
