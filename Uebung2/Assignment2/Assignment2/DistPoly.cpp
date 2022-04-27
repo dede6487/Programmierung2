@@ -44,6 +44,15 @@ DistPoly& DistPoly::add(int coeff, int* exps) {
 }
 
 DistPoly& DistPoly::add(DistPoly& p) {
+    for (int i = 0; i < this->n; i++) {
+        if (this->vars[i] != p.vars[i]) {
+            cout << "Error: the variables of two added polynomials do not match";
+            exit(1);
+        }
+    }
+    if (p.am != 0) {
+        //here the polynomials should be added using the previuously defined add function
+    }
 
     return *this;
 }
@@ -107,11 +116,13 @@ DistPoly::DistPoly(DistPoly& p) {
     this->vars = p.vars;
     this->m = p.m;
     this->am = p.am;
-    this->monoms = new Monom[(p.m) + 1];
+    this->monoms = new Monom[this->m];
     //check if monomial is null, e.g. is actually a monomial, this check should be included everywhere, where such copying actions are performed
     for (int i = 0; i < m; i++) {
         this->monoms[i].coeff = p.monoms[i].coeff;
-        this->monoms[i].exps = p.monoms[i].exps;
+        for (int j = 0; j < p.n; j++) {
+            this->monoms[i].exps[j] = p.monoms[i].exps[j];
+        }
     }
 
 }
@@ -121,11 +132,14 @@ DistPoly& DistPoly::operator=(DistPoly& p) {
     this->vars = p.vars;
     this->m = p.m;
     this->am = p.am;
-    this->monoms = new Monom[(p.m) + 1];
+    this->monoms = new Monom[this->m];
     for (int i = 0; i < m; i++) {
         this->monoms[i].coeff = p.monoms[i].coeff;
-        this->monoms[i].exps = p.monoms[i].exps;
+        for (int j = 0; j < p.n; j++) {
+            this->monoms[i].exps[j] = p.monoms[i].exps[j];
+        }
     }
+
     return *this;
 }
 
@@ -138,20 +152,25 @@ DistPoly::~DistPoly() {
 }
 
 void DistPoly::resize(int factor) {
-    Monom* NewMonoms = new Monom[factor * m];
-    for (int i = 0; i < this->m; i++) {
-        NewMonoms[i] = this->monoms[i];
-    }
-    for (int i = this->m; i < (this->m) * factor; i++) {//initializes the remaining elements of the array with the standard value 0
-        NewMonoms[i].coeff = 0;
-        NewMonoms[i].exps = new int[this->n];
-        for (int j = 0; j < this->n; j++) {
-            NewMonoms[i].exps[j] = 0;
+    if (factor > 0) {
+        Monom* NewMonoms = new Monom[factor * this->m];
+        for (int i = 0; i < this->m; i++) {
+            NewMonoms[i] = this->monoms[i];
         }
+        for (int i = this->m; i < (this->m) * factor; i++) {//initializes the remaining elements of the array with the standard value 0
+            NewMonoms[i].coeff = 0;
+            NewMonoms[i].exps = new int[this->n];
+            for (int j = 0; j < this->n; j++) {
+                NewMonoms[i].exps[j] = 0;
+            }
+        }
+        delete[] this->monoms;
+        this->monoms = NewMonoms;
+        this->m = factor * (this->m);
     }
-    delete[] this->monoms;
-    this->monoms = NewMonoms;
-    this->m = factor * (this->m);
+    else{
+        cout << "Error: factor must be greater than 0";
+    }
 }
 //idea: create new array of monoms with emty constructor, then initialize them by assigning a newly constructed monom (with different constructor) to every element of the array
 
@@ -177,4 +196,9 @@ void DistPoly::resize(int factor) {
 //    this->exps = m.exps;
 //
 //    return *this;
+//}
+
+//destructor
+//Monom::~Monom() {
+//    delete[] exps;
 //}

@@ -141,11 +141,6 @@
 //
 //}
 
-//destructor
-//Monom::~Monom() {
-//    delete[] exps;
-//}
-
 //Monom::Monom(int coeff, int* exps) {
 //    this->coeff = coeff;
 //    this->exps = new int[this->n];

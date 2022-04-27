@@ -12,10 +12,13 @@ public:
 
 	//constructor
 	//Monom(int coeff, int* exps, int n);
-	//Monom(int n);
+	//Monom();
 
 	//copy constructor, copy assignment operator, destructor
 	//Monom& operator=(Monom& m);
+
+	//destructor
+	//~Monom();
 
 
 };
