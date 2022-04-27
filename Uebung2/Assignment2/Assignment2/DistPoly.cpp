@@ -108,6 +108,7 @@ DistPoly::DistPoly(DistPoly& p) {
     this->m = p.m;
     this->am = p.am;
     this->monoms = new Monom[(p.m) + 1];
+    //check if monomial is null, e.g. is actually a monomial, this check should be included everywhere, where such copying actions are performed
     for (int i = 0; i < m; i++) {
         this->monoms[i].coeff = p.monoms[i].coeff;
         this->monoms[i].exps = p.monoms[i].exps;
