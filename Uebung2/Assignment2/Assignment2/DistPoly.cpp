@@ -44,6 +44,9 @@ DistPoly& DistPoly::add(int coeff, int* exps) {
 }
 
 DistPoly& DistPoly::add(DistPoly& p) {
+    if (this->n != p.n) {
+        cout << "Error: the number of variables of two added polynomials is different";
+    }
     for (int i = 0; i < this->n; i++) {
         if (this->vars[i] != p.vars[i]) {
             cout << "Error: the variables of two added polynomials do not match";
@@ -100,7 +103,10 @@ void DistPoly::println() {
 
 DistPoly::DistPoly(int n, string* vars) {
     this->n = n;
-    this->vars = vars;
+    this->vars = new string[n];
+    for (int i = 0; i < n; i++) {
+        this->vars[i] = vars[i];
+    }
     this->m = 1;
     this->am = 0;
     this->monoms = new Monom[m];
@@ -116,7 +122,10 @@ DistPoly::DistPoly(int n, string* vars) {
 
 DistPoly::DistPoly(DistPoly& p) {
     this->n = p.n;
-    this->vars = p.vars;
+    this->vars = new string[n];
+    for (int i = 0; i < n; i++) {
+        this->vars[i] = p.vars[i];
+    }
     this->m = p.m;
     this->am = p.am;
     this->monoms = new Monom[this->m];
@@ -133,7 +142,10 @@ DistPoly::DistPoly(DistPoly& p) {
 
 DistPoly& DistPoly::operator=(DistPoly& p) {
     this->n = p.n;
-    this->vars = p.vars;
+    this->vars = new string[n];
+    for (int i = 0; i < n; i++) {
+        this->vars[i] = p.vars[i];
+    }
     this->m = p.m;
     this->am = p.am;
     this->monoms = new Monom[this->m];
@@ -153,13 +165,14 @@ DistPoly::~DistPoly() {
     //for (int i = 0; i < this->m; i++) {
     //    delete[] this->monoms[i].exps;
     //}
+    delete[] this->vars;
     delete[] this->monoms;
 }
 
 void DistPoly::resize(int factor) {
     if (factor > 0) {
-        Monom* NewMonoms = new Monom[factor * this->m];
-        for (int i = 0; i < (this->m); i++) {
+        Monom* NewMonoms = new Monom[(factor * this->m)+1];
+        for (int i = 0; i < this->m; i++) {
             //Monom temporary(this->monoms[i].coeff, this->monoms[i].exps, this->n);
             //NewMonoms[i] = temporary;
             NewMonoms[i] = this->monoms[i];
@@ -173,7 +186,7 @@ void DistPoly::resize(int factor) {
         //}
         //delete[] this->monoms;
         this->monoms = NewMonoms;
-        this->m = factor * (this->m);
+        this->m = factor * (this->m) + 1;
     }
     else{
         cout << "Error: factor must be greater than 0";
@@ -218,6 +231,6 @@ Monom& Monom::operator=(Monom& m) {
 }
 
 //destructor
-Monom::~Monom() {
-    delete[] exps;
-}
+//Monom::~Monom() {
+//    delete [] exps;
+//}
