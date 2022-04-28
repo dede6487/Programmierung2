@@ -34,9 +34,6 @@ public:
 
     //constructors
     Monom();
-
-    //in this project, this constructor was actually never used, it could thus be deleted
-    //it was left in, because it could be usefull for further expanding the class
     Monom(int coeff, int* exps, int n); 
 
     //copy constructor, copy assignment operator, destructor
@@ -92,7 +89,6 @@ DistPoly& DistPoly::add(int coeff, int* exps) {
                 {
                     this->monoms[j].exps[i] = exps[i];
                 }
-                //this->monoms[j].exps = exps;
                 this->am++;
                 break;
             }
@@ -127,7 +123,6 @@ DistPoly& DistPoly::add(DistPoly& p) {
             this->add(p.monoms[i].coeff, p.monoms[i].exps);
         }
     }
-
     return *this;
 }
 
@@ -166,7 +161,6 @@ int DistPoly::sort(int* exps, int n, int j) {
 // 
 // is a member function of the "DistPoly" class.
 // it prints out the given polynomial.
-// 
 //******************************************************************
 
 void DistPoly::println() {
@@ -177,7 +171,6 @@ void DistPoly::println() {
         for (int i = 0; i < m; i++) {
             if (this->monoms[i].coeff != 0) {
                 cout << this->monoms[i].coeff;
-
                 for (int j = 0; j < n; j++) {
                     if (this->monoms[i].exps[j] == 1) {
                         cout << this->vars[j];
@@ -308,8 +301,6 @@ void DistPoly::resize(int factor) {
 // coeff ... is the coefficient of the monomial
 // exps ... is the exponent array
 // n ... is the number of variables 
-// 
-// this constructor is currently not used
 //******************************************************************
 
 DistPoly::Monom::Monom(int coeff, int* exps, int n) {
@@ -319,7 +310,6 @@ DistPoly::Monom::Monom(int coeff, int* exps, int n) {
     for (int i = 0; i < n; i++) {
         this->exps[i] = exps[i];
     }
-
 }
 
 //******************************************************************
@@ -348,6 +338,7 @@ DistPoly::Monom::Monom() {
 DistPoly::Monom& DistPoly::Monom::operator=(Monom& m) {
     this->n = m.n;
     this->coeff = m.coeff;
+    delete[] exps;
     this->exps = new int[n]; //creates a new array of exponents, this is in order to have seperate pointers and deallocate their respectivve memory later (for DistPoly)
     for (int i = 0; i < n; i++) {
         this->exps[i] = m.exps[i];
@@ -360,8 +351,6 @@ DistPoly::Monom& DistPoly::Monom::operator=(Monom& m) {
 // 
 // is the destructor for the private member class of "DistPoly"
 // called "Monom".
-// 
-// there are currently problems, involving this destructor!!!
 //******************************************************************
 
 DistPoly::Monom::~Monom() {

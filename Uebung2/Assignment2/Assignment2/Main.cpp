@@ -6,6 +6,8 @@
 // 
 // There are different versions of this file with different intentions
 // in the assignment folder.
+//
+//created by Felix Dressler, 28.04.2022
 //******************************************************************
 #include"DistPoly.h"
 #include<string>
@@ -40,7 +42,3 @@ int main() {
 
 	return 0;
 }
-
-
-
-

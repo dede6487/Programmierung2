@@ -98,10 +98,10 @@ literate =
 		\subsubsection{testing in one variable}
 		The following code was used to perform the tests.
 			\lstinputlisting[]{Documentation/specific_tests/Main3.cpp}
-	
+\newpage	
 		This is the output, that was created by the code above.
 			\lstinputlisting[numbers=none]{Documentation/specific_tests/test-output3.txt}
-\newpage		
+		
 		\subsubsection{testing in three variables}
 		The following code was used to perform the tests.
 			\lstinputlisting[]{Documentation/specific_tests/Main1.cpp}
@@ -139,25 +139,15 @@ literate =
 		
 	\section{Problems}
 	This section will briefly discuss the Problems that have occurred during programming.
-		\subsection{Monom-destructor}
-		The following Error message is displayed, when trying to run the program with the \emph{destructor} of the \emph{Monom} class.
-		
-			\includegraphics[]{Documentation/Error-destructor.png}
-		
-		This \emph{destructor} was tried in different versions. Without the check, if the to be deleted exponent is not the NULL pointer, there was the same error message. When debugging it would stop at a predefined library-breakpoint.
-		This is the reason why this destructor was left commented out in the final version, even though this means that there are most probably memory leaks occurring while running the program.
-		\StartLineAt{375}	
-		\lstinputlisting[linerange={375-379}]{Assignment2/Assignment2/DistPoly.cpp}
-		
 		\subsection{warnings}
-		In the \emph{resize} method, line 297 of the \emph{DistPoly.cpp} this warning is displayed:
+		In the \emph{resize} method, line 283 of the \emph{DistPoly.cpp} this warning is displayed:
 		
 			\includegraphics[scale=1.5]{Documentation/warning-line297.png}
 		
-		\StartLineAt{293}	
-		\lstinputlisting[linerange={293-306}]{Assignment2/Assignment2/DistPoly.cpp}
+		\StartLineAt{281}	
+		\lstinputlisting[linerange={279-292}]{Assignment2/Assignment2/DistPoly.cpp}
 		
-		This is probably caused by the copy assignment operator of the \emph{Monom} class, because as soon as we disable all methods of the \emph{Monom} class, this warning disappears.
+		This is probably caused in connection by the copy assignment operator of the \emph{Monom} class, because as soon as we disable all methods of the \emph{Monom} class, this warning disappears.
 		
 	
 \newpage
@@ -169,8 +159,7 @@ literate =
 	
 \newpage
 	\section{The Class - DistPoly.cpp}
-		This section shows the .cpp file in which the \emph{DistPoly} class is implemented.	
-		
+		This section shows the .cpp file in which the \emph{DistPoly} class is implemented.
 		
 		Note: The copy constructor could also be implemented by using the add function.	
 		
