@@ -164,41 +164,18 @@ DistPoly& DistPoly::operator=(DistPoly& p) {
     return *this;
 }
 
-//problem is because it tries to delete a pointer, that has already been deleted -> better: create constructor and destructor for class Monom
 DistPoly::~DistPoly() {
-    //for (int i = 0; i < this->m; i++) {
-    //    delete[] this->monoms[i].exps;
-    //}
-    //check if any of the deleted vars or monoms is 0
-    //if (vars != 0) {
         delete[] this->vars;
-    //}
-    //if (monoms != 0) {
         delete[] this->monoms;
-    //}
 }
 
 void DistPoly::resize(int factor) {
-    if (factor > 0) {
+    if (factor > 1) {
         Monom* newMonoms = new Monom[(factor * this->m) + 1];
         for (int i = 0; i < this->am; i++) {
-            //Monom temporary(this->monoms[i].coeff, this->monoms[i].exps, this->n);
-            //NewMonoms[i] = temporary;
             newMonoms[i] = this->monoms[i];
         }
-        //for (int i = this->m; i < (this->m) * factor; i++) {//initializes the remaining elements of the array with the standard value 0
-        //    NewMonoms[i].coeff = 0;
-        //    NewMonoms[i].exps = new int[this->n];
-        //    for (int j = 0; j < this->n; j++) {
-        //        NewMonoms[i].exps[j] = 0;
-        //    }
-        //}
         delete[] this->monoms;
-        //for (int i = 0; i < n; i++) {//this handles what the missing destructor for the Monoms would otherwise do
-        //    if (monoms[i].exps != 0) {
-        //        delete[] monoms[i].exps;
-        //    }
-        //}
         this->monoms = newMonoms;
         this->m = factor * (this->m) + 1;
     }
@@ -219,7 +196,7 @@ Monom::Monom(int coeff, int* exps, int n) {
 
 }
 
-////constructor
+//constructor
 Monom::Monom() {
     this->n = 1;
     this->coeff = 0;
@@ -244,8 +221,8 @@ Monom& Monom::operator=(Monom& m) {
 
 //destructor
 //check if any of the deleted exps is 0
-Monom::~Monom() {
-    //if (exps != 0) {
-        delete[] exps;
-    //}
-}
+//Monom::~Monom() {
+//    //if (exps != 0) {
+//        delete[] exps;
+//    //}
+//}

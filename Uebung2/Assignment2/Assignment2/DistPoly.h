@@ -19,7 +19,7 @@ public:
 	Monom& operator=(Monom& m);
 
 	//destructor
-	~Monom();
+	//~Monom();
 
 
 };
@@ -44,10 +44,9 @@ public:
 
 	DistPoly& add(int coeff, int* exps);
 	DistPoly& add(DistPoly& p);
-	//void println_brkts(); //prints the polynomial in brackets-style
 	void println();
 
-	void resize(int factor);//enlarges the polynomial by a given factor 
+	void resize(int factor);//enlarges the polynomial by a given factor greater than or equal two
 
 	int sort(int* exps, int n, int j);//gives back the position in which the monom with the exponents exps should be inserted
 };
