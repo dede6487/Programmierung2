@@ -1,3 +1,14 @@
+//******************************************************************
+// "Main.cpp"
+// 
+// is the Main cpp file that was used to test different scenarios
+// of using the DistPoly class.
+// 
+// There are different versions of this file with different intentions
+// in the assignment folder.
+//
+//created by Felix Dressler, 28.04.2022
+//******************************************************************
 #include"DistPoly.h"
 #include<string>
 

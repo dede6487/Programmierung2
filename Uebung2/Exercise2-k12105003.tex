@@ -6,7 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{titlesec}
 \usepackage{graphicx}
-\usepackage{subcaption}
+%\usepackage{subcaption}
 
 \usepackage{listings}
 \usepackage{color}
@@ -35,6 +35,7 @@ literate =
 }
 
 \def\ContinueLineNumber{\lstset{firstnumber=last}}
+\def\StartLineAt#1{\lstset{firstnumber=#1}}
 
 \usepackage[
 	a4paper,
@@ -138,6 +139,27 @@ literate =
 		
 	\section{Problems}
 	This section will briefly discuss the Problems that have occurred during programming.
+		\subsection{Monom-destructor}
+		The following Error message is displayed, when trying to run the program with the \emph{destructor} of the \emph{Monom} class.
+		
+			\includegraphics[]{Documentation/Error-destructor.png}
+		
+		This \emph{destructor} was tried in different versions. Without the check, if the to be deleted exponent is not the NULL pointer, there was the same error message. When debugging it would stop at a predefined library-breakpoint.
+		This is the reason why this destructor was left commented out in the final version, even though this means that there are most probably memory leaks occurring while running the program.
+		\StartLineAt{375}	
+		\lstinputlisting[linerange={375-379}]{Assignment2/Assignment2/DistPoly.cpp}
+		
+		\subsection{warnings}
+		In the \emph{resize} method, line 297 of the \emph{DistPoly.cpp} this warning is displayed:
+		
+			\includegraphics[scale=1.5]{Documentation/warning-line297.png}
+		
+		\StartLineAt{293}	
+		\lstinputlisting[linerange={293-306}]{Assignment2/Assignment2/DistPoly.cpp}
+		
+		This is probably caused by the copy assignment operator of the \emph{Monom} class, because as soon as we disable all methods of the \emph{Monom} class, this warning disappears.
+		
+	
 \newpage
 		
 	\section{The Class - DistPoly.h}
