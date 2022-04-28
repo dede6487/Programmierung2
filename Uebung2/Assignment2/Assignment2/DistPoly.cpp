@@ -43,7 +43,7 @@ public:
     Monom& operator=(Monom& m);
 
     //destructor
-    //~Monom();
+    ~Monom();
 };
 
 //******************************************************************
@@ -78,15 +78,21 @@ DistPoly& DistPoly::add(int coeff, int* exps) {
             }
             else if (k == -1) {
 
-                if (this->m == this->am+1) {
+                if (this->m >= this->am+1) {
                     this->resize(2);
                 }
 
-                for (int l = this->am + 1; l > j; l--) {
+                for (int l = this->am+1; l > j; l--) {
                     this->monoms[l] = this->monoms[l-1];
                 }
                 this->monoms[j].coeff = coeff;
-                this->monoms[j].exps = exps;
+                delete[] this->monoms[j].exps;
+                this->monoms[j].exps = new int[this->n];
+                for (int i = 0; i <this->n; i++)
+                {
+                    this->monoms[j].exps[i] = exps[i];
+                }
+                //this->monoms[j].exps = exps;
                 this->am++;
                 break;
             }
@@ -108,6 +114,7 @@ DistPoly& DistPoly::add(int coeff, int* exps) {
 DistPoly& DistPoly::add(DistPoly& p) {
     if (this->n != p.n) {
         cout << "Error: the number of variables of two added polynomials is different";
+        exit(2);
     }
     for (int i = 0; i < this->n; i++) {
         if (this->vars[i] != p.vars[i]) {
@@ -205,12 +212,7 @@ DistPoly::DistPoly(int n, string* vars) {
     this->am = 0;
     this->monoms = new Monom[m];
     for (int j = 0; j < m; j++) {
-        this->monoms[j].coeff = 0;
-        this->monoms[j].exps = new int[n];
-        this->monoms[j].n = n;
-        for (int i = 0; i < n; i++) {
-            this->monoms[j].exps[i] = 0;
-        }
+        this->monoms[j] = *new Monom(0, new int[n] {0}, n);
     }
 }
 
@@ -232,13 +234,8 @@ DistPoly::DistPoly(DistPoly& p) {
     delete[] this->monoms;
     this->monoms = new Monom[this->m];
     for (int i = 0; i < m; i++) {
-        this->monoms[i].coeff = p.monoms[i].coeff;
-        this->monoms[i].n = p.n;
-        for (int j = 0; j < p.n; j++) {
-            this->monoms[i].exps[j] = p.monoms[i].exps[j];
-        }
+        this->monoms[i] = *new Monom(p.monoms[i].coeff, p.monoms[i].exps, p.n);
     }
-
 }
 
 //******************************************************************
@@ -259,11 +256,7 @@ DistPoly& DistPoly::operator=(DistPoly& p) {
     delete[] monoms;
     this->monoms = new Monom[this->m];
     for (int i = 0; i < m; i++) {
-        this->monoms[i].coeff = p.monoms[i].coeff;
-        this->monoms[i].n = p.n;
-        for (int j = 0; j < p.n; j++) {
-            this->monoms[i].exps[j] = p.monoms[i].exps[j];
-        }
+        this->monoms[i] = *new Monom(p.monoms[i].coeff, p.monoms[i].exps, p.n);
     }
 
     return *this;
@@ -359,7 +352,6 @@ DistPoly::Monom& DistPoly::Monom::operator=(Monom& m) {
     for (int i = 0; i < n; i++) {
         this->exps[i] = m.exps[i];
     }
-
     return *this;
 }
 
@@ -372,8 +364,6 @@ DistPoly::Monom& DistPoly::Monom::operator=(Monom& m) {
 // there are currently problems, involving this destructor!!!
 //******************************************************************
 
-//DistPoly::Monom::~Monom() {
-//    if (exps != 0) {
-//        delete[] exps;
-//    }
-//}
+DistPoly::Monom::~Monom() {
+    delete[] exps;
+}
