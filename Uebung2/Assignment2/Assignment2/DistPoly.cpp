@@ -168,8 +168,12 @@ DistPoly::~DistPoly() {
     //    delete[] this->monoms[i].exps;
     //}
     //check if amy of the deleted vars or monoms is 0
-    delete[] this->vars;
-    delete[] this->monoms;
+    //if (vars != 0) {
+        delete[] this->vars;
+    //}
+    //if (monoms != 0) {
+        delete[] this->monoms;
+    //}
 }
 
 void DistPoly::resize(int factor) {
@@ -241,5 +245,7 @@ Monom& Monom::operator=(Monom& m) {
 //destructor
 //check if any of the deleted exps is 0
 //Monom::~Monom() {
-//    delete[] exps;
+//    //if (exps != 0) {
+//        delete[] exps;
+//    //}
 //}
