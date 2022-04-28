@@ -1,13 +1,66 @@
-﻿#include"DistPoly.h"
+//******************************************************************
+// "DistPoly.cpp"
+// 
+// is the cpp file, where the member-functions of the DistPoly Class
+// are defined.
+// 
+// created by Felix Dresser, 28.04.2022
+//******************************************************************
+
+#include"DistPoly.h"
 #include<iostream>
 
 using namespace std;
 
+//******************************************************************
+// class "Monom"
+// 
+// The Monom class is a private class of the DistPoly class and
+// serves as a structure for saving monomials in the DistPoly class.
+// 
+// coeff ... is the coefficient of a monomial
+// exps ... is an array of integers, that holds the exponents of the monomial
+// n ... is the number of variables in a monomial
+// 
+// member functions ... more description in the comments above them
+//******************************************************************
+
+class DistPoly::Monom
+{
+public:
+    int coeff;
+    int* exps;
+    int n;
+
+    //constructors
+    Monom();
+
+    //in this project, this constructor was actually never used, it could thus be deleted
+    //it was left in, because it could be usefull for further expanding the class
+    Monom(int coeff, int* exps, int n); 
+
+    //copy constructor, copy assignment operator, destructor
+    Monom& operator=(Monom& m);
+
+    //destructor
+    //~Monom();
+};
+
+//******************************************************************
+// Method "add(itn coeff, int* exps)"
+// 
+// is a member function of the class "DistPoly" and adds the monomial
+// given by its coefficient and its exponent to the current polynomial
+// 
+// coeff ... ceofficient of the monomial that will be added
+// exps ... exponents of the monomial that will be added
+//******************************************************************
+
 DistPoly& DistPoly::add(int coeff, int* exps) {
     if (coeff !=0) {
         for (int j = 0; j <= this->m; j++) {
-            
             int k = 1;
+            //checks where to insert/add the polynomial
             if (j < this->m) {
                 k = sort(exps, this->n, j);
             }
@@ -43,6 +96,15 @@ DistPoly& DistPoly::add(int coeff, int* exps) {
     return *this;
 }
 
+//******************************************************************
+// Method "add(DistPoly& p)"
+// 
+// is a member function of the class "DistPoly" and adds one 
+// polynomial to the polynomial.
+// 
+// p ... polynomial that should be added
+//******************************************************************
+
 DistPoly& DistPoly::add(DistPoly& p) {
     if (this->n != p.n) {
         cout << "Error: the number of variables of two added polynomials is different";
@@ -62,6 +124,24 @@ DistPoly& DistPoly::add(DistPoly& p) {
     return *this;
 }
 
+//******************************************************************
+// Method "sort"
+// 
+// is a private member function of DistPoly used in the add method to determine
+// the correct place in which the new monomial should be added.
+// 
+// It takes the exponents of a monomial and gives back 
+// 
+// -> 0 if the given exponents match the exponents of this polynomial.
+// -> 1 if the given exponents need to be inserted after this polynomial.
+// -> -1 if the given exponents need to be inserted before this polynomial.
+// 
+// exps ... exponents to be sorted in
+// n ... number of variables in this polynomial
+// j ... the number of the monomial it should check against in the 
+// monomial array of the polynomial
+//******************************************************************
+
 int DistPoly::sort(int* exps, int n, int j) {
     for (int i = 0; i < n; i++) {
         if (this->monoms[j].exps[i] > exps[i]) {
@@ -73,6 +153,14 @@ int DistPoly::sort(int* exps, int n, int j) {
     }
     return 0;
 }
+
+//******************************************************************
+// Method "println()"
+// 
+// is a member function of the "DistPoly" class.
+// it prints out the given polynomial.
+// 
+//******************************************************************
 
 void DistPoly::println() {
     if (n == 0 || m==0 || am==0) {
@@ -101,6 +189,12 @@ void DistPoly::println() {
     }
 }
 
+//******************************************************************
+// constructor "DistPoly(int n, string* vars)"
+// 
+// constructs and initializes Polynomials
+//******************************************************************
+
 DistPoly::DistPoly(int n, string* vars) {
     this->n = n;
     this->vars = new string[n];
@@ -120,6 +214,12 @@ DistPoly::DistPoly(int n, string* vars) {
     }
 }
 
+//******************************************************************
+// copy constructor "DistPoly(DistPoly& p)"
+// 
+// copy constructor for "DistPoly"
+//******************************************************************
+
 DistPoly::DistPoly(DistPoly& p) {
     this->n = p.n;
     delete[] this->vars;
@@ -131,7 +231,6 @@ DistPoly::DistPoly(DistPoly& p) {
     this->am = p.am;
     delete[] this->monoms;
     this->monoms = new Monom[this->m];
-    //check if monomial is null, e.g. is actually a monomial, this check should be included everywhere, where such copying actions are performed
     for (int i = 0; i < m; i++) {
         this->monoms[i].coeff = p.monoms[i].coeff;
         this->monoms[i].n = p.n;
@@ -141,6 +240,12 @@ DistPoly::DistPoly(DistPoly& p) {
     }
 
 }
+
+//******************************************************************
+// copy assignment operator "DistPoly::operator=(DistPoly& p)"
+// 
+//  copy assignment operator for "DistPoly"
+//******************************************************************
 
 DistPoly& DistPoly::operator=(DistPoly& p) {
     this->n = p.n;
@@ -164,15 +269,31 @@ DistPoly& DistPoly::operator=(DistPoly& p) {
     return *this;
 }
 
+//******************************************************************
+// destructor "~DistPoly()"
+// 
+// destructor for "DistPoly" 
+//******************************************************************
+
 DistPoly::~DistPoly() {
         delete[] this->vars;
         delete[] this->monoms;
 }
 
+//******************************************************************
+// Method "resize(int factor)"
+// 
+// is a member function of "DistPoly".
+// It enlarges the size of the array by a given factor (>1) of polynomials 
+// and copys the old polynomial into it.
+// 
+// factor ... the factor by which the polynomial should be enlarged
+//******************************************************************
+
 void DistPoly::resize(int factor) {
     if (factor > 1) {
         Monom* newMonoms = new Monom[(factor * this->m) + 1];
-        for (int i = 0; i < this->am; i++) {
+        for (int i = 0; i < this->am+1; i++) {
             newMonoms[i] = this->monoms[i];
         }
         delete[] this->monoms;
@@ -184,9 +305,21 @@ void DistPoly::resize(int factor) {
     }
 }
 
+//******************************************************************
+// constructor "Monom(int coeff, int* exps, int n)"
+// 
+// is a constructor for the private member class of "DistPoly"
+// called "Monom".
+// It constructs a monomial with the values of:
+// 
+// coeff ... is the coefficient of the monomial
+// exps ... is the exponent array
+// n ... is the number of variables 
+// 
+// this constructor is currently not used
+//******************************************************************
 
-//constructor
-Monom::Monom(int coeff, int* exps, int n) {
+DistPoly::Monom::Monom(int coeff, int* exps, int n) {
     this->n = n;
     this->coeff = coeff;
     this->exps = new int[n]; //creates a new array of exponents, this is in order to have seperate pointers and deallocate their respectivve memory later (for DistPoly)
@@ -196,8 +329,14 @@ Monom::Monom(int coeff, int* exps, int n) {
 
 }
 
-//constructor
-Monom::Monom() {
+//******************************************************************
+// constructor "Monom()"
+// 
+// is the empty constructor for the private member class of "DistPoly"
+// called "Monom". 
+//******************************************************************
+
+DistPoly::Monom::Monom() {
     this->n = 1;
     this->coeff = 0;
     this->exps = new int[n];
@@ -206,11 +345,16 @@ Monom::Monom() {
     }
 }
 
-//copy assignment operator
-Monom& Monom::operator=(Monom& m) {
+//******************************************************************
+// copy assignment operator "Monom::operator=(Monom& m)"
+// 
+// is the copy assignment operator for the private member class of "DistPoly"
+// called "Monom".
+//******************************************************************
+
+DistPoly::Monom& DistPoly::Monom::operator=(Monom& m) {
     this->n = m.n;
     this->coeff = m.coeff;
-    delete[] exps;
     this->exps = new int[n]; //creates a new array of exponents, this is in order to have seperate pointers and deallocate their respectivve memory later (for DistPoly)
     for (int i = 0; i < n; i++) {
         this->exps[i] = m.exps[i];
@@ -219,10 +363,17 @@ Monom& Monom::operator=(Monom& m) {
     return *this;
 }
 
-//destructor
-//check if any of the deleted exps is 0
-//Monom::~Monom() {
-//    //if (exps != 0) {
+//******************************************************************
+// destructor "~Monom()"
+// 
+// is the destructor for the private member class of "DistPoly"
+// called "Monom".
+// 
+// there are currently problems, involving this destructor!!!
+//******************************************************************
+
+//DistPoly::Monom::~Monom() {
+//    if (exps != 0) {
 //        delete[] exps;
-//    //}
+//    }
 //}
