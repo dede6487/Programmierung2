@@ -122,12 +122,14 @@ DistPoly::DistPoly(int n, string* vars) {
 
 DistPoly::DistPoly(DistPoly& p) {
     this->n = p.n;
+    delete[] this->vars;
     this->vars = new string[n];
     for (int i = 0; i < n; i++) {
         this->vars[i] = p.vars[i];
     }
     this->m = p.m;
     this->am = p.am;
+    delete[] this->monoms;
     this->monoms = new Monom[this->m];
     //check if monomial is null, e.g. is actually a monomial, this check should be included everywhere, where such copying actions are performed
     for (int i = 0; i < m; i++) {
@@ -167,7 +169,7 @@ DistPoly::~DistPoly() {
     //for (int i = 0; i < this->m; i++) {
     //    delete[] this->monoms[i].exps;
     //}
-    //check if amy of the deleted vars or monoms is 0
+    //check if any of the deleted vars or monoms is 0
     //if (vars != 0) {
         delete[] this->vars;
     //}
@@ -178,11 +180,11 @@ DistPoly::~DistPoly() {
 
 void DistPoly::resize(int factor) {
     if (factor > 0) {
-        Monom* NewMonoms = new Monom[(factor * this->m) + 1];
-        for (int i = 0; i < this->m; i++) {
+        Monom* newMonoms = new Monom[(factor * this->m) + 1];
+        for (int i = 0; i < this->am; i++) {
             //Monom temporary(this->monoms[i].coeff, this->monoms[i].exps, this->n);
             //NewMonoms[i] = temporary;
-            NewMonoms[i] = this->monoms[i];
+            newMonoms[i] = this->monoms[i];
         }
         //for (int i = this->m; i < (this->m) * factor; i++) {//initializes the remaining elements of the array with the standard value 0
         //    NewMonoms[i].coeff = 0;
@@ -197,14 +199,13 @@ void DistPoly::resize(int factor) {
         //        delete[] monoms[i].exps;
         //    }
         //}
-        this->monoms = NewMonoms;
+        this->monoms = newMonoms;
         this->m = factor * (this->m) + 1;
     }
     else{
         cout << "Error: factor must be greater than 0";
     }
 }
-//idea: create new array of monoms with emty constructor, then initialize them by assigning a newly constructed monom (with different constructor) to every element of the array
 
 
 //constructor
@@ -217,8 +218,7 @@ Monom::Monom(int coeff, int* exps, int n) {
     }
 
 }
-//
-//
+
 ////constructor
 Monom::Monom() {
     this->n = 1;
@@ -228,12 +228,12 @@ Monom::Monom() {
         this->exps[i] = 0;
     }
 }
-//
-//
-////copy assignment operator
+
+//copy assignment operator
 Monom& Monom::operator=(Monom& m) {
     this->n = m.n;
     this->coeff = m.coeff;
+    delete[] exps;
     this->exps = new int[n]; //creates a new array of exponents, this is in order to have seperate pointers and deallocate their respectivve memory later (for DistPoly)
     for (int i = 0; i < n; i++) {
         this->exps[i] = m.exps[i];
@@ -244,8 +244,8 @@ Monom& Monom::operator=(Monom& m) {
 
 //destructor
 //check if any of the deleted exps is 0
-//Monom::~Monom() {
-//    //if (exps != 0) {
-//        delete[] exps;
-//    //}
-//}
+Monom::~Monom() {
+    //if (exps != 0) {
+        delete[] exps;
+    //}
+}

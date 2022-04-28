@@ -19,7 +19,7 @@ public:
 	Monom& operator=(Monom& m);
 
 	//destructor
-	//~Monom();
+	~Monom();
 
 
 };
