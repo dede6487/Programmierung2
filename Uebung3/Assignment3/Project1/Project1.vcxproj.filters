@@ -18,9 +18,15 @@
     <ClInclude Include="Polygon.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Polygon.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkedList.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
