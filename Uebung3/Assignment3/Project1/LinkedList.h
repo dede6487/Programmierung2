@@ -2,14 +2,14 @@
 
 class LinkedList
 {
-	class IntNode;
+	class Node;
 private:
-	IntNode* head;
+	Node* head;
 	int number;
 public:
 	LinkedList();
 	~LinkedList();
 	int length() const;
-	LinkedList& insert(int e);
-	int get(int i) const;
+	LinkedList& insert(int* e);
+	int* get(int i) const;
 };
