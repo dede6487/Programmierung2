@@ -139,10 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CImg.h" />
+    <ClInclude Include="Drawing.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Polygon.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Drawing.cpp" />
     <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="Polygon.cpp" />
   </ItemGroup>

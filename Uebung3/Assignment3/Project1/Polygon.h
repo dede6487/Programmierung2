@@ -1,11 +1,14 @@
 #pragma once
 
+//could be unincluded later
+//#include"LinkedList.h"
+//#include"Drawing.h"
 
 
 class Polygon
 {
 private:
-    int color = 0xFFFF;
+    unsigned int color = 0xFFFF;
 
 public:
     // create polygon in denoted color (default black)
@@ -27,9 +30,9 @@ public:
     virtual void draw(double x0 = 0, double y0 = 0, double f = 1);
 };
 
-class RegularPolygon : public Polygon
-{
-public:
-    RegularPolygon(double x, double y, double r, int n,
-        double a = 0, unsigned int c = 0);
-};
+//class RegularPolygon : public Polygon
+//{
+//public:
+//    RegularPolygon(double x, double y, double r, int n,
+//        double a = 0, unsigned int c = 0);
+//};

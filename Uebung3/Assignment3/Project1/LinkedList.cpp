@@ -1,16 +1,25 @@
+//******************************************************************
+// "LinkedList.h"
+// 
+// contains the methods of the class "LinkedList" based on the
+// functionality as presented in the lecture slides.
+// 
+// created by Felix Dressler, 
+//******************************************************************
+
 #include "LinkedList.h"
 
 class LinkedList::Node {
 	friend class LinkedList;
 private:
 	int* value; Node* next;
-	Node(int* v, Node* n){ 
+	Node(int* v, Node* n) {
 		next = n;
 		value = new int[2];
-			value[0] = v[0];
-			value[1] = v[1];
+		value[0] = v[0];
+		value[1] = v[1];
 	}
-}
+};
 
 LinkedList::LinkedList() {
 	head = 0;
