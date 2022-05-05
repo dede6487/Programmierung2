@@ -9,6 +9,7 @@ class Polygon
 {
 private:
     unsigned int color = 0xFFFF;
+    LinkedList points;
 
 public:
     // create polygon in denoted color (default black)
