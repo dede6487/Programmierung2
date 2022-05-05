@@ -3,7 +3,7 @@
 //could be unincluded later
 //#include"LinkedList.h"
 //#include"Drawing.h"
-
+//#include"CImg.h"
 
 class Polygon
 {
