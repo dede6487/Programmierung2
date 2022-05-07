@@ -50,8 +50,8 @@ void Polygon::draw(double x0, double y0, double f) {
     int* tempy = new int[length];
 
     for (int i = 0; i < length; i++) {
-        tempx[i] = points.get(i,0);
-        tempy[i] = points.get(i, 1);
+        tempx[i] = x0 + points.get(i,0)*f;
+        tempy[i] = y0 + points.get(i, 1)*f;
     }
 
     drawPolygon(length, tempx, tempy, color);
@@ -60,25 +60,42 @@ void Polygon::draw(double x0, double y0, double f) {
     delete[] tempy;  
 }
 
-//*****************************************************************************
+//*************************************************************************************************
 
-RegularPolygon::RegularPolygon(double x, double y, double r, int n, double a, unsigned int c):Polygon(c) {
+RegularPolygon::RegularPolygon(double x, double y, 
+    double r, int n, double a, unsigned int c):Polygon(c) {
+
     for (double i = 0; i < n; i ++) {
         this->add(x - (cos(a + i * 2 * M_PI / n) * r), y - (sin(a + i * 2 * M_PI / n) * r));
     }
     this->x = x;
     this->y = y;
-    this->r = r;
     this->n = n;
     this->a = a;
-    this->c = c;
+    setColor(c);
 }
 
 void RegularPolygon::draw(double x0, double y0, double f) {
     Polygon::draw(x0,y0,f);
-    drawPoint(x, y, c);
+    drawPoint(x0 + x, y0 + y, getColor());
 }
     
 RegularPolygon::~RegularPolygon() {
 
 }
+
+//*************************************************************************************************
+
+Square::Square(double x, double y, 
+    double r, double a, unsigned int c):RegularPolygon(x,y,r,4,a,c) {
+
+}
+
+//*************************************************************************************************
+
+Hexagon::Hexagon(double x, double y, 
+    double r, double a, unsigned int c) :RegularPolygon(x, y, r, 6, a, c) {
+
+}
+
+//*************************************************************************************************

@@ -14,13 +14,20 @@ int main() {
 	p.add(50, 1);
 	p.add(50, 50);
 	p.add(1, 50);
-	//p.add(400, 30);
 
 	p.draw();
 
 	RegularPolygon q(250, 250, 30, 5, 0, 100);
 
-	q.Polygon::draw();
+	q.draw();
+
+	Square r(350, 350, 60, 0, 0xFF);
+
+	r.draw();
+
+	Hexagon s(400,200,80,0,0x00FF);
+
+	s.draw();
 
 	endDrawing();
 }

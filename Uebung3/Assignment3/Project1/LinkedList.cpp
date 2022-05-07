@@ -35,11 +35,6 @@ LinkedList::~LinkedList() {
 	}
 }
 
-//LinkedList& operator=(LinkedList& p) {
-//	this->head = p.head;
-//
-//}
-
 int LinkedList::length() const {
 	return number;
 }
