@@ -2,20 +2,29 @@
 #include"LinkedList.h"
 #include"Drawing.h"
 
+#define _USE_MATH_DEFINES
+
+#include<cmath>
+
 using namespace std;
 using namespace compsys;
 
 //constructor
-Polygon::Polygon(unsigned int color = 0) {
+Polygon::Polygon(unsigned int color) {
     this->color = color;
+    this->points;
 }
 
 Polygon::Polygon(Polygon& p) {
-
+    this->points = p.points;
+    this->color = p.color;
 }
 
 Polygon& Polygon::operator=(Polygon& p) {
+    this->points = p.points;
+    this->color = p.color;
 
+    return *this;
 }
 
 Polygon::~Polygon() {
@@ -23,24 +32,53 @@ Polygon::~Polygon() {
 }
 
 Polygon* Polygon::clone() {
-
+    Polygon p;
+    p.color = this->color;
+    p.points = this->points;
+    
+    return &p;
 }
 
 void Polygon::add(double x, double y) {
-
+    int e[2] = { x,y };
+    points.insert(e);
 }
 
-void Polygon::draw(double x0 = 0, double y0 = 0, double f = 1) {
-    beginDrawing(500, 500, "Polygon", 0xFFFF, false);
+void Polygon::draw(double x0, double y0, double f) {
+    int length = points.length();
+    int* tempx = new int[length];
+    int* tempy = new int[length];
 
-    //for (int i = 0; i < this->points.length() - 1; i++)
-    //{
-    //    drawLine(xs[i], ys[i], xs[i + 1], ys[i + 1], color);
-    //}
-    //if (n > 0) {
-    //    drawLine(xs[this->points.length() - 1], ys[this->points.length() - 1], xs[0], ys[0], color);
-    //}
-    //flush();
+    for (int i = 0; i < length; i++) {
+        tempx[i] = points.get(i,0);
+        tempy[i] = points.get(i, 1);
+    }
 
-    endDrawing();
+    drawPolygon(length, tempx, tempy, color);
+
+    delete[] tempx;
+    delete[] tempy;  
+}
+
+//*****************************************************************************
+
+RegularPolygon::RegularPolygon(double x, double y, double r, int n, double a, unsigned int c):Polygon(c) {
+    for (double i = 0; i < n; i ++) {
+        this->add(x - (cos(a + i * 2 * M_PI / n) * r), y - (sin(a + i * 2 * M_PI / n) * r));
+    }
+    this->x = x;
+    this->y = y;
+    this->r = r;
+    this->n = n;
+    this->a = a;
+    this->c = c;
+}
+
+void RegularPolygon::draw(double x0, double y0, double f) {
+    Polygon::draw(x0,y0,f);
+    drawPoint(x, y, c);
+}
+    
+RegularPolygon::~RegularPolygon() {
+
 }

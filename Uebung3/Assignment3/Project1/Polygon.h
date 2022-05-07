@@ -1,9 +1,8 @@
 #pragma once
 
 //could be unincluded later
-//#include"LinkedList.h"
-//#include"Drawing.h"
-//#include"CImg.h"
+#include"LinkedList.h"
+
 
 class Polygon
 {
@@ -28,12 +27,23 @@ public:
 
     // draws the polygon at absolute coordinates (x0,y0) scaled by factor f;
     // thus every point (x,y) is drawn at position (x0+x*f, y0+y*f)
-    virtual void draw(double x0 = 0, double y0 = 0, double f = 1);
+    void draw(double x0 = 0, double y0 = 0, double f = 1);
 };
 
-//class RegularPolygon : public Polygon
-//{
-//public:
-//    RegularPolygon(double x, double y, double r, int n,
-//        double a = 0, unsigned int c = 0);
-//};
+class RegularPolygon : public Polygon
+{
+private:
+    double a;
+    double x;
+    double y;
+    int n;
+    unsigned int c;
+    double r;
+public:
+    RegularPolygon(double x, double y, double r, int n,
+        double a = 0, unsigned int c = 0);
+
+    virtual ~RegularPolygon();
+
+    virtual void draw(double x0 = 0, double y0 = 0, double f = 1);
+};

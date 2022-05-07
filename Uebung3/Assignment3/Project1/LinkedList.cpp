@@ -35,6 +35,11 @@ LinkedList::~LinkedList() {
 	}
 }
 
+//LinkedList& operator=(LinkedList& p) {
+//	this->head = p.head;
+//
+//}
+
 int LinkedList::length() const {
 	return number;
 }
@@ -44,9 +49,9 @@ LinkedList& LinkedList::insert(int* e) {
 	number = number + 1;
 	return *this;
 }
-int* LinkedList::get(int i) const {
+int LinkedList::get(int i, int n) const {
 	Node* node = head;
 	for (int j = 0; j < number - i - 1; j++)
 		node = node->next;
-	return node->value;
+	return node->value[n];
 }
