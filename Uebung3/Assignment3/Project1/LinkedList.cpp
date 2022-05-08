@@ -8,6 +8,7 @@
 //******************************************************************
 
 #include "LinkedList.h"
+#include"Polygon.h"
 
 class LinkedListArr::Node {
 	friend class LinkedListArr;
@@ -53,41 +54,41 @@ int LinkedListArr::get(int i, int n) const {
 
 //*************************************************************************************************
 
-class LinkedListInt::IntNode {
-	friend class LinkedListInt;
+class LinkedListPointer::PointerNode {
+	friend class LinkedListPointer;
 private:
-	int value; IntNode* next;
-	IntNode(int v, IntNode* n) {
+	Polygon* value; PointerNode* next;
+	PointerNode(Polygon* v, PointerNode* n) {
 		next = n;
 		value = v;
 	}
 };
 
-LinkedListInt::LinkedListInt() {
+LinkedListPointer::LinkedListPointer() {
 	head = 0;
 	number = 0;
 }
 
-LinkedListInt::~LinkedListInt() {
-	IntNode* node = head;
+LinkedListPointer::~LinkedListPointer() {
+	PointerNode* node = head;
 	while (node != 0) {
-		IntNode* node0 = node->next;
+		PointerNode* node0 = node->next;
 		delete node;
 		node = node0;
 	}
 }
 
-int LinkedListInt::length() const {
+int LinkedListPointer::length() const {
 	return number;
 }
-LinkedListInt& LinkedListInt::insert(int e) {
-	IntNode* node = new IntNode(e, head);
+LinkedListPointer& LinkedListPointer::insert(Polygon e) {
+	PointerNode* node = new PointerNode(&e, head);
 	head = node;
 	number = number + 1;
 	return *this;
 }
-int LinkedListInt::get(int i) const {
-	IntNode* node = head;
+Polygon* LinkedListPointer::get(int i) const {
+	PointerNode* node = head;
 	for (int j = 0; j < number - i - 1; j++)
 		node = node->next;
 	return node->value;

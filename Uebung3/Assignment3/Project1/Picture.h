@@ -6,7 +6,9 @@
 class Picture
 {
 private:
-    //LinkedList Polygons;//needs another type
+    LinkedListPointer Polygons;
+    unsigned int h;
+    unsigned int w;
 public:
     Picture();
     Picture(Picture& p);
