@@ -142,12 +142,14 @@
     <ClInclude Include="CImg.h" />
     <ClInclude Include="Drawing.h" />
     <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="LinkedListPointer.h" />
     <ClInclude Include="Picture.h" />
     <ClInclude Include="Polygon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Drawing.cpp" />
     <ClCompile Include="LinkedList.cpp" />
+    <ClCompile Include="LinkedListPointer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="Picture.cpp" />

@@ -16,19 +16,19 @@ int main() {
 	p.add(50, 50);
 	p.add(1, 50);
 
-	//p.draw();
+	p.draw();
 
 	RegularPolygon q(250, 250, 30, 5, 0, 100);
 
-	//q.draw();
+	q.draw();
 
 	Square r(350, 350, 60, 0, 0xFF);
 
-	//r.draw();
+	r.draw();
 
 	Hexagon s(400,200,80,0,0x00FF);
 
-	//s.draw();
+	s.draw();
 
 	Picture pic;
 
@@ -37,7 +37,7 @@ int main() {
 	pic.add(r);
 	pic.add(s);
 
-	pic.draw(40,40,300,300);
+	//pic.draw(40,40,300,300);
 
 	endDrawing();
 }

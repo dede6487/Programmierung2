@@ -9,8 +9,6 @@
 
 #pragma once
 
-#include"Polygon.h"
-
 class LinkedListArr
 {
 	class Node;
@@ -24,19 +22,4 @@ public:
 	int length() const;
 	LinkedListArr& insert(int* e);
 	int get(int i, int n) const;
-};
-
-class LinkedListPointer
-{
-	class PointerNode;
-private:
-	PointerNode* head;
-	int number; //starts with 0 for the first element
-public:
-	LinkedListPointer();
-	~LinkedListPointer();
-
-	int length() const;
-	LinkedListPointer& insert(Polygon e);
-	Polygon* get(int i) const;
 };

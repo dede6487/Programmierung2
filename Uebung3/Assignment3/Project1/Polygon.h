@@ -1,6 +1,5 @@
 #pragma once
 
-//could be unincluded later
 #include"LinkedList.h"
 
 
@@ -78,3 +77,10 @@ public:
     Hexagon(double x, double y, double r,
         double a = 0, unsigned int c = 0);
 };
+
+
+
+
+
+
+

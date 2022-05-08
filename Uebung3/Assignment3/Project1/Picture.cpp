@@ -1,5 +1,5 @@
 #include"Polygon.h"
-#include"LinkedList.h"
+#include"LinkedListPointer.h"
 #include"Drawing.h"
 #include"Picture.h"
 

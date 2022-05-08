@@ -1,6 +1,6 @@
 #pragma once
 
-#include"LinkedList.h"
+#include"LinkedListPointer.h"
 #include"Polygon.h"
 
 class Picture
