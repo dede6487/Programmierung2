@@ -9,18 +9,32 @@
 
 #pragma once
 
-class LinkedList
+class LinkedListArr
 {
 	class Node;
 private:
 	Node* head;
 	int number; //starts with 0 for the first element
 public:
-	LinkedList();
-	~LinkedList();
-	//LinkedList& operator=(LinkedList& p);
+	LinkedListArr();
+	~LinkedListArr();
 
 	int length() const;
-	LinkedList& insert(int* e);
+	LinkedListArr& insert(int* e);
 	int get(int i, int n) const;
+};
+
+class LinkedListInt
+{
+	class IntNode;
+private:
+	IntNode* head;
+	int number; //starts with 0 for the first element
+public:
+	LinkedListInt();
+	~LinkedListInt();
+
+	int length() const;
+	LinkedListInt& insert(int e);
+	int get(int i) const;
 };

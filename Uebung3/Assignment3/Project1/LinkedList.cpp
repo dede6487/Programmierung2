@@ -9,8 +9,8 @@
 
 #include "LinkedList.h"
 
-class LinkedList::Node {
-	friend class LinkedList;
+class LinkedListArr::Node {
+	friend class LinkedListArr;
 private:
 	int* value; Node* next;
 	Node(int* v, Node* n) {
@@ -21,12 +21,12 @@ private:
 	}
 };
 
-LinkedList::LinkedList() {
+LinkedListArr::LinkedListArr() {
 	head = 0;
 	number = 0;
 }
 
-LinkedList::~LinkedList() {
+LinkedListArr::~LinkedListArr() {
 	Node* node = head;
 	while (node != 0) {
 		Node* node0 = node->next;
@@ -35,18 +35,60 @@ LinkedList::~LinkedList() {
 	}
 }
 
-int LinkedList::length() const {
+int LinkedListArr::length() const {
 	return number;
 }
-LinkedList& LinkedList::insert(int* e) {
+LinkedListArr& LinkedListArr::insert(int* e) {
 	Node* node = new Node(e, head);
 	head = node;
 	number = number + 1;
 	return *this;
 }
-int LinkedList::get(int i, int n) const {
+int LinkedListArr::get(int i, int n) const {
 	Node* node = head;
 	for (int j = 0; j < number - i - 1; j++)
 		node = node->next;
 	return node->value[n];
+}
+
+//*************************************************************************************************
+
+class LinkedListInt::IntNode {
+	friend class LinkedListInt;
+private:
+	int value; IntNode* next;
+	IntNode(int v, IntNode* n) {
+		next = n;
+		value = v;
+	}
+};
+
+LinkedListInt::LinkedListInt() {
+	head = 0;
+	number = 0;
+}
+
+LinkedListInt::~LinkedListInt() {
+	IntNode* node = head;
+	while (node != 0) {
+		IntNode* node0 = node->next;
+		delete node;
+		node = node0;
+	}
+}
+
+int LinkedListInt::length() const {
+	return number;
+}
+LinkedListInt& LinkedListInt::insert(int e) {
+	IntNode* node = new IntNode(e, head);
+	head = node;
+	number = number + 1;
+	return *this;
+}
+int LinkedListInt::get(int i) const {
+	IntNode* node = head;
+	for (int j = 0; j < number - i - 1; j++)
+		node = node->next;
+	return node->value;
 }

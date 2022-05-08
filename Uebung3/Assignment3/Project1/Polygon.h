@@ -8,7 +8,7 @@ class Polygon
 {
 private:
     unsigned int color = 0xFFFF;
-    LinkedList points;
+    LinkedListArr points;
 
 public:
     // create polygon in denoted color (default black)
@@ -36,6 +36,14 @@ public:
     unsigned int getColor() {
         return color;
     }
+
+    int pNum() {
+        return points.length();
+    }
+
+    int getCoord(int i, int n) {
+        return points.get(i, n);
+    }
 };
 
 class RegularPolygon : public Polygon
@@ -44,6 +52,7 @@ private:
     double a;
     double x;
     double y;
+    double r;
     int n;
 public:
     RegularPolygon(double x, double y, double r, int n,
@@ -52,6 +61,8 @@ public:
     virtual ~RegularPolygon();
 
     virtual void draw(double x0 = 0, double y0 = 0, double f = 1);
+
+    virtual RegularPolygon* clone();
 };
 
 class Square : public RegularPolygon

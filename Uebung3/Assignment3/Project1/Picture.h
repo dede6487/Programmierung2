@@ -6,7 +6,7 @@
 class Picture
 {
 private:
-    LinkedList Polygons;//needs another type
+    //LinkedList Polygons;//needs another type
 public:
     Picture();
     Picture(Picture& p);

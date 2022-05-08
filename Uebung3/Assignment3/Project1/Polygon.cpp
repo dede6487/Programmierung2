@@ -28,15 +28,19 @@ Polygon& Polygon::operator=(Polygon& p) {
 }
 
 Polygon::~Polygon() {
-
+    
 }
 
 Polygon* Polygon::clone() {
-    Polygon p;
-    p.color = this->color;
-    p.points = this->points;
+    Polygon* p = new Polygon(this->color);
+
+    int length = this->points.length();
+
+    for (int i = 0; i < length; i++) {
+        p->add(this->points.get(i,0), this->points.get(i, 1));
+    }
     
-    return &p;
+    return p;
 }
 
 void Polygon::add(double x, double y) {
@@ -72,6 +76,7 @@ RegularPolygon::RegularPolygon(double x, double y,
     this->y = y;
     this->n = n;
     this->a = a;
+    this->r = r;
     setColor(c);
 }
 
@@ -82,6 +87,12 @@ void RegularPolygon::draw(double x0, double y0, double f) {
     
 RegularPolygon::~RegularPolygon() {
 
+}
+
+RegularPolygon* RegularPolygon::clone() {
+    RegularPolygon* p = new RegularPolygon(this->x, this->y, this->r, this->pNum(), this->a, this->getColor());
+
+    return p;
 }
 
 //*************************************************************************************************
