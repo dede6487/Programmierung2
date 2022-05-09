@@ -18,6 +18,7 @@ Picture::Picture(Picture& p) {
 	this->Polygons = p.Polygons;
 }
 
+//copies pointers not values, needs to be changed
 Picture& Picture::operator=(Picture& p) {
 	this->h = p.h;
 	this->w = p.w;

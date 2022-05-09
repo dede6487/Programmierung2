@@ -16,13 +16,25 @@ Polygon::Polygon(unsigned int color) {
 }
 
 Polygon::Polygon(Polygon& p) {
-    this->points = p.points;
     this->color = p.color;
+    int length = p.points.length();
+
+    for (int i = 0; i < length; i++) {
+        this->add(p.points.get(i, 0), p.points.get(i, 1));
+    }
 }
 
 Polygon& Polygon::operator=(Polygon& p) {
-    this->points = p.points;
+
+    //check if it is already the same
+
     this->color = p.color;
+    int length = p.points.length();
+
+    for(int i = 0; i < length; i++) {
+        this->add(p.points.get(i, 0), p.points.get(i, 1));
+    }
+
 
     return *this;
 }
@@ -99,7 +111,7 @@ RegularPolygon* RegularPolygon::clone() {
 
 Square::Square(double x, double y, 
     double r, double a, unsigned int c):RegularPolygon(x,y,r,4,a,c) {
-
+    
 }
 
 //*************************************************************************************************

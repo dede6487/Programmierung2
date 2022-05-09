@@ -8,7 +8,7 @@
 //******************************************************************
 
 #include "LinkedList.h"
-#include"Polygon.h"
+
 
 class LinkedListArr::Node {
 	friend class LinkedListArr;

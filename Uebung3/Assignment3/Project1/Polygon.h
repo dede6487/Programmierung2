@@ -77,10 +77,3 @@ public:
     Hexagon(double x, double y, double r,
         double a = 0, unsigned int c = 0);
 };
-
-
-
-
-
-
-
