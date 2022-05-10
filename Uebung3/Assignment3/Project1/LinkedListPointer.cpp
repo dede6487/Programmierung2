@@ -6,7 +6,7 @@
 using namespace std;
 
 class LinkedListPointer::PointerNode {
-    friend class LinkedListPointer;
+    friend class LinkedListPointer;  
 private:
     Polygon* value; PointerNode* next;
     PointerNode(Polygon* v, PointerNode* n) {

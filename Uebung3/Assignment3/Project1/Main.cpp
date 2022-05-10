@@ -2,6 +2,10 @@
 #include"Drawing.h"
 #include"Picture.h"
 
+#include<iostream>
+
+using namespace std;
+
 using namespace compsys;
 
 //#include"Drawing.h"
@@ -20,7 +24,7 @@ int main() {
 
 	Polygon l(0);
 
-	l = *p.clone();
+	//l = *p.clone();
 
 	//l.draw(20,20);
 
@@ -28,12 +32,6 @@ int main() {
 	RegularPolygon q(250, 250, 30, 5, 0, 100);
 
 	//q.draw();
-
-	RegularPolygon m(0, 0, 0, 0, 0, 0 );
-
-	//m = *q.clone();
-
-	//m.draw(30,30);
 
 	Square r(350, 350, 60, 0, 0xFF);
 
@@ -45,9 +43,13 @@ int main() {
 
 	Picture pic;
 
+	cout << "add p - Polygon" << endl;
 	pic.add(p);
+	cout << "add q - Regular" << endl;
 	pic.add(q);
+	cout << "add r - Regular" << endl;
 	pic.add(r);
+	cout << "add s - Regular" << endl;
 	pic.add(s);
 
 	pic.draw(40,40,300,300,1);

@@ -25,7 +25,6 @@ Picture::Picture(Picture& p) {
     }
 }
 
-//copies pointers not values, needs to be changed
 Picture& Picture::operator=(Picture& p) {
     this->h = p.h;
     this->w = p.w;
@@ -39,7 +38,11 @@ Picture& Picture::operator=(Picture& p) {
 }
 
 Picture::~Picture() {
+    int length = Polygons.length();
 
+    for (int i = 0; i < length; i++) {
+        delete Polygons.get(i);
+    }
 }
 
 void Picture::add(Polygon &p) {
