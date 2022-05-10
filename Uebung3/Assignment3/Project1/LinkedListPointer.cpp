@@ -1,6 +1,10 @@
 #include"LinkedListPointer.h"
 #include"Polygon.h"
 
+#include<iostream>
+
+using namespace std;
+
 class LinkedListPointer::PointerNode {
     friend class LinkedListPointer;
 private:

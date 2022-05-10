@@ -5,6 +5,7 @@
 #define _USE_MATH_DEFINES
 
 #include<cmath>
+#include<iostream>
 
 using namespace std;
 using namespace compsys;
@@ -66,6 +67,8 @@ void Polygon::draw(double x0, double y0, double f) {
     int* tempy = new int[length];
 
     for (int i = 0; i < length; i++) {
+        //cout << "vor get polygon points" << endl;
+        //problem lies within this loop
         tempx[i] = x0 + points.get(i,0)*f;
         tempy[i] = y0 + points.get(i, 1)*f;
     }

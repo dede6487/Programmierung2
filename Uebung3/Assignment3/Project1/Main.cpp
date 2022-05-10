@@ -46,9 +46,9 @@ int main() {
 	Picture pic;
 
 	pic.add(p);
-	pic.add(q);
-	pic.add(r);
-	pic.add(s);
+	//pic.add(q);
+	//pic.add(r);
+	//pic.add(s);
 
 	pic.draw(40,40,300,300,1);
 
