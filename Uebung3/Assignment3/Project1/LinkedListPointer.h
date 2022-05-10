@@ -13,6 +13,6 @@ public:
     ~LinkedListPointer();
 
     int length() const;
-    LinkedListPointer& insert(Polygon e);
+    LinkedListPointer& insert(Polygon* e);
     Polygon* get(int i) const;
 };

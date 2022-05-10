@@ -32,8 +32,8 @@ LinkedListPointer::~LinkedListPointer() {
 int LinkedListPointer::length() const {
     return number;
 }
-LinkedListPointer& LinkedListPointer::insert(Polygon e) {
-    PointerNode* node = new PointerNode(&e, head);
+LinkedListPointer& LinkedListPointer::insert(Polygon* e) {
+    PointerNode* node = new PointerNode(e, head);
     head = node;
     number = number + 1;
     return *this;
