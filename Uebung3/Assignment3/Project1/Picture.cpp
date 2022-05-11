@@ -28,24 +28,22 @@ Picture::Picture() {
 Picture::Picture(Picture& p) {
     this->h = p.h;
     this->w = p.w;
-
-    int length = Polygons.length();
-
-    LinkedListPointer* tempList = new LinkedListPointer;
-
+    
+    int length = p.Polygons.length();
     for (int i = 0; i < length; i++) {
-        tempList->insert(p.Polygons.get(i));
+        this->Polygons.insert(p.Polygons.get(i));
     }
+
 }
 
 //copy assignment operator for Picture
 Picture& Picture::operator=(Picture& p) {
     this->h = p.h;
     this->w = p.w;
-
-    int length = Polygons.length();
+    
+    int length = p.Polygons.length();
     for (int i = 0; i < length; i++) {
-        this->add(*p.Polygons.get(i));
+        this->Polygons.insert(p.Polygons.get(i));
     }
 
     return *this;

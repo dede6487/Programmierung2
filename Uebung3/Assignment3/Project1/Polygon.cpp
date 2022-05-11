@@ -37,9 +37,6 @@ Polygon::Polygon(Polygon& p) {
 
 //copy assignment operator for Polygon
 Polygon& Polygon::operator=(Polygon& p) {
-
-    //check if it is already the same
-
     this->color = p.color;
     int length = p.points.length();
 
@@ -63,7 +60,7 @@ Polygon::~Polygon() {
 // of a polygon.
 //******************************************************************
 Polygon* Polygon::clone() {
-    cout << "clone - Polygon" << endl;
+    //cout << "clone - Polygon" << endl;
     Polygon* p = new Polygon(this->color);
 
     int length = this->points.length();
@@ -93,7 +90,7 @@ void Polygon::add(double x, double y) {
 // function defined in "Drawing.cpp".
 //******************************************************************
 void Polygon::draw(double x0, double y0, double f) {
-    cout << "draw - Polygon" << endl;
+    //cout << "draw - Polygon" << endl;
     int length = points.length();
     int* tempx = new int[length];
     int* tempy = new int[length];
@@ -141,7 +138,7 @@ RegularPolygon::RegularPolygon(double x, double y,
 // of the regular polygon.
 //******************************************************************
 void RegularPolygon::draw(double x0, double y0, double f) {
-    cout << "draw - Regular Polygon" << endl;
+    //cout << "draw - Regular Polygon" << endl;
     Polygon::draw(x0,y0,f);
     drawPoint(x0 + x, y0 + y, getColor());
 }
@@ -160,7 +157,7 @@ RegularPolygon::~RegularPolygon() {
 // regular polygon with the same values.
 //******************************************************************
 RegularPolygon* RegularPolygon::clone() {
-    cout << "clone - Regular Polygon" << endl;
+    //cout << "clone - Regular Polygon" << endl;
     RegularPolygon* p = new RegularPolygon(*this);
 
     return p;
