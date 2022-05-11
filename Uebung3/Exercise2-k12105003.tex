@@ -78,6 +78,47 @@ literate =
 
 \begin{document}
 \maketitle
+	\section{Testing the Program}
+		\subsection{Testing Code - Main.cpp}
+		
+		\subsection{testing - output}
+
+
+	\section{Problems}
+	This section will briefly discuss the Problems that have occurred during programming.
+		\subsection{virtual functions/Data types}
+			Despite the best efforts, there is still a problem with the code. Specifically concerning the \emph{Picture} class. While drawing a picture, the outputted polygons of type \emph{RegularPolygon} do not contain a center point. In the following two sections, the code which was used to narrow the problem down and its output are presented.
+			The code contains multiple \emph{cout}s to determine where exactly the problem lies.
+			We can see, that while adding polygons to the \emph{LinkedList} of the picture, that holds pointer to polygons, the correct \emph{clone()} function of the respective derived class is called. But when calling the \emph{draw()} function, it always calls the virtual function defined in the \emph{Polygon} class.
+			
+			This Problem is probably caused by the type that those polygons hold during runtime of the program. Because the \emph{LinkedListPointer} stores just pointer to polygons (\emph{Polygon*}) this could be caused by the declaration of the type of pointer inside there.
+			
+			The testing of clone and draw, that we have already done suggests, that these functions are created correctly.
+			\subsubsection{testing code}	
+		
+				\lstinputlisting[]{Documentation/Problems/main.cpp}
+		
+			\subsubsection{output of the testing code}	
+	
+				\includegraphics[scale=0.5]{Documentation/Problems/problem.png}
+				
+				\begin{lstlisting}[numbers=none]
+					add p - Polygon
+					clone - Polygon
+					add q - Regular
+					clone - Regular Polygon
+					add r - Regular
+					clone - Regular Polygon
+					add s - Regular
+					clone - Regular Polygon
+					draw - Polygon
+					draw - Polygon
+					draw - Polygon
+					draw - Polygon
+					draw - Polygon
+				\end{lstlisting}
+	
+\newpage
 	\section{The Program}
 	
 
@@ -108,12 +149,7 @@ literate =
 			\subsubsection{LinkedListPointer.cpp}
 				\lstinputlisting[]{Assignment3/Project1/LinkedListPointer.cpp}
 				
-	\section{Problems}
-	This section will briefly discuss the Problems that have occurred during programming.
-		\subsection{warnings}
-		In the \emph{resize} method, line 283 of the \emph{DistPoly.cpp} this warning is displayed:
-		
-			%\includegraphics[scale=1.5]{Documentation/warning-line297.png}
+
 		
 	
 \end{document}
