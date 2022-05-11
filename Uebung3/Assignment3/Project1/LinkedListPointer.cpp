@@ -1,3 +1,12 @@
+//******************************************************************
+// "LinkedListPointer.h"
+// 
+// contains the methods of the class "LinkedListPointer" based on the
+// functionality as presented in the lecture slides.
+// 
+// created by Felix Dressler, 11.05.2022
+//******************************************************************
+
 #include"LinkedListPointer.h"
 #include"Polygon.h"
 

@@ -1,3 +1,12 @@
+//******************************************************************
+// "Picture.h"
+// 
+// contains the definition for the class "Picture", which holds polygons
+// in a linked list and is able to draw those in combination with a frame.
+// 
+// created by Felix Dresser, 11.05.2022
+//******************************************************************
+
 #pragma once
 
 #include"LinkedListPointer.h"

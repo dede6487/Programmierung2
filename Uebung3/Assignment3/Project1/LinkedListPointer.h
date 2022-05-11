@@ -1,3 +1,12 @@
+//******************************************************************
+// "LinkedListPointer.h"
+// 
+// contains the class "LinkedListPointer", that implements a linked list
+// based on the linked list that was presented in the lecture slides.
+// 
+// created by Felix Dressler, 
+//******************************************************************
+
 #pragma once
 
 #include"Polygon.h"

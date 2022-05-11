@@ -51,6 +51,3 @@ int LinkedListArr::get(int i, int n) const {
 		node = node->next;
 	return node->value[n];
 }
-
-//*************************************************************************************************
-

@@ -114,7 +114,9 @@ void Polygon::draw(double x0, double y0, double f) {
 //******************************************************************
 // constructor of "RegularPolygon"
 // 
-// 
+// constructs a regular polygon with center point (x,y), radius from
+// the center to the points r, number of points n, angle of the
+// first point to the horizontal axis a and color c.
 //******************************************************************
 RegularPolygon::RegularPolygon(double x, double y, 
     double r, int n, double a, unsigned int c):Polygon(c) {
@@ -129,6 +131,15 @@ RegularPolygon::RegularPolygon(double x, double y,
     setColor(c);
 }
 
+
+//******************************************************************
+// "draw"
+// 
+// the "draw" function of Polygon is a virtual function, this is the 
+// respective function for "RegularPolygon". It first calls the normal
+// "Polygon::draw()" and then additionally draws the center point
+// of the regular polygon.
+//******************************************************************
 void RegularPolygon::draw(double x0, double y0, double f) {
     cout << "draw - Regular Polygon" << endl;
     Polygon::draw(x0,y0,f);
@@ -140,15 +151,24 @@ RegularPolygon::~RegularPolygon() {
 
 }
 
+
+//******************************************************************
+// "clone()"
+// 
+// the "clone" function of Polygon is a virtual function, this is the
+// respective function for "RegularPolygon". It constructs a new
+// regular polygon with the same values.
+//******************************************************************
 RegularPolygon* RegularPolygon::clone() {
     cout << "clone - Regular Polygon" << endl;
-    RegularPolygon* p = new RegularPolygon(this->x, this->y, this->r, this->pNum(), this->a, this->getColor());
+    RegularPolygon* p = new RegularPolygon(*this);
 
     return p;
 }
 
 //*************************************************************************************************
 
+//constructor for Square - constructs a regular polygon with a fixed number of points (4)
 Square::Square(double x, double y, 
     double r, double a, unsigned int c):RegularPolygon(x,y,r,4,a,c) {
     
@@ -156,12 +176,8 @@ Square::Square(double x, double y,
 
 //*************************************************************************************************
 
+//constructor for Square - constructs a regular polygon with a fixed number of points (6)
 Hexagon::Hexagon(double x, double y, 
     double r, double a, unsigned int c) :RegularPolygon(x, y, r, 6, a, c) {
 
 }
-
-//*************************************************************************************************
-
-
-
