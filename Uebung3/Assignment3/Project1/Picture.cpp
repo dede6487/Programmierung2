@@ -30,8 +30,11 @@ Picture::Picture(Picture& p) {
     this->w = p.w;
 
     int length = Polygons.length();
+
+    LinkedListPointer* tempList = new LinkedListPointer;
+
     for (int i = 0; i < length; i++) {
-        this->Polygons.insert(p.Polygons.get(i));
+        tempList->insert(p.Polygons.get(i));
     }
 }
 
@@ -42,7 +45,7 @@ Picture& Picture::operator=(Picture& p) {
 
     int length = Polygons.length();
     for (int i = 0; i < length; i++) {
-        this->Polygons.insert(p.Polygons.get(i));
+        this->add(*p.Polygons.get(i));
     }
 
     return *this;

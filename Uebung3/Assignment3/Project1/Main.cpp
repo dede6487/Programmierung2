@@ -28,45 +28,55 @@ int main() {
 	p.add(50, 50);
 	p.add(1, 50);
 
-	p.draw();
+	//p.draw();
 
-	Polygon l(0);
+	//Polygon l(0);
 
-	l = *p.clone();
+	//l = *p.clone();
 
-	l.draw(60,60);
+	//l.draw(60,60);
 
 
 	RegularPolygon q(250, 250, 30, 5, 0, 100);
 
-	q.draw();
+	//q.draw();
 
-	RegularPolygon a(0,0,0,0,0,0);
+	//RegularPolygon a(0,0,0,0,0,0);
 
-	a = *q.clone();
+	//a = *q.clone();
 
-	a.draw(50, 50);
+	//a.draw(50, 50);
 
-	//Square r(350, 350, 60, 0, 0xFF);
+	Square r(350, 350, 60, 0, 0xFF);
 
-	////r.draw();
+	//r.draw();
 
-	//Hexagon s(400,200,80,0,0x00FF);
+	Hexagon s(400,200,80,0,0x00FF);
 
-	////s.draw();
+	//s.draw();
 
-	//Picture pic;
+	Picture pic;
 
-	//cout << "add p - Polygon" << endl;
-	//pic.add(p);
-	//cout << "add q - Regular" << endl;
-	//pic.add(q);
-	//cout << "add r - Regular" << endl;
-	//pic.add(r);
-	//cout << "add s - Regular" << endl;
-	//pic.add(s);
+	cout << "add p - Polygon" << endl;
+	pic.add(p);
+	cout << "add q - Regular" << endl;
+	pic.add(q);
+	cout << "add r - Regular" << endl;
+	pic.add(r);
+	cout << "add s - Regular" << endl;
+	pic.add(s);
 
-	//pic.draw(40,40,300,300,1);
+	pic.draw(40,40,300,300,1);
+
+	Picture pic2(pic);
+
+	Picture pic3;
+
+	pic3 = pic;
+
+	pic2.draw(20, 20, 80, 80, 1);
+	pic3.draw(50, 50, 100, 100, 1);
+
 
 	endDrawing();
 }
