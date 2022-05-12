@@ -9,7 +9,7 @@
 
 #include "LinkedList.h"
 
-
+//Node Element of the Linked List
 class LinkedListArr::Node {
 	friend class LinkedListArr;
 private:
@@ -22,11 +22,13 @@ private:
 	}
 };
 
+//constructor
 LinkedListArr::LinkedListArr() {
 	head = 0;
 	number = 0;
 }
 
+//destructor
 LinkedListArr::~LinkedListArr() {
 	Node* node = head;
 	while (node != 0) {
@@ -36,15 +38,20 @@ LinkedListArr::~LinkedListArr() {
 	}
 }
 
+//gives the number of nodes in the linked list
 int LinkedListArr::length() const {
 	return number;
 }
+
+//inserts a Node into the linked list
 LinkedListArr& LinkedListArr::insert(int* e) {
 	Node* node = new Node(e, head);
 	head = node;
 	number = number + 1;
 	return *this;
 }
+
+//gives back the value of the element of the linked list in position i
 int LinkedListArr::get(int i, int n) const {
 	Node* node = head;
 	for (int j = 0; j < number - i - 1; j++)

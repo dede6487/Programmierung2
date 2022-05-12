@@ -106,7 +106,7 @@ void Polygon::draw(double x0, double y0, double f) {
     delete[] tempy;  
 }
 
-//*************************************************************************************************
+
 
 //******************************************************************
 // constructor of "RegularPolygon"
@@ -119,7 +119,8 @@ RegularPolygon::RegularPolygon(double x, double y,
     double r, int n, double a, unsigned int c):Polygon(c) {
 
     for (double i = 0; i < n; i ++) {
-        this->add(x - (cos(a + i * 2 * M_PI / n) * r), y - (sin(a + i * 2 * M_PI / n) * r));
+        this->add(x - (cos(a + i * 2 * M_PI / n) * r),
+            y - (sin(a + i * 2 * M_PI / n) * r));
     }
     this->x = x;
     this->y = y;
@@ -163,17 +164,17 @@ RegularPolygon* RegularPolygon::clone() {
     return p;
 }
 
-//*************************************************************************************************
 
-//constructor for Square - constructs a regular polygon with a fixed number of points (4)
+//constructor for Square - constructs a regular polygon 
+//with a fixed number of points (4)
 Square::Square(double x, double y, 
     double r, double a, unsigned int c):RegularPolygon(x,y,r,4,a,c) {
     
 }
 
-//*************************************************************************************************
 
-//constructor for Square - constructs a regular polygon with a fixed number of points (6)
+//constructor for Square - constructs a regular polygon 
+//with a fixed number of points (6)
 Hexagon::Hexagon(double x, double y, 
     double r, double a, unsigned int c) :RegularPolygon(x, y, r, 6, a, c) {
 

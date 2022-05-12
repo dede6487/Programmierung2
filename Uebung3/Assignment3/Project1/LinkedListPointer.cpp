@@ -14,6 +14,7 @@
 
 using namespace std;
 
+//Node Element of the Linked List
 class LinkedListPointer::PointerNode {
     friend class LinkedListPointer;  
 private:
@@ -24,11 +25,13 @@ private:
     }
 };
 
+//constructor
 LinkedListPointer::LinkedListPointer() {
     head = 0;
     number = 0;
 }
 
+//destructor
 LinkedListPointer::~LinkedListPointer() {
     PointerNode* node = head;
     while (node != 0) {
@@ -38,15 +41,20 @@ LinkedListPointer::~LinkedListPointer() {
     }
 }
 
+//gives the number of nodes in the linked list
 int LinkedListPointer::length() const {
     return number;
 }
+
+//inserts a Node into the linked list
 LinkedListPointer& LinkedListPointer::insert(Polygon* e) {
     PointerNode* node = new PointerNode(e, head);
     head = node;
     number = number + 1;
     return *this;
 }
+
+//gives back the value of the element of the linked list in position i
 Polygon* LinkedListPointer::get(int i) const {
     PointerNode* node = head;
     for (int j = 0; j < number - i - 1; j++)
