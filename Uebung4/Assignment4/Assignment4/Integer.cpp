@@ -27,11 +27,11 @@ Integer* Integer::zero() {
 }
 
 Integer* Integer::operator-() {
-
+    this->n = -this->n;
 }
 
 // sum and product of this element and c
-Integer* Integer::operator+(Integer* c) {
+Integer* Integer::operator+(Ring* c) {
     Integer* x = dynamic_cast<Integer*>(c);
 
     if (x == 0) {
@@ -44,7 +44,7 @@ Integer* Integer::operator+(Integer* c) {
     return *temp;
 }
 
-Integer* Integer::operator*(Integer* c) {
+Integer* Integer::operator*(Ring* c) {
     Integer* x = dynamic_cast<Integer*>(c);
     Integer temp(this->n * x->n);
 
