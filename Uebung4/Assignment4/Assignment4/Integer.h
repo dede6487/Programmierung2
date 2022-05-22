@@ -28,5 +28,5 @@ public:
 	virtual Integer* operator*(Ring* c);
 
 	// comparison function
-	virtual bool operator==(Integer* c);
+	virtual bool operator==(Ring* c);
 };

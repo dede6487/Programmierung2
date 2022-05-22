@@ -10,9 +10,9 @@ Integer::Integer(int n) {
 
 // a heap-allocated duplicate of this element
 Integer* Integer::clone() {
-    Integer c(this->n);
+    Integer* c = new Integer(this->n);
     
-    return *c;
+    return c;
 }
 
 // the string representation of this element
@@ -24,10 +24,12 @@ string Integer::str() {
 // the constant of the type of this element and the inverse of this element
 Integer* Integer::zero() {
 
+    return &Integer(0);
 }
 
 Integer* Integer::operator-() {
-    this->n = -this->n;
+
+    return &Integer(-(this->n));
 }
 
 // sum and product of this element and c
@@ -39,26 +41,30 @@ Integer* Integer::operator+(Ring* c) {
         exit(1);
     }
 
-    Integer temp(this->n + x->n);
-
-    return *temp;
+    return &Integer(this->n + x->n);
 }
 
 Integer* Integer::operator*(Ring* c) {
     Integer* x = dynamic_cast<Integer*>(c);
-    Integer temp(this->n * x->n);
 
     if (x == 0) {
         cout << "Error: Multiplikation with incompatible Elements performed" << endl;
         exit(2);
     }
 
-        return *temp;
+    return &Integer(this->n * x->n);
 }
 
 // comparison function
-bool Integer::operator==(Integer* c) {
-    if (this->n == c->n) {
+bool Integer::operator==(Ring* c) {
+    Integer* x = dynamic_cast<Integer*>(c);
+
+    if (x == 0) {
+        cout << "Error: Comparison with incompatible Elements performed" << endl;
+        exit(3);
+    }
+
+    if (this->n == x->n) {
         return true;
     }
     else {
