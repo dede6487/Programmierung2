@@ -21,15 +21,18 @@
     <ClInclude Include="Integer.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="RecPoly.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Ring.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Integer.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="RecPoly.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
