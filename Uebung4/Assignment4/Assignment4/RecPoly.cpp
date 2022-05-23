@@ -1,4 +1,5 @@
 #include"RecPoly.h"
+#include"Integer.h"
 
 
 // polynomial with n>=0 coefficients and given variable name
@@ -70,16 +71,28 @@ string RecPoly::str() {
 
 // the constant of the type of this element and the inverse of this element
 RecPoly* RecPoly::zero() {
-	return &RecPoly(this->var, 0, {});
+	return new RecPoly(this->var, 0, {});
 }
 
 RecPoly* RecPoly::operator-() {
+	Ring** coeffs;
 
+	for (int i = 0; i < this->n; i++) {
+
+	}
+
+	RecPoly temp = new RecPoly(this->var, this->n, coeffs);
+
+	return temp;
 }
 
 // sum and product of this element and c
 RecPoly* RecPoly::operator+(Ring* c) {
+	for (int i = 0; i > this->n; i++) {
+		this->coeff[i] = this->coeff[i];
+	}
 
+	return this;
 }
 
 RecPoly* RecPoly::operator*(Ring* c) {

@@ -24,12 +24,12 @@ string Integer::str() {
 // the constant of the type of this element and the inverse of this element
 Integer* Integer::zero() {
 
-    return &Integer(0);
+    return new Integer(0);
 }
 
 Integer* Integer::operator-() {
 
-    return &Integer(-(this->n));
+    return new Integer(-(this->n));
 }
 
 // sum and product of this element and c
@@ -41,7 +41,7 @@ Integer* Integer::operator+(Ring* c) {
         exit(1);
     }
 
-    return &Integer(this->n + x->n);
+    return new Integer(this->n + x->n);
 }
 
 Integer* Integer::operator*(Ring* c) {
@@ -52,7 +52,7 @@ Integer* Integer::operator*(Ring* c) {
         exit(2);
     }
 
-    return &Integer(this->n * x->n);
+    return new Integer(this->n * x->n);
 }
 
 // comparison function

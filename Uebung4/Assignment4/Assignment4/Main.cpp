@@ -5,8 +5,7 @@
 using namespace std;
 
 int main() {
-	Ring* c[] = { new Integer(-5), new Integer(2),
-	new Integer(0), new Integer(-3) };
+	Ring* c[] = { new Integer(-5), new Integer(2), new Integer(0), new Integer(-3) };
 	RecPoly* p = new RecPoly("x", 4, c); // p = -3x^3 + 2x - 5
 	cout << p->str();
 	RecPoly* q = // q = p+p
