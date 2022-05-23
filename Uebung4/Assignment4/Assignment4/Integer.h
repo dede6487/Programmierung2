@@ -14,18 +14,18 @@ public:
 	}
 	
 	// a heap-allocated duplicate of this element
-	virtual Integer* clone();
+	virtual Ring* clone();
 
 	// the string representation of this element
 	virtual string str();
 
 	// the constant of the type of this element and the inverse of this element
-	virtual Integer* zero();
-	virtual Integer* operator-();
+	virtual Ring* zero();
+	virtual Ring* operator-();
 
 	// sum and product of this element and c
-	virtual Integer* operator+(Ring* c);
-	virtual Integer* operator*(Ring* c);
+	virtual Ring* operator+(Ring* c);
+	virtual Ring* operator*(Ring* c);
 
 	// comparison function
 	virtual bool operator==(Ring* c);

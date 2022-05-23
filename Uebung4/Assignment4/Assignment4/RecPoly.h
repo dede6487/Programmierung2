@@ -16,19 +16,19 @@ public:
 	virtual ~RecPoly();
 
 	// a heap-allocated duplicate of this element
-	virtual RecPoly* clone();
+	virtual Ring* clone();
 
 	// the string representation of this element
 	virtual string str();
 
 	// the constant of the type of this element and the inverse of this element
-	virtual RecPoly* zero();
-	virtual RecPoly* operator-();
+	virtual Ring* zero();
+	virtual Ring* operator-();
 
 	// sum and product of this element and c
-	virtual RecPoly* operator+(RecPoly* c);
-	virtual RecPoly* operator*(RecPoly* c);
+	virtual Ring* operator+(Ring* c);
+	virtual Ring* operator*(Ring* c);
 
 	// comparison function
-	virtual bool operator==(RecPoly* c);
+	virtual bool operator==(Ring* c);
 };

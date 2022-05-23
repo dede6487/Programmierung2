@@ -9,7 +9,7 @@ Integer::Integer(int n) {
 }
 
 // a heap-allocated duplicate of this element
-Integer* Integer::clone() {
+Ring* Integer::clone() {
     Integer* c = new Integer(this->n);
     
     return c;
@@ -22,18 +22,18 @@ string Integer::str() {
 }
 
 // the constant of the type of this element and the inverse of this element
-Integer* Integer::zero() {
+Ring* Integer::zero() {
 
     return new Integer(0);
 }
 
-Integer* Integer::operator-() {
+Ring* Integer::operator-() {
 
     return new Integer(-(this->n));
 }
 
 // sum and product of this element and c
-Integer* Integer::operator+(Ring* c) {
+Ring* Integer::operator+(Ring* c) {
     Integer* x = dynamic_cast<Integer*>(c);
 
     if (x == 0) {
@@ -41,10 +41,12 @@ Integer* Integer::operator+(Ring* c) {
         exit(1);
     }
 
-    return new Integer(this->n + x->n);
+    this->n += x->n;
+    
+    return this;//like this
 }
 
-Integer* Integer::operator*(Ring* c) {
+Ring* Integer::operator*(Ring* c) {
     Integer* x = dynamic_cast<Integer*>(c);
 
     if (x == 0) {
