@@ -17,8 +17,8 @@ Integer* Integer::clone() {
 
 // the string representation of this element
 string Integer::str() {
-    string s = to_string(this->n);
-    return s;
+
+    return to_string(this->n);;
 }
 
 // the constant of the type of this element and the inverse of this element

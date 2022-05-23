@@ -26,9 +26,9 @@ public:
 	virtual RecPoly* operator-();
 
 	// sum and product of this element and c
-	virtual RecPoly* operator+(Ring* c);
-	virtual RecPoly* operator*(Ring* c);
+	virtual RecPoly* operator+(RecPoly* c);
+	virtual RecPoly* operator*(RecPoly* c);
 
 	// comparison function
-	virtual bool operator==(Ring* c);
+	virtual bool operator==(RecPoly* c);
 };

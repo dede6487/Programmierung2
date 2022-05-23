@@ -78,28 +78,36 @@ RecPoly* RecPoly::operator-() {
 	Ring** coeffs;
 
 	for (int i = 0; i < this->n; i++) {
-
+		*coeffs[i] = - *this->coeff[i]->clone();
 	}
 
-	RecPoly temp = new RecPoly(this->var, this->n, coeffs);
+	RecPoly* temp = new RecPoly(this->var, this->n, coeffs);
 
 	return temp;
 }
 
 // sum and product of this element and c
-RecPoly* RecPoly::operator+(Ring* c) {
-	for (int i = 0; i > this->n; i++) {
-		this->coeff[i] = this->coeff[i];
-	}
+RecPoly* RecPoly::operator+(RecPoly* c) {
+
+	//*this->coeff[0] = this->coeff[0]->clone() + c->clone();
 
 	return this;
 }
 
-RecPoly* RecPoly::operator*(Ring* c) {
+RecPoly* RecPoly::operator*(RecPoly* c) {
+	
+
 
 }
 
 // comparison function
-bool RecPoly::operator==(Ring* c) {
+bool RecPoly::operator==(RecPoly* c) {
+	if (this->n != c->n) {
+		return false;
+	}
+	else {
+		for (int i = 0; i < this->n; i++) {
 
+		}
+	}
 }
