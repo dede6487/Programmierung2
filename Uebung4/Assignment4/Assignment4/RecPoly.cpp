@@ -43,11 +43,9 @@ RecPoly::~RecPoly() {
 }
 
 // a heap-allocated duplicate of this element
-RecPoly* RecPoly::clone() {
-    RecPoly* c = new RecPoly(*this);
+Ring* RecPoly::clone() {
 
-
-    return c;
+    return new RecPoly(*this);
 }
 
 // the string representation of this element
@@ -57,9 +55,14 @@ string RecPoly::str() {
         str = "0" ;
     }
     else {
+        str += "( ";
         for (int i = 0; i < n; i++) {
             str += coeff[i]->str() + "*" + var + "^" + to_string(i);
+            if (i < n - 1) {
+                str += "+";
+            }
         }
+        str += " )";
     }
 
     return str;
@@ -71,45 +74,55 @@ Ring* RecPoly::zero() {
 }
 
 Ring* RecPoly::operator-() {
-    Ring** coeffs;
 
     for (int i = 0; i < this->n; i++) {
-        *coeffs[i] = - *this->coeff[i]->clone();
+        this->coeff[i] = this->coeff[i]->operator-();
     }
 
-    RecPoly* temp = new RecPoly(this->var, this->n, coeffs);
-
-    return temp;
+    return this;
 }
 
 // sum and product of this element and c
 Ring* RecPoly::operator+(Ring* c) {
 
-
-    //To-Do: For loop, to run through every coeff from this polynomial and then add c everytime
-
-    this->coeff[0] = this->coeff[0]->clone()->operator+(c->clone());//important
+    for (int i = 0; i < this->n; i++) {
+        this->coeff[i] = this->clone()->operator+(c->clone());//important
+    }  //coeff[i]->
 
     return this;
 }
 
 Ring* RecPoly::operator*(Ring* c) {
-    
+    if (this->n == 0) {
+        return new RecPoly(*this);
+    }
+    else{
+        Ring** temp = new Ring*[this->n];
+        for (int i = 0; i < this->n; i++) {
+            temp[i] = 0;
+            for (int j = 0; j < i; j++) {
+                temp[i] = temp[i]->operator+(this->coeff[i]->operator*(c));
+            }
+        }
 
+        RecPoly* mult = new RecPoly(this->var, this->n, temp);
 
+        for (int i = 0; i < this->n; i++) {
+            delete temp[i];
+        }
+        delete[] temp;
+
+        return mult;
+    }
 }
 
 // comparison function
 bool RecPoly::operator==(Ring* c) {
-    //if (this->n != c->n) {
-    //	return false;
-    //}
-    //else {
-    //for (int i = 0; i < this->n; i++) {
-
-    //}
-    //}
-
-
-
+    
+    for (int i = 0; i < this->n; i++) {
+        if (this->coeff[i] != c) {
+            return false;
+        }
+    }
+    return true;
 }
