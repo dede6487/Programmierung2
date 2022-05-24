@@ -57,9 +57,11 @@ string RecPoly::str() {
     else {
         str += "(";
         for (int i = 0; i < n; i++) {
-            str += coeff[i]->str() + "*" + var + "^" + to_string(i);
-            if (i < n - 1) {
-                str += "+";
+            if (!(coeff[i]->operator==(coeff[i]->zero()))) {
+                str += coeff[i]->str() + "*" + var + "^" + to_string(i);
+                    if (i < n - 1) {
+                        str += "+";
+                    }
             }
         }
         str += ")";
@@ -85,20 +87,60 @@ Ring* RecPoly::operator-() {
 // sum and product of this element and c
 Ring* RecPoly::operator+(Ring* c) {
 
-    Ring** temp = new Ring*[this->n];
+    RecPoly* x = dynamic_cast<RecPoly*>(c);
 
-    for (int i = 0; i < this->n; i++) {
-        temp[i] = c->operator+(this->coeff[i]);//important
+    int n_temp = 0;
+
+    if (this->n >= x->n) {
+        n_temp = this->n;
+    }
+    else {
+        n_temp = x->n;
     }
 
-    RecPoly* add = new RecPoly(this->var, this->n, temp);
+    Ring** temp = new Ring * [n_temp];
 
-    //for (int i = 0; i < this->n; i++) {
-    //    delete temp[i];
-    //}
-    //delete[] temp;
+    if (this->n == 0) {
+        for (int i = 0; i < x->n; i++) {
+            temp[i] = x->coeff[i]->clone();
+        }
 
-    return add;
+        RecPoly* add = new RecPoly(this->var, x->n, temp);
+
+        //delete
+
+        return add;
+    }
+    else {
+
+        for (int i = 0; i < this->n && i < x->n; i++) {
+            temp[i] = this->coeff[i]->operator+(x->coeff[i]);
+        }
+
+
+        if (this->n > x->n) {
+            for (int i = x->n; i < this->n; i++) {
+                temp[i] = this->coeff[i]->operator+(x->coeff[i]);//why???
+            }
+        }
+        else if(this->n < x->n) {
+            for (int i = this->n; i < x->n; i++) {
+                temp[i] = this->coeff[i]->operator+(x->coeff[i]);
+            }
+        }
+        //for (int i = 0; i < this->n; i++) {
+        //    temp[i] = c->operator+(this->coeff[i]);//important
+        //}
+
+        RecPoly* add = new RecPoly(this->var, this->n, temp);
+
+        //for (int i = 0; i < this->n; i++) {
+        //    delete temp[i];
+        //}
+        //delete[] temp;
+
+        return add;
+    }
 }
 
 Ring* RecPoly::operator*(Ring* c) {
