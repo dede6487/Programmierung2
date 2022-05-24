@@ -1,3 +1,11 @@
+//******************************************************************
+// "Main.cpp"
+//
+// is used to test the functions of Ring and its subclasses.
+// 
+// created by: Felix Dressler - 24.05.2022
+//******************************************************************
+
 #include "Integer.h"
 #include "RecPoly.h"
 #include <iostream>
