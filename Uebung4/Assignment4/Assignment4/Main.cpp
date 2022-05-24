@@ -9,14 +9,14 @@ int main() {
 
 	RecPoly* p = new RecPoly("x", 4, c); // p = -3x^3 + 2x - 5
 
-	cout << p->str();
+	cout << p->str() << endl;
 
-	//RecPoly* q = //new RecPoly(*p); //= // q = p+p
-	//	dynamic_cast<RecPoly*>(p->operator+(p));
-	//	cout << q->str();
-	//RecPoly* r = // r = p*q
-	//	dynamic_cast<RecPoly*>(p->operator*(q));
-	//cout << r->str();
+	RecPoly* q = //new RecPoly(*p); //= // q = p+p = -6x^3 + 4x - 10
+		dynamic_cast<RecPoly*>(p->operator+(p));
+		cout << q->str() << endl;
+	RecPoly* r = // r = p*q
+		dynamic_cast<RecPoly*>(p->operator*(q));
+	cout << r->str() << endl;
 
 
 

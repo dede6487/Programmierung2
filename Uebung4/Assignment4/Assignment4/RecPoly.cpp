@@ -8,7 +8,7 @@ RecPoly::RecPoly(string var, int n, Ring** coeffs) {
     this->n = n;
     this->coeff = new Ring*[n];
     for (int i = 0; i < n; i++) {
-        coeff[i] = coeffs[i]->clone();
+        coeff[i] = coeffs[i]->clone();//clone to make sure only we have control over the array
     }
 }
 
@@ -52,17 +52,17 @@ Ring* RecPoly::clone() {
 string RecPoly::str() {
     string str = "";
     if (n == 0) {
-        str = "0" ;
+        str = "0";
     }
     else {
-        str += "( ";
+        str += "(";
         for (int i = 0; i < n; i++) {
             str += coeff[i]->str() + "*" + var + "^" + to_string(i);
             if (i < n - 1) {
                 str += "+";
             }
         }
-        str += " )";
+        str += ")";
     }
 
     return str;
@@ -85,11 +85,20 @@ Ring* RecPoly::operator-() {
 // sum and product of this element and c
 Ring* RecPoly::operator+(Ring* c) {
 
-    for (int i = 0; i < this->n; i++) {
-        this->coeff[i] = this->clone()->operator+(c->clone());//important
-    }  //coeff[i]->
+    Ring** temp = new Ring*[this->n];
 
-    return this;
+    for (int i = 0; i < this->n; i++) {
+        temp[i] = c->operator+(this->coeff[i]);//important
+    }
+
+    RecPoly* add = new RecPoly(this->var, this->n, temp);
+
+    //for (int i = 0; i < this->n; i++) {
+    //    delete temp[i];
+    //}
+    //delete[] temp;
+
+    return add;
 }
 
 Ring* RecPoly::operator*(Ring* c) {
@@ -101,16 +110,16 @@ Ring* RecPoly::operator*(Ring* c) {
         for (int i = 0; i < this->n; i++) {
             temp[i] = 0;
             for (int j = 0; j < i; j++) {
-                temp[i] = temp[i]->operator+(this->coeff[i]->operator*(c));
+                temp[i] = temp[i]->operator+(c->operator*(this->coeff[i]));
             }
         }
 
         RecPoly* mult = new RecPoly(this->var, this->n, temp);
 
-        for (int i = 0; i < this->n; i++) {
-            delete temp[i];
-        }
-        delete[] temp;
+        //for (int i = 0; i < this->n; i++) {
+        //    delete temp[i];
+        //}
+        //delete[] temp;
 
         return mult;
     }
