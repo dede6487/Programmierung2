@@ -40,7 +40,9 @@ RecPoly& RecPoly::operator=(RecPoly& p) {
     this->var = p.var;
     this->n = p.n;
 
-    this->coeff = new Ring * [n];
+    delete[] this->coeff;
+    this->coeff = new Ring*[n];
+
     for (int i = 0; i < n; i++) {
         coeff[i] = p.coeff[i]->clone();
     }
@@ -90,11 +92,18 @@ Ring* RecPoly::zero() {
 
 Ring* RecPoly::operator-() {
 
+    Ring** temp = new Ring*[this->n];
+
     for (int i = 0; i < this->n; i++) {
-        this->coeff[i] = this->coeff[i]->operator-();
+        temp[i] = this->coeff[i]->operator-();
     }
 
-    return this;
+    for (int i = 0; i < this->n; i++) {
+        delete temp[i];
+    }
+    delete[] temp;
+
+    return new RecPoly(this->var, this->n, temp);
 }
 
 // sum and product of this element and c
@@ -220,23 +229,17 @@ Ring* RecPoly::operator*(Ring* c) {
         }
         else{
 
-            cout << "after 0" << endl;
-
-            int length = this->n + x->n - 1;
+            int length = this->n + x->n -1;
 
             Ring** temp = new Ring*[length];
 
             for (int i = 0; i < length; i++) {
                 temp[i] = x->coeff[0]->zero();
-                cout << "intitializing temp" << endl;
             }
 
             for (int i = 0; i < this->n; i++) {
-                cout << "in for i" << endl;
                 for (int j = 0; j < x->n; j++) {
-                    cout << "in for j" << endl;
                     Ring* del = temp[i+j];
-                    //cout << x- << endl;
                     temp[i+j] = temp[i+j]->operator+(this->coeff[i]->operator*(x->coeff[j]));
                     delete del;
                 }
@@ -259,10 +262,14 @@ Ring* RecPoly::operator*(Ring* c) {
 // comparison function
 bool RecPoly::operator==(Ring* c) {
     
+    RecPoly* x = dynamic_cast<RecPoly*>(c);
+
+    bool same = true;
+
     for (int i = 0; i < this->n; i++) {
-        if (this->coeff[i] != c) {
-            return false;
+        if (this->coeff[i] != x->coeff[i]) {
+            same = false;
         }
     }
-    return true;
+    return same;
 }
