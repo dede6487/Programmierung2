@@ -18,7 +18,23 @@ using namespace std;
 // polynomial with n>=0 coefficients and given variable name
 RecPoly::RecPoly(string var, int n, Ring** coeffs) {
     this->var = var;
-    this->n = n;
+
+    int zeros = 0;
+
+    //cuts of all 0s at the end of the coeffs array
+    if (n != 0) {
+        Ring* z = coeffs[0]->zero();
+
+        for (int i = n - 1; i >= 0; i--) {
+            if (!(coeffs[i]->operator==(z))) {
+                break;
+            }
+            zeros++;
+        }
+        delete z;
+    }
+
+    this->n = n-zeros;
     this->coeff = new Ring*[n];
     for (int i = 0; i < n; i++) {
         coeff[i] = coeffs[i]->clone();//clone to make sure only we have control over the array
@@ -123,14 +139,7 @@ Ring* RecPoly::operator+(Ring* c) {
     }
 
     else {
-        int n_temp = 0;
-
-        if (this->n >= x->n) {
-            n_temp = this->n;
-        }
-        else {
-            n_temp = x->n;
-        }
+        int n_temp = max(this->n,x->n);
 
         Ring** temp = new Ring*[n_temp];
 
@@ -156,56 +165,18 @@ Ring* RecPoly::operator+(Ring* c) {
 
             if (this->n > x->n) {
                 for (int i = x->n; i < this->n; i++) {
-                    temp[i] = this->coeff[i]->operator+(x->coeff[i]);//why???
+                    temp[i] = this->coeff[i];
                 }
             }
             else if(this->n < x->n) {
                 for (int i = this->n; i < x->n; i++) {
-                    temp[i] = this->coeff[i]->operator+(x->coeff[i]);
+                    temp[i] = x->coeff[i];
                 }
             }
 
             RecPoly* add = new RecPoly(this->var, n_temp, temp);
 
-            return add;
-/*          Ring* zer = this->coeff[0]->zero();
-            int new_n = 0;
-
-            for (int i = n_temp-1; i > 0; i--) {
-                if (temp[i] == zer) {
-                    new_n++;
-                }
-            }
-            if (new_n < n_temp) {
-                Ring** new_temp = new Ring*[n_temp - new_n];
-                for (int i = 0; i < n_temp - new_n; i++) {
-                    new_temp[i] = temp[i];
-                }
-                RecPoly* add = new RecPoly(this->var, n_temp - new_n, new_temp);
-
-                for (int i = 0; i < n_temp; i++) {
-                    delete temp[i];
-                }
-                delete[] temp;
-
-                for (int i = 0; i < n_temp- new_n; i++) {
-                    delete new_temp[i];
-                }
-                delete[] new_temp;
-
-                return add;
-
-            }
-            else {
-                RecPoly* add = new RecPoly(this->var, n_temp, temp);
-
-                for (int i = 0; i < n_temp; i++) {
-                    delete temp[i];
-                }
-                delete[] temp;
-
-                return add;
-            }      */    
+            return add;  
         }
     }
 
