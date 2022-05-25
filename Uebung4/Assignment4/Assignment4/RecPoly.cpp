@@ -89,10 +89,13 @@ string RecPoly::str() {
         str += "(";
         for (int i = 0; i < n; i++) {
             if (!(coeff[i]->operator==(coeff[i]->zero()))) {
-                str += coeff[i]->str() + "*" + var + "^" + to_string(i);
-                    if (i < n - 1) {
-                        str += "+";
-                    }
+                str += coeff[i]->str();
+                if (i != 0) {
+                    str += "*" + var + "^" + to_string(i);
+                }
+                if (i < n - 1) {
+                    str += "+";
+                }
             }
         }
         str += ")";
