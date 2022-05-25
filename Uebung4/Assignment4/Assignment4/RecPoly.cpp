@@ -216,35 +216,39 @@ Ring* RecPoly::operator*(Ring* c) {
 
     else {
         if (this->n == 0 || x->n == 0) {
-            return new RecPoly(this->var,0,{});
+            return this->zero(); // new RecPoly(this->var, 0, {});
         }
         else{
 
-            int length = this->n + x->n + 2;
+            cout << "after 0" << endl;
+
+            int length = this->n + x->n - 1;
 
             Ring** temp = new Ring*[length];
 
-            //for (int i = 0; i < length; i++) {
-            //    temp[i] = x->coeff[0]->zero();
-            //}
-            //int highest = max(this->n,x->n);
-            //int lowest = min();
+            for (int i = 0; i < length; i++) {
+                temp[i] = x->coeff[0]->zero();
+                cout << "intitializing temp" << endl;
+            }
 
-
-            for (int i = 0; i < this->n +1 ; i++) {
-                //temp[i] = x->coeff[0]->zero();
-                for (int j = 0; j < x->n +1; j++) { 
-                    temp[i] = temp[i]->operator+(this->coeff[i]->operator*(x->coeff[i-j]));
+            for (int i = 0; i < this->n; i++) {
+                cout << "in for i" << endl;
+                for (int j = 0; j < x->n; j++) {
+                    cout << "in for j" << endl;
+                    Ring* del = temp[i+j];
+                    //cout << x- << endl;
+                    temp[i+j] = temp[i+j]->operator+(this->coeff[i]->operator*(x->coeff[j]));
+                    delete del;
                 }
                 
             }
 
-            RecPoly* mult = new RecPoly(this->var, 0, {});// RecPoly(this->var, length, temp);
+            RecPoly* mult = new  RecPoly(this->var, length, temp);
 
-            //for (int i = 0; i < this->n; i++) {
-            //    delete temp[i];
-            //}
-            //delete[] temp;
+            for (int i = 0; i < length; i++) {
+                delete temp[i];
+            }
+            delete[] temp;
 
             return mult;
         }
