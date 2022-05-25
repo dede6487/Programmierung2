@@ -154,7 +154,10 @@ Ring* RecPoly::operator+(Ring* c) {
                 }
             }
 
-            Ring* zer = this->coeff[0]->zero();
+            RecPoly* add = new RecPoly(this->var, n_temp, temp);
+
+            return add;
+/*          Ring* zer = this->coeff[0]->zero();
             int new_n = 0;
 
             for (int i = n_temp-1; i > 0; i--) {
@@ -191,7 +194,7 @@ Ring* RecPoly::operator+(Ring* c) {
                 delete[] temp;
 
                 return add;
-            }          
+            }      */    
         }
     }
 
