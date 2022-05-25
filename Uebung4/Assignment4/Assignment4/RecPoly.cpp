@@ -98,12 +98,14 @@ Ring* RecPoly::operator-() {
         temp[i] = this->coeff[i]->operator-();
     }
 
+    RecPoly* ret = new RecPoly(this->var, this->n, temp);
+
     for (int i = 0; i < this->n; i++) {
         delete temp[i];
     }
     delete[] temp;
 
-    return new RecPoly(this->var, this->n, temp);
+    return ret;
 }
 
 // sum and product of this element and c

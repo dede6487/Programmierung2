@@ -19,10 +19,10 @@ int main() {
 
 	cout << p->str() << endl;
 
-	RecPoly* q = //new RecPoly(*p); //= // q = p+p = -6x^3 + 4x - 10
+	RecPoly* q = // q = p+p = -6x^3 + 4x - 10
 		dynamic_cast<RecPoly*>(p->operator+(p));
 		cout << q->str() << endl;
-	RecPoly* r = // r = p*q
+	RecPoly* r = // r = p*q = 50 - 40 x + 8 x^2 + 60 x^3 - 24 x^4 + 18 x^6
 		dynamic_cast<RecPoly*>(p->operator*(q));
 	cout << r->str() << endl;
 

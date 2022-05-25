@@ -51,7 +51,7 @@ Ring* Integer::operator+(Ring* c) {
         exit(1);
     }
 
-    int t = this->n += x->n;
+    int t = this->n + x->n;
     
     return new Integer(t);
 }
