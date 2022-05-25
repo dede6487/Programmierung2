@@ -9,6 +9,7 @@
 #include"RecPoly.h"
 #include"Integer.h"
 
+#include<algorithm>
 #include<iostream>
 
 using namespace std;
@@ -105,6 +106,11 @@ Ring* RecPoly::operator+(Ring* c) {
         cout << "Error: Addition with incompatible Elements performed" << endl;
         exit(3);
     }
+    if (this->var != x->var) {
+        cout << "Error: Addition with incompatible Polynomials performed (wrong variables)" << endl;
+        exit(4);
+    }
+
     else {
         int n_temp = 0;
 
@@ -115,7 +121,7 @@ Ring* RecPoly::operator+(Ring* c) {
             n_temp = x->n;
         }
 
-        Ring** temp = new Ring * [n_temp];
+        Ring** temp = new Ring*[n_temp];
 
         if (this->n == 0) {
             for (int i = 0; i < x->n; i++) {
@@ -124,7 +130,10 @@ Ring* RecPoly::operator+(Ring* c) {
 
             RecPoly* add = new RecPoly(this->var, x->n, temp);
 
-            //delete
+            for (int i = 0; i < n_temp; i++) {
+                delete temp[i];
+            }
+            delete[] temp;
 
             return add;
         }
@@ -133,7 +142,6 @@ Ring* RecPoly::operator+(Ring* c) {
             for (int i = 0; i < this->n && i < x->n; i++) {
                 temp[i] = this->coeff[i]->operator+(x->coeff[i]);
             }
-
 
             if (this->n > x->n) {
                 for (int i = x->n; i < this->n; i++) {
@@ -145,18 +153,45 @@ Ring* RecPoly::operator+(Ring* c) {
                     temp[i] = this->coeff[i]->operator+(x->coeff[i]);
                 }
             }
-            //for (int i = 0; i < this->n; i++) {
-            //    temp[i] = c->operator+(this->coeff[i]);//important
-            //}
 
-            RecPoly* add = new RecPoly(this->var, this->n, temp);
+            Ring* zer = this->coeff[0]->zero();
+            int new_n = 0;
 
-            for (int i = 0; i < n_temp; i++) {
-                delete temp[i];
+            for (int i = n_temp-1; i > 0; i--) {
+                if (temp[i] == zer) {
+                    new_n++;
+                }
             }
-            delete[] temp;
+            if (new_n < n_temp) {
+                Ring** new_temp = new Ring*[n_temp - new_n];
+                for (int i = 0; i < n_temp - new_n; i++) {
+                    new_temp[i] = temp[i];
+                }
+                RecPoly* add = new RecPoly(this->var, n_temp - new_n, new_temp);
 
-            return add;
+                for (int i = 0; i < n_temp; i++) {
+                    delete temp[i];
+                }
+                delete[] temp;
+
+                for (int i = 0; i < n_temp- new_n; i++) {
+                    delete new_temp[i];
+                }
+                delete[] new_temp;
+
+                return add;
+
+            }
+            else {
+                RecPoly* add = new RecPoly(this->var, n_temp, temp);
+
+                for (int i = 0; i < n_temp; i++) {
+                    delete temp[i];
+                }
+                delete[] temp;
+
+                return add;
+            }          
         }
     }
 
@@ -169,11 +204,11 @@ Ring* RecPoly::operator*(Ring* c) {
 
     if (x == 0) {
         cout << "Error: Multiplication with incompatible Elements performed" << endl;
-        exit(4);
+        exit(5);
     }
     if (this->var != x->var) {
         cout << "Error: Multiplication with incompatible Polynomials performed (wrong variables)" << endl;
-        exit(4);
+        exit(6);
     }
 
     else {
@@ -181,16 +216,27 @@ Ring* RecPoly::operator*(Ring* c) {
             return new RecPoly(this->var,0,{});
         }
         else{
-            Ring** temp = new Ring*[this->n + x->n];
 
-            for (int i = 0; i < this->n + x->n; i++) {
-                //temp[i] = 0;
-                for (int j = 0; j < i; j++) {
-                    temp[i] = *temp[i] + *this->coeff[i] * x->coeff[i];
-                }//->operator ->operator
+            int length = this->n + x->n + 2;
+
+            Ring** temp = new Ring*[length];
+
+            //for (int i = 0; i < length; i++) {
+            //    temp[i] = x->coeff[0]->zero();
+            //}
+            //int highest = max(this->n,x->n);
+            //int lowest = min();
+
+
+            for (int i = 0; i < this->n +1 ; i++) {
+                //temp[i] = x->coeff[0]->zero();
+                for (int j = 0; j < x->n +1; j++) { 
+                    temp[i] = temp[i]->operator+(this->coeff[i]->operator*(x->coeff[i-j]));
+                }
+                
             }
 
-            RecPoly* mult = new RecPoly(this->var, this->n, temp);
+            RecPoly* mult = new RecPoly(this->var, 0, {});// RecPoly(this->var, length, temp);
 
             //for (int i = 0; i < this->n; i++) {
             //    delete temp[i];

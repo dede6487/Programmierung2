@@ -1,7 +1,8 @@
 //******************************************************************
-// "Main.cpp"
+// "Ring.h"
 //
-//
+// contains the pure abstract class Ring, which defines the
+// base-functionality that should be provided by a Ring.
 // 
 // created by: Felix Dressler - 24.05.2022
 //******************************************************************

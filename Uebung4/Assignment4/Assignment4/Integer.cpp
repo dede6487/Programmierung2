@@ -1,7 +1,8 @@
 //******************************************************************
 // "Integer.cpp"
 //
-//
+// implements the functionality of the class Integer with its
+// Ring operations
 // 
 // created by: Felix Dressler - 24.05.2022
 //******************************************************************
@@ -44,6 +45,7 @@ Ring* Integer::operator-() {
 Ring* Integer::operator+(Ring* c) {
     Integer* x = dynamic_cast<Integer*>(c);
 
+    //if cast is unsuccessful, we exit
     if (x == 0) {
         cout << "Error: Addition with incompatible Elements performed" << endl;
         exit(1);
@@ -51,12 +53,13 @@ Ring* Integer::operator+(Ring* c) {
 
     this->n += x->n;
     
-    return this;//like this
+    return this;
 }
 
 Ring* Integer::operator*(Ring* c) {
     Integer* x = dynamic_cast<Integer*>(c);
 
+    //if the cast is unsuccessful, we exit 
     if (x == 0) {
         cout << "Error: Multiplikation with incompatible Elements performed" << endl;
         exit(2);
@@ -69,6 +72,8 @@ Ring* Integer::operator*(Ring* c) {
 bool Integer::operator==(Ring* c) {
     Integer* x = dynamic_cast<Integer*>(c);
 
+
+    //if cast is unsuccessful, we exit
     if (x == 0) {
         cout << "Error: Comparison with incompatible Elements performed" << endl;
         exit(3);

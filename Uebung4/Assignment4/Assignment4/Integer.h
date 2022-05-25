@@ -1,7 +1,8 @@
 //******************************************************************
 // "Integer.h
 //
-//
+// contains the Class Integer, which is derived from the class Ring.
+// It implements the Ring of integers.
 // 
 // created by: Felix Dressler - 24.05.2022
 //******************************************************************
