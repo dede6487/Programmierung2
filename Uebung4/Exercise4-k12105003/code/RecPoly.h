@@ -1,8 +1,8 @@
 //******************************************************************
-// "Integer.h
+// "RecPoly.h"
 //
-// contains the Class Integer, which is derived from the class Ring.
-// It implements the Ring of integers.
+// contains the definition of the class RecPol which is derived from
+// the class Ring. It implements the Ring of polynomials.
 // 
 // created by: Felix Dressler - 24.05.2022
 //******************************************************************
@@ -10,18 +10,22 @@
 #pragma once
 #include"Ring.h"
 
-class Integer : public Ring {
+class RecPoly : public Ring {
 private:
+	Ring** coeff;
 	int n;
+	string var;
+
 public:
-	// integer with value n (default 0)
-	Integer(int n = 0);
+	// polynomial with n>=0 coefficients and given variable name
+	RecPoly(string var, int n, Ring** coeffs);
+	// copy constructor, copy assignment operator, destructor
+	RecPoly(RecPoly& p);
+	RecPoly& operator=(RecPoly& p);
+	virtual ~RecPoly();
 
-	// destructor - empty because in Integer no new arrays/pointers are created
-	virtual ~Integer() {
+	//virtual functions from Ring:
 
-	}
-	
 	// a heap-allocated duplicate of this element
 	virtual Ring* clone();
 

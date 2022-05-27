@@ -106,17 +106,29 @@ literate =
 			((25+-20*x^1+4*x^2+30*x^3+-12*x^4+9*x^6)+(50+-40*x^1+8*x^2+60*x^3+-24*x^4+18*x^6)*y^1)
 		\end{lstlisting}
 
+\newpage
 	\section{The Program}
 		\subsection{The Program - Ring}
 			\lstinputlisting[]{Assignment4/Assignment4/Ring.h}	
 	
+\newpage	
 		\subsection{The Program - Integer}
-			\lstinputlisting[]{Assignment4/Assignment4/Integer.h}
-			\lstinputlisting[]{Assignment4/Assignment4/Integer.cpp}
-		
+			\subsubsection{Integer.h}
+				\lstinputlisting[]{Assignment4/Assignment4/Integer.h}
+			\subsubsection{Integer.cpp}
+				\lstinputlisting[]{Assignment4/Assignment4/Integer.cpp}
+
+\newpage		
 		\subsection{The Program - RecPoly}
-			\lstinputlisting[]{Assignment4/Assignment4/RecPoly.h}
-			\lstinputlisting[]{Assignment4/Assignment4/RecPoly.cpp}
+			\subsubsection{RecPoly.h}		
+				\lstinputlisting[]{Assignment4/Assignment4/RecPoly.h}
+			
+			\subsubsection{RecPoly.cpp}
+			The code in row 183 - 186 of \emph{RecPoly.cpp} should not be commented out in order to prevent memeory leaks created by the \emph{temp} array. Although I can not see the reason for it, these lines break the programm. 
+			It is very likely a problem with deleting a \emph{nullptr}.
+			
+			For this reason, this code was left commented out.
+				\lstinputlisting[]{Assignment4/Assignment4/RecPoly.cpp}
 			
 			
 \end{document}
