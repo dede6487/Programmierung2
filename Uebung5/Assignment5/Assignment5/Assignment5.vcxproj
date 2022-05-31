@@ -139,12 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BiPoly.h" />
+    <ClInclude Include="Integer.h" />
     <ClInclude Include="RecPoly.h" />
-    <ClInclude Include="UniPoly.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RecPoly.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

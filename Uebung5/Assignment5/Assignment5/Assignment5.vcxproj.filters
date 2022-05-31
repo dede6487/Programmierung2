@@ -18,15 +18,12 @@
     <ClInclude Include="RecPoly.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="UniPoly.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="BiPoly.h">
+    <ClInclude Include="Integer.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RecPoly.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
