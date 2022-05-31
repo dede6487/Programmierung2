@@ -140,11 +140,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BiPoly.h" />
-    <ClInclude Include="Template.h" />
+    <ClInclude Include="RecPoly.h" />
     <ClInclude Include="UniPoly.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Template.cpp" />
+    <ClCompile Include="RecPoly.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Template.h">
+    <ClInclude Include="RecPoly.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="UniPoly.h">
@@ -26,7 +26,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Template.cpp">
+    <ClCompile Include="RecPoly.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
