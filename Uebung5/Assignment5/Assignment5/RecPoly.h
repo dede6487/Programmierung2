@@ -11,9 +11,9 @@ using namespace std;
 template<class Ring> class RecPoly
 {
 private:
-	Ring** coeff;
-	int n;
-	string var;
+    Ring** coeff;
+    int n;
+    string var;
 
 public:
 
@@ -132,13 +132,6 @@ public:
 
     // sum operator for polynomials
     RecPoly* operator+(RecPoly* x) {
-
-       // RecPoly* x = dynamic_cast<RecPoly*>(c);
-
-        //if (x == 0) {
-        //    cout << "Error: Addition with incompatible Elements performed" << endl;
-        //    exit(3);
-        //}
         if (this->var != x->var) {
             cout << "Error: Addition with incompatible Polynomials performed (wrong variables)" << endl;
             exit(4);
@@ -195,13 +188,6 @@ public:
 
     // multiplication operator for polynomials
     RecPoly* operator*(RecPoly* x) {
-
-        //RecPoly* x = dynamic_cast<RecPoly*>(c);
-
-        //if (x == 0) {
-        //    cout << "Error: Multiplication with incompatible Elements performed" << endl;
-        //    exit(5);
-        //}
         if (this->var != x->var) {
             cout << "Error: Multiplication with incompatible Polynomials performed (wrong variables)" << endl;
             exit(6);
@@ -245,9 +231,6 @@ public:
 
     // comparison function for Plynomials
     bool operator==(RecPoly* x) {
-
-        //RecPoly* x = dynamic_cast<RecPoly*>(c);
-
         bool same = true;
 
         for (int i = 0; i < this->n; i++) {
@@ -257,33 +240,6 @@ public:
         }
         return same;
     }
-
-
-	//// polynomial with n>=0 coefficients and given variable name
-	//RecPoly(string var, int n, Ring** coeffs);
-	//// copy constructor, copy assignment operator, destructor
-	//RecPoly(RecPoly& p);
-	//RecPoly& operator=(RecPoly& p);
-	//~RecPoly();
-
-	////functions from Ring:
-
-	//// a heap-allocated duplicate of this element
-	//Ring* clone();
-
-	//// the string representation of this element
-	//string str();
-
-	//// the constant of the type of this element and the inverse of this element
-	//Ring* zero();
-	//Ring* operator-();
-
-	//// sum and product of this element and c
-	//Ring* operator+(Ring* c);
-	//Ring* operator*(Ring* c);
-
-	//// comparison function
-	//bool operator==(Ring* c);
 };
 
 typedef RecPoly<Integer> UniPoly;
