@@ -1,3 +1,11 @@
+//******************************************************************
+// "RecPoly.h"
+//
+// contains the template class RecPoly and its functions.
+// 
+// created by: Felix Dressler - 03.06.2022
+//******************************************************************
+
 #pragma once
 
 #include<string>

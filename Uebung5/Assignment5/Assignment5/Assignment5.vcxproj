@@ -143,6 +143,7 @@
     <ClInclude Include="RecPoly.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Integer.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

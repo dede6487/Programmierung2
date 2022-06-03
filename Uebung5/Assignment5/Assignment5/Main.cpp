@@ -1,9 +1,9 @@
 //******************************************************************
 // "Main.cpp"
 //
-// is used to test the functions of Ring and its subclasses.
+// is used to test the functions of the template class RecPoly.
 // 
-// created by: Felix Dressler - 24.05.2022
+// created by: Felix Dressler - 03.06.2022
 //******************************************************************
 
 #include "Integer.h"
