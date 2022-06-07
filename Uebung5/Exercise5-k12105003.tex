@@ -86,11 +86,29 @@ literate =
 		For testing the \emph{Main.cpp} was adapted to work with the new templates.
 			\lstinputlisting[]{Assignment5/Assignment5/Main.cpp}
 		\subsection{output}
-			
+		The output was the same as in the previous project.
+			\begin{lstlisting}
+				(-5+2*x^1+-3*x^3)
+				(-10+4*x^1+-6*x^3)
+				(50+-40*x^1+8*x^2+60*x^3+-24*x^4+18*x^6)
+				0
+				(-5+2*x^1+-3*x^3)
+				0
+				(5+-2*x^1+3*x^3)
+				0
+				((-5+2*x^1+-3*x^3)+(-10+4*x^1+-6*x^3)*y^1)
+				((-5+2*x^1+-3*x^3))
+				((-10+4*x^1+-6*x^3)+(-10+4*x^1+-6*x^3)*y^1)
+				((25+-20*x^1+4*x^2+30*x^3+-12*x^4+9*x^6)+(50+-40*x^1+8*x^2+60*x^3+-24*x^4+18*x^6)*y^1)
+			\end{lstlisting}
 	
+\newpage	
 	\section{RecPoly.h}
+	Because this project was about using the previous code and adapt it to work with templates, the memory leak in line 186-189 still exists.
+	
 			\lstinputlisting[]{Assignment5/Assignment5/RecPoly.h}
 	
+\newpage	
 	\section{Integer}
 		\subsection{Integer.h}
 			\lstinputlisting[]{Assignment5/Assignment5/Integer.h}
