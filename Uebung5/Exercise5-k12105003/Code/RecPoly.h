@@ -53,26 +53,31 @@ public:
 
     // copy constructor, copy assignment operator
     RecPoly(RecPoly& p) {
-        this->var = p.var;
-        this->n = p.n;
+            this->var = p.var;
+            this->n = p.n;
 
-        this->coeff = new Ring * [n];
-        for (int i = 0; i < n; i++) {
-            coeff[i] = p.coeff[i]->clone();
-        }
+            this->coeff = new Ring * [n];
+            for (int i = 0; i < n; i++) {
+                coeff[i] = p.coeff[i]->clone();
+            }
     }
 
     RecPoly& operator=(RecPoly& p) {
-        this->var = p.var;
-        this->n = p.n;
+        if (p != this) {
+            this->var = p.var;
+            this->n = p.n;
 
-        delete[] this->coeff;
-        this->coeff = new Ring * [n];
+            for (int i = 0; i < this->n; i++) {
+                delete coeff[i];
+            }
+            delete[] this->coeff;
 
-        for (int i = 0; i < n; i++) {
-            coeff[i] = p.coeff[i]->clone();
+            this->coeff = new Ring * [n];
+
+            for (int i = 0; i < n; i++) {
+                coeff[i] = p.coeff[i]->clone();
+            }
         }
-
         return *this;
     }
 
@@ -172,21 +177,21 @@ public:
 
                 if (this->n > x->n) {
                     for (int i = x->n; i < this->n; i++) {
-                        temp[i] = this->coeff[i];
+                        temp[i] = this->coeff[i]->clone();
                     }
                 }
                 else if (this->n < x->n) {
                     for (int i = this->n; i < x->n; i++) {
-                        temp[i] = x->coeff[i];
+                        temp[i] = x->coeff[i]->clone();
                     }
                 }
 
                 RecPoly* add = new RecPoly(this->var, n_temp, temp);
 
-                //for (int i = 0; i < n_temp; i++) {
-                //    delete temp[i];
-                //}
-                //delete[] temp;
+                for (int i = 0; i < n_temp; i++) {
+                    delete temp[i];
+                }
+                delete[] temp;
 
                 return add;
             }
